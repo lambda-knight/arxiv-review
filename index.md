@@ -7,12 +7,12 @@ layout: default
 
 量子コンピュータ・生成AI の最新論文をずんだもん＋四国めたんが解説します。
 
-| 論文 | arXiv | 章数 |
+| 論文 | 論文リンク | 章数 |
 |------|-------|------|
-| [表面符号 ── 大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [1208.0928](https://arxiv.org/abs/1208.0928) | 6 |
-| [Gemini Robotics ── AIを物理世界に持ち込む](papers/2503.20020/) | [2503.20020](https://arxiv.org/abs/2503.20020) | 5 |
-| [Qwen-VLA — 一つのモデルで「見る・考える・動く」を統一する](papers/2605.30280/) | [2605.30280](https://arxiv.org/abs/2605.30280) | 5 |
-| [ニトロゲナーゼ補因子の生合成](papers/chemrev.9b00489/) | [chemrev.9b00489](https://arxiv.org/abs/chemrev.9b00489) | 10 |
+| [表面符号 ── 大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 6 |
+| [Gemini Robotics ── AIを物理世界に持ち込む](papers/2503.20020/) | [arXiv:2503.20020](https://arxiv.org/abs/2503.20020) | 5 |
+| [Qwen-VLA — 一つのモデルで「見る・考える・動く」を統一する](papers/2605.30280/) | [arXiv:2605.30280](https://arxiv.org/abs/2605.30280) | 5 |
+| [ニトロゲナーゼ補因子の生合成](papers/chemrev.9b00489/) | [DOI:10.1021/acs.chemrev.9b00489](https://doi.org/10.1021/acs.chemrev.9b00489) | 10 |
 
 ---
 

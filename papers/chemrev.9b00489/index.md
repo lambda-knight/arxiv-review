@@ -12,7 +12,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 *Burén, Jiménez-Vicente, Echavarri-Erasun, Rubio*
 
-- arXiv: [chemrev.9b00489](https://arxiv.org/abs/chemrev.9b00489)
+- DOI: [10.1021/acs.chemrev.9b00489](https://doi.org/10.1021/acs.chemrev.9b00489)
 - Internet Archive: [paper-explain-chemrev-9b00489](https://archive.org/details/paper-explain-chemrev-9b00489)
 
 ---
