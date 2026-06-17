@@ -3,6 +3,11 @@ title: "ニトロゲナーゼ補因子の生合成"
 layout: default
 ---
 
+<script>
+MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
 # ニトロゲナーゼ補因子の生合成
 
 *Burén, Jiménez-Vicente, Echavarri-Erasun, Rubio*

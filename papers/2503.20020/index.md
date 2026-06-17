@@ -3,6 +3,11 @@ title: "Gemini Robotics ── AIを物理世界に持ち込む"
 layout: default
 ---
 
+<script>
+MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
 # Gemini Robotics ── AIを物理世界に持ち込む
 
 *Google DeepMind (2025)*
