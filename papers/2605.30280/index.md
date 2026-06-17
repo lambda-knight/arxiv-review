@@ -256,12 +256,12 @@ arXiv: https://arxiv.org/abs/2605.30280
 <ul>
 <li>$\mathbf{a}_0$: ノイズなしの正解アクション（教師データ）</li>
 <li>$\mathbf{a}_t$: タイムステップ $t$ でノイズを加えたアクション</li>
-<li>$\bar{\alpha}<em>t = \prod</em>{s=1}^{t}(1-\beta_s)$: 累積ノイズスケジュール（$t \to T$ で $\bar{\alpha}_t \to 0$）</li>
+<li>$\bar{\alpha}_t = \prod_{s=1}^{t}(1-\beta_s)$: 累積ノイズスケジュール（$t \to T$ で $\bar{\alpha}_t \to 0$）</li>
 <li>$\boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$: 加えるガウスノイズ</li>
 </ul>
 <p><strong>直感</strong>: $t=0$ は元のアクション、$t=T$ は完全なランダムノイズ。その中間状態を学習する。</p>
 <h3>訓練目標（ノイズ予測）</h3>
-<p>$$\mathcal{L}<em>{\text{DiT}} = \mathbb{E}</em>{t,\,\mathbf{a}<em>0,\,\boldsymbol{\epsilon}} \left[ \left| \boldsymbol{\epsilon} - \boldsymbol{\epsilon}</em>\theta!\left(\mathbf{a}_t,\, t,\, \mathbf{c}\right) \right|^2 \right]$$</p>
+<p>$$\mathcal{L}_{\text{DiT}} = \mathbb{E}_{t,\,\mathbf{a}_0,\,\boldsymbol{\epsilon}} \left[ \left\| \boldsymbol{\epsilon} - \boldsymbol{\epsilon}_\theta\!\left(\mathbf{a}_t,\, t,\, \mathbf{c}\right) \right\|^2 \right]$$</p>
 <ul>
 <li>$\boldsymbol{\epsilon}_\theta(\cdot)$: DiT が予測する「加えられたノイズ」（パラメータ $\theta$）</li>
 <li>$\mathbf{c}$: 条件ベクトル（Qwen VL が生成した視覚・言語・エンボディメント特徴）</li>
@@ -272,7 +272,7 @@ arXiv: https://arxiv.org/abs/2605.30280
 - $t$: 拡散タイムステップ（1〜T）
 - $\mathbf{c}$: VL 特徴条件（=「状況・指示の要約」）</p>
 <h3>ポリシーとしての拡散モデル</h3>
-<p>$$\pi_\theta!\left(\mathbf{a} \mid \mathbf{o},\, \ell_{\text{task}},\, \ell_{\text{body}}\right) = p_\theta!\left(\mathbf{a}<em>0 \;\Big|\; \mathbf{a}_T \sim \mathcal{N}(0, \mathbf{I}),\;\; \mathbf{c} = f</em>\phi(\mathbf{o},\, \ell_{\text{task}},\, \ell_{\text{body}})\right)$$</p>
+<p>$$\pi_\theta\!\left(\mathbf{a} \mid \mathbf{o},\, \ell_{\text{task}},\, \ell_{\text{body}}\right) = p_\theta\!\left(\mathbf{a}_0 \;\Big|\; \mathbf{a}_T \sim \mathcal{N}(0, \mathbf{I}),\;\; \mathbf{c} = f_\phi(\mathbf{o},\, \ell_{\text{task}},\, \ell_{\text{body}})\right)$$</p>
 <ul>
 <li>$\mathbf{o}$: カメラ画像（観測）</li>
 <li>$\ell_{\text{task}}$: タスク指示文（例: "pick up the red cup"）</li>
@@ -295,7 +295,7 @@ arXiv: https://arxiv.org/abs/2605.30280
 <li>$\mathbf{a}_T \sim \mathcal{N}(0, \mathbf{I})$ をサンプル（完全ノイズ）</li>
 <li>$t = T, T-1, \ldots, 1$ のループ:</li>
 <li>$\boldsymbol{\epsilon}_\theta(\mathbf{a}_t, t, \mathbf{c})$ を DiT で推論</li>
-<li>DDPM スケジューラで $\mathbf{a}<em>t \to \mathbf{a}</em>{t-1}$ に更新</li>
+<li>DDPM スケジューラで $\mathbf{a}_t \to \mathbf{a}_{t-1}$ に更新</li>
 <li>$\mathbf{a}_0$ をロボットに送信（関節角度 / 方向 / 座標列）</li>
 </ol>
 <hr />

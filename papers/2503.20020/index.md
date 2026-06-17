@@ -114,7 +114,7 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 </ul>
 <h3>4つのロボティクス知覚能力</h3>
 <p><strong>① 物体検出・ポインティング</strong></p>
-<p>$$\text{query} \xrightarrow{\text{Gemini-ER}} {(x_i, y_i, \text{label}_i)}_i$$</p>
+<p>$$\text{query} \xrightarrow{\text{Gemini-ER}} \{(x_i, y_i, \text{label}_i)\}_i$$</p>
 <ul>
 <li>自然言語クエリから物体の2D座標を返す</li>
 <li>例：「赤いカップの取っ手はどこ？」→ 画像上の点を出力</li>
@@ -171,7 +171,7 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 </code></pre>
 <h3>アクション生成の仕組み</h3>
 <p><strong>チャンク予測</strong>：1ステップずつでなく、複数ステップを一括予測：</p>
-<p>$$\mathbf{a}<em>{t:t+H} = \pi</em>\theta(\mathbf{o}_t, \mathbf{c})$$</p>
+<p>$$\mathbf{a}_{t:t+H} = \pi_\theta(\mathbf{o}_t, \mathbf{c})$$</p>
 <ul>
 <li>$H$：予測ホライズン（例：16ステップ）</li>
 <li>$\mathbf{o}_t$：現在の観測（画像＋状態）</li>
@@ -239,7 +239,7 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 <li>ERモデルの軌跡予測と組み合わせて精度向上</li>
 </ul>
 <p><strong>② 少数ショット学習（Few-shot）</strong></p>
-<p>$$\mathcal{D}<em>{\text{new}} = {(\mathbf{o}_i, \mathbf{a}_i)}</em>{i=1}^{N}, \quad N \approx 100$$</p>
+<p>$$\mathcal{D}_{\text{new}} = \{(\mathbf{o}_i, \mathbf{a}_i)\}_{i=1}^{N}, \quad N \approx 100$$</p>
 <ul>
 <li>100デモ程度で新タスクを習得</li>
 <li>基盤モデルの事前知識を活用するため少量のデモで収束</li>
