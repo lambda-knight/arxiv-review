@@ -108,6 +108,250 @@ $$p_L \approx A \left(\frac{p}{p_{\rm th}}\right)^{\lceil d/2 \rceil}$$
 
 </details>
 
+### 第2章: Part 2: スタビライザーと表面符号
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch02.mp4"></video>
+
+[Internet Archive で開く](https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch02.mp4){:target="_blank"}
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+## Part 2: スタビライザーと表面符号
+
+### パウリ演算子（§III）
+
+$$
+X = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+Z = \begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
+Y = iXZ = \begin{pmatrix}0&-i\\i&0\end{pmatrix}
+$$
+
+- $X$：ビット反転，$Z$：位相反転
+- **反可換**：$XZ = -ZX$（この非可換性がエラー検出の鍵）
+- パウリ群：$\{I, X, Y, Z\}^{\otimes n}$（$n$ 量子ビット系）
+
+### スタビライザーの定義
+
+量子状態 $|\psi\rangle$ を固有値 $+1$ で安定化する演算子 $S$：
+
+$$S|\psi\rangle = +|\psi\rangle$$
+
+エラー $E$ が起きると（$E$ が $S$ と反可換なら）：
+
+$$S(E|\psi\rangle) = -E(S|\psi\rangle) = -(E|\psi\rangle)$$
+
+固有値が $-1$ に反転 → **エラーを状態を崩さずに検出**
+
+### 2量子ビットの例（§III）
+
+$S_1 = ZZ$，$S_2 = XX$ でベル状態 $|\Phi^+\rangle = \frac{|00\rangle+|11\rangle}{\sqrt{2}}$ を安定化
+
+- $X_1$ エラー → $S_1 = ZZ$ の測定値が $-1$ に → 検出！量子状態は破壊されない
+- 量子情報は $Z_1Z_2$ と $X_1X_2$ の固有空間に「エンコード」されている
+
+### 表面符号のスタビライザー（§IV）
+
+> 📊 Fig. 2, 3 参照（原論文）
+
+$d \times d$ 格子上に量子ビットを配置（辺上に1個ずつ）：
+
+$$A_v = \prod_{i \in \partial v} X_i \qquad (\text{頂点プラケット：位相エラー検出})$$
+
+$$B_p = \prod_{i \in \partial p} Z_i \qquad (\text{面プラケット：ビット反転エラー検出})$$
+
+- $[A_v, B_p] = 0$（常に可換 → 同時測定可能、論理状態を壊さない）
+- 正常状態：全プラケット測定値 $= +1$（シンドロームはすべて 0）
+
+```
+● ─X─ ● ─X─ ●
+|      |      |
+Z  Bp  Z  Bp  Z
+|      |      |
+● ─X─ ● ─X─ ●
+```
+
+---
+
+
+</details>
+
+### 第3章: Part 3: 欠陥と論理量子ビットの初期化・測定
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch03.mp4"></video>
+
+[Internet Archive で開く](https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch03.mp4){:target="_blank"}
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+## Part 3: 欠陥と論理量子ビットの初期化・測定
+
+### 欠陥（Defect）とは（§V）
+
+> 📊 Fig. 4, 5 参照（原論文）
+
+格子上の一部のプラケット測定をあえて止めると「**欠陥（穴）**」が生まれる：
+
+- **$d$タイプ欠陥**：$B_p$（$Z$プラケット）を止めた穴
+- **$p$タイプ欠陥**：$A_v$（$X$プラケット）を止めた穴
+- 同タイプの欠陥ペアで **論理量子ビット 1個** を定義
+
+論理演算子：
+
+$$\bar{X} = \prod_{i \in \text{欠陥間の鎖}} X_i, \qquad \bar{Z} = \prod_{i \in \text{欠陥周囲}} Z_i$$
+
+### 論理量子ビットの初期化・測定（§VI）
+
+> 📊 Fig. 6 参照（原論文）
+
+| 操作 | 手順 |
+|------|------|
+| $|\bar{0}\rangle$ 初期化 | 全データ量子ビットを $|0\rangle$ にセット → スタビライザー測定 $d$ 回 |
+| $|\bar{+}\rangle$ 初期化 | 全データ量子ビットを $|+\rangle$ にセット → スタビライザー測定 $d$ 回 |
+| $\bar{Z}$ 測定 | $d$タイプ欠陥間のデータ量子ビットを $Z$ 測定（情報は消滅） |
+| $\bar{X}$ 測定 | $p$タイプ欠陥を囲む量子ビットを $X$ 測定（情報は消滅） |
+
+- 測定ノイズを考慮して **$d$ 回繰り返し測定**して多数決
+
+---
+
+
+</details>
+
+### 第4章: Part 4: 論理量子ビットの移動とブレイド
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch04.mp4"></video>
+
+[Internet Archive で開く](https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch04.mp4){:target="_blank"}
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+## Part 4: 論理量子ビットの移動とブレイド
+
+### 論理量子ビットの移動（§VII）
+
+> 📊 Fig. 7, 8 参照（原論文）
+
+欠陥を格子上で「滑らせる」ことで論理量子ビットを移動：
+
+1. 移動先のプラケット測定を停止（穴を拡張）
+2. 元の位置の測定を再開（穴を縮小）
+3. 移動中もスタビライザー測定を継続 → **フォールトトレラント**
+
+移動コスト：距離 $\ell$ の移動に $O(\ell \cdot d)$ サイクル
+
+### ブレイドによる論理 CNOT（§VIII）
+
+> 📊 Fig. 9, 10, 11 参照（原論文）
+
+制御量子ビット（$d$型欠陥）を標的量子ビット（$p$型欠陥）の**周りを一周**させる：
+
+$$|c\rangle|\psi\rangle \xrightarrow{\text{braid}} |c\rangle\, X^c|\psi\rangle \quad (\text{論理 CNOT})$$
+
+- **位相的操作**：経路の細部が変わっても結果は不変（トポロジカル保護）
+- 局所エラーに対して本質的に頑健
+- ゲートコスト：$O(d^2)$ サイクル
+
+---
+
+
+</details>
+
+### 第5章: Part 5: HゲートとSゲートとTゲート
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch05.mp4"></video>
+
+[Internet Archive で開く](https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch05.mp4){:target="_blank"}
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+## Part 5: HゲートとSゲートとTゲート
+
+### Hadamard ゲート（§IX）
+
+> 📊 Fig. 12 参照（原論文）
+
+$$H = \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix}, \quad HXH^\dagger = Z,\quad HZH^\dagger = X$$
+
+表面符号での実現：格子を **90°回転** → $X$プラケットと$Z$プラケットが入れ替わる（物理的には量子ビットの再ラベリング）
+
+### $S$ ゲート（§X）
+
+> 📊 Fig. 13 参照（原論文）
+
+$$S = \begin{pmatrix}1&0\\0&i\end{pmatrix} = \sqrt{Z}$$
+
+アンシラ量子ビットとの**測定ベース操作**で実現：アンシラ準備 → CNOT → $X$ 測定 → パウリ補正
+
+### $T$ ゲート（§XI）
+
+$$T = \begin{pmatrix}1&0\\0&e^{i\pi/4}\end{pmatrix} = \sqrt{S}$$
+
+- **スタビライザー形式の外**にあるゲート → 直接フォールトトレラントに実現不可
+- マジック状態を使った「状態注入（state injection）」で実現：
+
+$$|T\rangle = T|+\rangle = \frac{|0\rangle + e^{i\pi/4}|1\rangle}{\sqrt{2}}$$
+
+$|T\rangle$ を消費することで $T$ ゲートを 1 回適用できる
+
+---
+
+
+</details>
+
+### 第6章: Part 6: マジック状態蒸留と物理実装
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch06.mp4"></video>
+
+[Internet Archive で開く](https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch06.mp4){:target="_blank"}
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+## Part 6: マジック状態蒸留と物理実装
+
+### マジック状態蒸留（§XII）
+
+> 📊 Fig. 14, 15 参照（原論文）
+
+低品質な $|T\rangle$（エラー率 $p_{\rm in}$）を多数消費して高品質な $|T\rangle$ を生成：
+
+**15-to-1 蒸留プロトコル：**
+
+$$p_{\rm out} \approx 35\, p_{\rm in}^3$$
+
+- 15 個の低品質 $|T\rangle$ を消費して 1 個の高品質 $|T\rangle$ を出力
+- エラー率が 3 乗で改善（$p_{\rm in} = 10^{-3}$ → $p_{\rm out} \approx 3.5 \times 10^{-8}$）
+- 必要に応じて **多段蒸留**（第1段の出力を第2段の入力に使う）
+
+### $\{H, S, T, \text{CNOT}\}$ = ユニバーサルゲートセット
+
+| ゲート | 表面符号での実装 |
+|--------|-----------------|
+| CNOT | ブレイド変換（§VIII） |
+| $H$ | 格子 90° 回転 |
+| $S$ | 測定ベース操作 |
+| $T$ | マジック状態注入 |
+
+### 物理実装（§XIV）
+
+> 📊 Fig. 16, 17 参照（原論文）
+
+| プラットフォーム | 特徴 | 課題 |
+|-----------------|------|------|
+| 超伝導量子ビット | 高速（ns ゲート）、2次元格子が作りやすい | デコヒーレンス時間 $\sim 100\,\mu$s |
+| トラップドイオン | 長いコヒーレンス時間、高忠実度 | 操作速度が遅い（$\mu$s ゲート）、スケールアップ困難 |
+| 中性原子 | 光ピンセットで柔軟な配置 | 読み出し速度、真空技術が課題 |
+| フォトニクス | 室温動作可能 | 決定論的2量子ビットゲートが困難 |
+
+---
+
+
+</details>
+
 ---
 
 [← 論文一覧に戻る](../../)
