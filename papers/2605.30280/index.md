@@ -57,8 +57,6 @@ arXiv: https://arxiv.org/abs/2605.30280
 
 <audio controls src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch01.mp3" style="width:100%;margin-top:4px"></audio>
 
-[Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch01.mp4){:target="_blank"}
-
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -156,8 +154,6 @@ arXiv: https://arxiv.org/abs/2605.30280
 
 <audio controls src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch02.mp3" style="width:100%;margin-top:4px"></audio>
 
-[Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch02.mp4){:target="_blank"}
-
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -231,8 +227,6 @@ arXiv: https://arxiv.org/abs/2605.30280
 <video controls width="100%" src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch03.mp4"></video>
 
 <audio controls src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch03.mp3" style="width:100%;margin-top:4px"></audio>
-
-[Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch03.mp4){:target="_blank"}
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -318,8 +312,6 @@ arXiv: https://arxiv.org/abs/2605.30280
 <video controls width="100%" src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch04.mp4"></video>
 
 <audio controls src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch04.mp3" style="width:100%;margin-top:4px"></audio>
-
-[Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch04.mp4){:target="_blank"}
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -410,8 +402,6 @@ arXiv: https://arxiv.org/abs/2605.30280
 <video controls width="100%" src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch05.mp4"></video>
 
 <audio controls src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch05.mp3" style="width:100%;margin-top:4px"></audio>
-
-[Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch05.mp4){:target="_blank"}
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
