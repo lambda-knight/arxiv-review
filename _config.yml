@@ -5,5 +5,8 @@ url: "https://lambda-knight.github.io"
 theme: minima
 lang: ja
 
+kramdown:
+  parse_block_html: true
+
 plugins:
   - jekyll-feed

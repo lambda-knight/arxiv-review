@@ -42,7 +42,7 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch01.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## 背景と全体像 ── ロボットAIの壁
@@ -87,7 +87,7 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch02.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## Gemini Robotics-ER ── 身体化推論の仕組み
@@ -146,7 +146,7 @@ $$\text{grasp} = (x, y, z, \theta_{\text{roll}}, \theta_{\text{pitch}}, \theta_{
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch03.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## Gemini Robotics ── VLAモデルのアーキテクチャと学習
@@ -204,7 +204,7 @@ $$\mathbf{a}_{t:t+H} = \pi_\theta(\mathbf{o}_t, \mathbf{c})$$
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch04.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## 特化訓練と汎化性能
@@ -254,7 +254,7 @@ $$\mathcal{D}_{\text{new}} = \{(\mathbf{o}_i, \mathbf{a}_i)\}_{i=1}^{N}, \quad N
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch05.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## 安全性・実験結果・今後の展望

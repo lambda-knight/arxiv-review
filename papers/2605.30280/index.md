@@ -52,7 +52,7 @@ arXiv: https://arxiv.org/abs/2605.30280
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch01.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## 背景 — 断片化したロボット知能の課題
@@ -102,7 +102,7 @@ arXiv: https://arxiv.org/abs/2605.30280
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch02.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## Qwen-VLA の全体像とアーキテクチャ
@@ -178,7 +178,7 @@ arXiv: https://arxiv.org/abs/2605.30280
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch03.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## DiT アクションデコーダ — 拡散過程で動きを生成
@@ -254,7 +254,7 @@ $$\text{AdaLN}(h, t, \mathbf{c}) = \gamma(t, \mathbf{c}) \cdot \frac{h - \mu}{\s
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch04.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## 大規模学習データとエンボディメント対応
@@ -314,7 +314,7 @@ System: <embodiment>
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2605-30280/paper_2605.30280_ch05.mp4){:target="_blank"}
 
-<details>
+<details markdown="1">
 <summary>解説スライド（クリックで展開）</summary>
 
 ## 実験結果・限界・今後の展望
