@@ -45,6 +45,8 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch01.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch01_manim_ch01.mp3" style="width:100%;margin-top:4px"></audio>
+
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch01.mp4){:target="_blank"}
 
 <details>
@@ -101,6 +103,8 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch02.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch02.mp3" style="width:100%;margin-top:4px"></audio>
+
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch02.mp4){:target="_blank"}
 
 <details>
@@ -155,6 +159,8 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 ### 第3章: Gemini Robotics ── VLAモデルのアーキテクチャと学習
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch03.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch03.mp3" style="width:100%;margin-top:4px"></audio>
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch03.mp4){:target="_blank"}
 
@@ -227,6 +233,8 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch04.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch04.mp3" style="width:100%;margin-top:4px"></audio>
+
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch04.mp4){:target="_blank"}
 
 <details>
@@ -273,6 +281,8 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 ### 第5章: 安全性・実験結果・今後の展望
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch05.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch05.mp3" style="width:100%;margin-top:4px"></audio>
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch05.mp4){:target="_blank"}
 
