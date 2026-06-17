@@ -42,42 +42,53 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch01.mp4){:target="_blank"}
 
-<details markdown="1">
+<details>
 <summary>解説スライド（クリックで展開）</summary>
 
-## 背景と全体像 ── ロボットAIの壁
-
-### デジタルから物理世界へ
-
-- 大規模マルチモーダルモデルはデジタル領域では驚異的な汎用能力を発揮
-- しかしロボットなどの**物理エージェントへの転換は依然として大きな課題**
-- 本論文は Gemini 2.0 を基盤とした**ロボット専用AIモデルファミリー**を発表
-
-### 2つのモデル
-
-| モデル | 役割 |
-|--------|------|
-| **Gemini Robotics-ER** | Embodied Reasoning（身体化推論）。空間・時間的理解を強化した知覚モデル |
-| **Gemini Robotics** | VLA（Vision-Language-Action）。ロボットを直接制御する汎用アクションモデル |
-
-### なぜロボットは難しいのか
-
-> 📊 Fig. 1 参照（原論文）
-
-1. **物理世界のリアルタイム性** ── デジタルと違い「やり直し」が効かない
-2. **多様なロボット形態（エンボディメント）** ── アームの自由度・センサが機体ごとに異なる
-3. **長期的タスク** ── 数十ステップ先を見越した計画が必要
-4. **安全性** ── 誤動作が物理的危険を招く
-
-### Gemini Robotics の主要能力
-
-- 滑らかでリアクティブな動作生成
-- 多様な物体・未知環境への汎化
-- オープン語彙の指示への対応
-- 100デモ程度の少数ショット学習で新タスクに特化
-
----
-
+<h2>背景と全体像 ── ロボットAIの壁</h2>
+<h3>デジタルから物理世界へ</h3>
+<ul>
+<li>大規模マルチモーダルモデルはデジタル領域では驚異的な汎用能力を発揮</li>
+<li>しかしロボットなどの<strong>物理エージェントへの転換は依然として大きな課題</strong></li>
+<li>本論文は Gemini 2.0 を基盤とした<strong>ロボット専用AIモデルファミリー</strong>を発表</li>
+</ul>
+<h3>2つのモデル</h3>
+<table>
+<thead>
+<tr>
+<th>モデル</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gemini Robotics-ER</strong></td>
+<td>Embodied Reasoning（身体化推論）。空間・時間的理解を強化した知覚モデル</td>
+</tr>
+<tr>
+<td><strong>Gemini Robotics</strong></td>
+<td>VLA（Vision-Language-Action）。ロボットを直接制御する汎用アクションモデル</td>
+</tr>
+</tbody>
+</table>
+<h3>なぜロボットは難しいのか</h3>
+<blockquote>
+<p>📊 Fig. 1 参照（原論文）</p>
+</blockquote>
+<ol>
+<li><strong>物理世界のリアルタイム性</strong> ── デジタルと違い「やり直し」が効かない</li>
+<li><strong>多様なロボット形態（エンボディメント）</strong> ── アームの自由度・センサが機体ごとに異なる</li>
+<li><strong>長期的タスク</strong> ── 数十ステップ先を見越した計画が必要</li>
+<li><strong>安全性</strong> ── 誤動作が物理的危険を招く</li>
+</ol>
+<h3>Gemini Robotics の主要能力</h3>
+<ul>
+<li>滑らかでリアクティブな動作生成</li>
+<li>多様な物体・未知環境への汎化</li>
+<li>オープン語彙の指示への対応</li>
+<li>100デモ程度の少数ショット学習で新タスクに特化</li>
+</ul>
+<hr />
 
 </details>
 
@@ -87,56 +98,52 @@ Ch.5 安全性・実験結果・今後の展望 ── 4リスク・ベンチマ
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch02.mp4){:target="_blank"}
 
-<details markdown="1">
+<details>
 <summary>解説スライド（クリックで展開）</summary>
 
-## Gemini Robotics-ER ── 身体化推論の仕組み
-
-### ER（Embodied Reasoning）とは
-
-Gemini のマルチモーダル推論能力を物理世界に拡張：
-
-> 📊 Fig. 2, 3 参照（原論文）
-
-- **空間理解**：物体の位置・形状・向きを3次元で把握
-- **時間的理解**：動作の時系列・因果関係を追跡
-- **ロボティクス固有タスク**：以下の4能力を実現
-
-### 4つのロボティクス知覚能力
-
-**① 物体検出・ポインティング**
-
-$$\text{query} \xrightarrow{\text{Gemini-ER}} \{(x_i, y_i, \text{label}_i)\}_i$$
-
-- 自然言語クエリから物体の2D座標を返す
-- 例：「赤いカップの取っ手はどこ？」→ 画像上の点を出力
-
-**② 軌跡予測**
-
-- ロボットの手先が通るべき経路を画像上の点列として予測
-- 操作開始前の「計画」として利用
-
-> 📊 Fig. 4 参照（原論文）
-
-**③ グラスプ予測**
-
-$$\text{grasp} = (x, y, z, \theta_{\text{roll}}, \theta_{\text{pitch}}, \theta_{\text{yaw}})$$
-
-- 物体をどの姿勢で把持するかを6自由度で予測
-- 素材・形状を考慮した把持点を提案
-
-**④ マルチビュー対応と3D Bounding Box**
-
-- 複数カメラ視点から3次元物体位置を推定
-- 3D bounding box で物体の位置・サイズを特定
-
-### なぜERモデルを分離するのか
-
-- 知覚モジュールを独立させることで**多様なロボットアプリに再利用**可能
-- ERモデルは大規模な視覚言語データで事前学習 → ファインチューニングなしで未知物体に対応
-
----
-
+<h2>Gemini Robotics-ER ── 身体化推論の仕組み</h2>
+<h3>ER（Embodied Reasoning）とは</h3>
+<p>Gemini のマルチモーダル推論能力を物理世界に拡張：</p>
+<blockquote>
+<p>📊 Fig. 2, 3 参照（原論文）</p>
+</blockquote>
+<ul>
+<li><strong>空間理解</strong>：物体の位置・形状・向きを3次元で把握</li>
+<li><strong>時間的理解</strong>：動作の時系列・因果関係を追跡</li>
+<li><strong>ロボティクス固有タスク</strong>：以下の4能力を実現</li>
+</ul>
+<h3>4つのロボティクス知覚能力</h3>
+<p><strong>① 物体検出・ポインティング</strong></p>
+<p>$$\text{query} \xrightarrow{\text{Gemini-ER}} {(x_i, y_i, \text{label}_i)}_i$$</p>
+<ul>
+<li>自然言語クエリから物体の2D座標を返す</li>
+<li>例：「赤いカップの取っ手はどこ？」→ 画像上の点を出力</li>
+</ul>
+<p><strong>② 軌跡予測</strong></p>
+<ul>
+<li>ロボットの手先が通るべき経路を画像上の点列として予測</li>
+<li>操作開始前の「計画」として利用</li>
+</ul>
+<blockquote>
+<p>📊 Fig. 4 参照（原論文）</p>
+</blockquote>
+<p><strong>③ グラスプ予測</strong></p>
+<p>$$\text{grasp} = (x, y, z, \theta_{\text{roll}}, \theta_{\text{pitch}}, \theta_{\text{yaw}})$$</p>
+<ul>
+<li>物体をどの姿勢で把持するかを6自由度で予測</li>
+<li>素材・形状を考慮した把持点を提案</li>
+</ul>
+<p><strong>④ マルチビュー対応と3D Bounding Box</strong></p>
+<ul>
+<li>複数カメラ視点から3次元物体位置を推定</li>
+<li>3D bounding box で物体の位置・サイズを特定</li>
+</ul>
+<h3>なぜERモデルを分離するのか</h3>
+<ul>
+<li>知覚モジュールを独立させることで<strong>多様なロボットアプリに再利用</strong>可能</li>
+<li>ERモデルは大規模な視覚言語データで事前学習 → ファインチューニングなしで未知物体に対応</li>
+</ul>
+<hr />
 
 </details>
 
@@ -146,55 +153,68 @@ $$\text{grasp} = (x, y, z, \theta_{\text{roll}}, \theta_{\text{pitch}}, \theta_{
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch03.mp4){:target="_blank"}
 
-<details markdown="1">
+<details>
 <summary>解説スライド（クリックで展開）</summary>
 
-## Gemini Robotics ── VLAモデルのアーキテクチャと学習
-
-### システム全体のアーキテクチャ
-
-> 📊 Fig. 5, 6 参照（原論文）
-
-```
-カメラ画像 ─┐
+<h2>Gemini Robotics ── VLAモデルのアーキテクチャと学習</h2>
+<h3>システム全体のアーキテクチャ</h3>
+<blockquote>
+<p>📊 Fig. 5, 6 参照（原論文）</p>
+</blockquote>
+<pre><code>カメラ画像 ─┐
 タスク指示  ─┤→ Gemini Robotics-ER → コンテキスト特徴 c
 エンボディメント記述 ─┘
                               ↓
                    Gemini Robotics（VLA）
                               ↓
                    アクション a_t（関節角度ベクトル）
-```
-
-### アクション生成の仕組み
-
-**チャンク予測**：1ステップずつでなく、複数ステップを一括予測：
-
-$$\mathbf{a}_{t:t+H} = \pi_\theta(\mathbf{o}_t, \mathbf{c})$$
-
-- $H$：予測ホライズン（例：16ステップ）
-- $\mathbf{o}_t$：現在の観測（画像＋状態）
-- $\mathbf{c}$：タスク指示と環境のコンテキスト
-
-### 学習データ
-
-> 📊 Fig. 7 参照（原論文）
-
-| データ種別 | 内容 |
-|-----------|------|
-| ロボット操作デモ | 多様なロボット・タスクのテレオペ軌跡 |
-| 人間の動作映像 | 一人称視点の手作業映像（暗黙知の学習） |
-| 合成シミュレーション | IsaacSim 等で自動生成 |
-| 補助VLデータ | キャプション・VQA（破壊的忘却防止） |
-
-### ゼロショット汎化の仕組み
-
-- **自然言語によるエンボディメント記述**：ロボットの仕様をテキストで渡す
-  - 例：「7自由度アーム、エンドエフェクタ位置xyz＋姿勢＋グリッパー開閉」
-- 言語モデルの推論能力で未学習のロボット記述から類推
-- **マルチタスク学習**による正の転移
-
----
-
+</code></pre>
+<h3>アクション生成の仕組み</h3>
+<p><strong>チャンク予測</strong>：1ステップずつでなく、複数ステップを一括予測：</p>
+<p>$$\mathbf{a}<em>{t:t+H} = \pi</em>\theta(\mathbf{o}_t, \mathbf{c})$$</p>
+<ul>
+<li>$H$：予測ホライズン（例：16ステップ）</li>
+<li>$\mathbf{o}_t$：現在の観測（画像＋状態）</li>
+<li>$\mathbf{c}$：タスク指示と環境のコンテキスト</li>
+</ul>
+<h3>学習データ</h3>
+<blockquote>
+<p>📊 Fig. 7 参照（原論文）</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>データ種別</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ロボット操作デモ</td>
+<td>多様なロボット・タスクのテレオペ軌跡</td>
+</tr>
+<tr>
+<td>人間の動作映像</td>
+<td>一人称視点の手作業映像（暗黙知の学習）</td>
+</tr>
+<tr>
+<td>合成シミュレーション</td>
+<td>IsaacSim 等で自動生成</td>
+</tr>
+<tr>
+<td>補助VLデータ</td>
+<td>キャプション・VQA（破壊的忘却防止）</td>
+</tr>
+</tbody>
+</table>
+<h3>ゼロショット汎化の仕組み</h3>
+<ul>
+<li><strong>自然言語によるエンボディメント記述</strong>：ロボットの仕様をテキストで渡す</li>
+<li>例：「7自由度アーム、エンドエフェクタ位置xyz＋姿勢＋グリッパー開閉」</li>
+<li>言語モデルの推論能力で未学習のロボット記述から類推</li>
+<li><strong>マルチタスク学習</strong>による正の転移</li>
+</ul>
+<hr />
 
 </details>
 
@@ -204,47 +224,44 @@ $$\mathbf{a}_{t:t+H} = \pi_\theta(\mathbf{o}_t, \mathbf{c})$$
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch04.mp4){:target="_blank"}
 
-<details markdown="1">
+<details>
 <summary>解説スライド（クリックで展開）</summary>
 
-## 特化訓練と汎化性能
-
-### 3つの特化シナリオ
-
-> 📊 Fig. 8, 9, 10 参照（原論文）
-
-**① 長期・高精度タスクへの特化**
-
-- 例：多段階の料理タスク、複雑な組み立て
-- ファインチューニングで数十ステップ先を見越した計画を学習
-- ERモデルの軌跡予測と組み合わせて精度向上
-
-**② 少数ショット学習（Few-shot）**
-
-$$\mathcal{D}_{\text{new}} = \{(\mathbf{o}_i, \mathbf{a}_i)\}_{i=1}^{N}, \quad N \approx 100$$
-
-- 100デモ程度で新タスクを習得
-- 基盤モデルの事前知識を活用するため少量のデモで収束
-- 比較：ゼロから学習する場合は数千〜数万デモが必要
-
-**③ 新規ロボット形態への適応**
-
-- 学習時に見ていないロボット（新しいアーム・二足歩行ロボット等）に転移
-- エンボディメント記述テキストを変えるだけで動作
-- ゼロショット・または少量データでの迅速な適応
-
-### 汎化性能の評価
-
-> 📊 Fig. 11, 12 参照（原論文）
-
-- **物体バリエーション**：未知の色・素材・形状の物体への対応率
-- **環境バリエーション**：照明・背景が変わった場合の成功率
-- **指示バリエーション**：表現が異なる同義の指示への対応
-
-**DROID ベンチマーク（多様ロボット操作）**での成績が示される
-
----
-
+<h2>特化訓練と汎化性能</h2>
+<h3>3つの特化シナリオ</h3>
+<blockquote>
+<p>📊 Fig. 8, 9, 10 参照（原論文）</p>
+</blockquote>
+<p><strong>① 長期・高精度タスクへの特化</strong></p>
+<ul>
+<li>例：多段階の料理タスク、複雑な組み立て</li>
+<li>ファインチューニングで数十ステップ先を見越した計画を学習</li>
+<li>ERモデルの軌跡予測と組み合わせて精度向上</li>
+</ul>
+<p><strong>② 少数ショット学習（Few-shot）</strong></p>
+<p>$$\mathcal{D}<em>{\text{new}} = {(\mathbf{o}_i, \mathbf{a}_i)}</em>{i=1}^{N}, \quad N \approx 100$$</p>
+<ul>
+<li>100デモ程度で新タスクを習得</li>
+<li>基盤モデルの事前知識を活用するため少量のデモで収束</li>
+<li>比較：ゼロから学習する場合は数千〜数万デモが必要</li>
+</ul>
+<p><strong>③ 新規ロボット形態への適応</strong></p>
+<ul>
+<li>学習時に見ていないロボット（新しいアーム・二足歩行ロボット等）に転移</li>
+<li>エンボディメント記述テキストを変えるだけで動作</li>
+<li>ゼロショット・または少量データでの迅速な適応</li>
+</ul>
+<h3>汎化性能の評価</h3>
+<blockquote>
+<p>📊 Fig. 11, 12 参照（原論文）</p>
+</blockquote>
+<ul>
+<li><strong>物体バリエーション</strong>：未知の色・素材・形状の物体への対応率</li>
+<li><strong>環境バリエーション</strong>：照明・背景が変わった場合の成功率</li>
+<li><strong>指示バリエーション</strong>：表現が異なる同義の指示への対応</li>
+</ul>
+<p><strong>DROID ベンチマーク（多様ロボット操作）</strong>での成績が示される</p>
+<hr />
 
 </details>
 
@@ -254,65 +271,102 @@ $$\mathcal{D}_{\text{new}} = \{(\mathbf{o}_i, \mathbf{a}_i)\}_{i=1}^{N}, \quad N
 
 [Internet Archive で開く](https://archive.org/download/paper-explain-2503-20020/paper_2503.20020_ch05.mp4){:target="_blank"}
 
-<details markdown="1">
+<details>
 <summary>解説スライド（クリックで展開）</summary>
 
-## 安全性・実験結果・今後の展望
-
-### 安全性の考慮（重要）
-
-> 📊 Fig. 13 参照（原論文）
-
-ロボット基盤モデルの安全性は通常のLLMと異なる課題を持つ：
-
-| リスク | 対策 |
-|--------|------|
-| 物理的危害 | 動作速度・力の上限設定、異常検知 |
-| 意図しない行動 | タスク外の動作拒否メカニズム |
-| 悪用 | エンボディメント記述の検証 |
-| データバイアス | 多様なデモデータの収集 |
-
-**安全フィルタリング**：
+<h2>安全性・実験結果・今後の展望</h2>
+<h3>安全性の考慮（重要）</h3>
+<blockquote>
+<p>📊 Fig. 13 参照（原論文）</p>
+</blockquote>
+<p>ロボット基盤モデルの安全性は通常のLLMと異なる課題を持つ：</p>
+<table>
+<thead>
+<tr>
+<th>リスク</th>
+<th>対策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物理的危害</td>
+<td>動作速度・力の上限設定、異常検知</td>
+</tr>
+<tr>
+<td>意図しない行動</td>
+<td>タスク外の動作拒否メカニズム</td>
+</tr>
+<tr>
+<td>悪用</td>
+<td>エンボディメント記述の検証</td>
+</tr>
+<tr>
+<td>データバイアス</td>
+<td>多様なデモデータの収集</td>
+</tr>
+</tbody>
+</table>
+<p><strong>安全フィルタリング</strong>：
 - 危険な動作パターンを学習データから除外
-- 実行前の動作計画の安全性チェック
-
-### 実験結果
-
-> 📊 Fig. 14, 15, 16 参照（原論文）
-
-**ゼロショット操作タスク**：
+- 実行前の動作計画の安全性チェック</p>
+<h3>実験結果</h3>
+<blockquote>
+<p>📊 Fig. 14, 15, 16 参照（原論文）</p>
+</blockquote>
+<p><strong>ゼロショット操作タスク</strong>：
 - 多様な物体把持・配置タスクで高い成功率
-- 未知物体・環境でもロバストに動作
-
-**長期タスク**：
+- 未知物体・環境でもロバストに動作</p>
+<p><strong>長期タスク</strong>：
 - 10ステップ以上の複合タスクで従来手法を上回る成功率
-- ERモデルの事前計画が精度に大きく貢献
-
-**少数ショット適応**：
+- ERモデルの事前計画が精度に大きく貢献</p>
+<p><strong>少数ショット適応</strong>：
 - 100デモで新タスクに適応（ベースラインの3〜5倍の成功率）
-- 1000デモでほぼ飽和（従来手法は数千〜数万必要）
-
-### Qwen-VLA との比較
-
-| | Gemini Robotics | Qwen-VLA |
-|--|----------------|----------|
-| 基盤モデル | Gemini 2.0 | Qwen VLM |
-| 特徴 | ERモデルを分離独立 | DiT拡散デコーダ |
-| データ規模 | 大規模（非公開） | 大規模（一部公開） |
-| ゼロショット | ◎ | ◎ |
-
-### 今後の展望
-
-1. **より長期的な計画** ── 数百ステップ規模のタスク
-2. **触覚・力覚センサの統合** ── 繊細な操作
-3. **オンライン学習** ── 実機での失敗から自動改善
-4. **マルチロボット協調** ── 複数ロボットの連携
-5. **安全性の強化** ── より堅牢な安全保証の確立
-
-### 参考
-
-- Google DeepMind, "Gemini Robotics: Bringing AI into the Physical World," arXiv:2503.20020 (2025)
-- https://arxiv.org/abs/2503.20020
+- 1000デモでほぼ飽和（従来手法は数千〜数万必要）</p>
+<h3>Qwen-VLA との比較</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Gemini Robotics</th>
+<th>Qwen-VLA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基盤モデル</td>
+<td>Gemini 2.0</td>
+<td>Qwen VLM</td>
+</tr>
+<tr>
+<td>特徴</td>
+<td>ERモデルを分離独立</td>
+<td>DiT拡散デコーダ</td>
+</tr>
+<tr>
+<td>データ規模</td>
+<td>大規模（非公開）</td>
+<td>大規模（一部公開）</td>
+</tr>
+<tr>
+<td>ゼロショット</td>
+<td>◎</td>
+<td>◎</td>
+</tr>
+</tbody>
+</table>
+<h3>今後の展望</h3>
+<ol>
+<li><strong>より長期的な計画</strong> ── 数百ステップ規模のタスク</li>
+<li><strong>触覚・力覚センサの統合</strong> ── 繊細な操作</li>
+<li><strong>オンライン学習</strong> ── 実機での失敗から自動改善</li>
+<li><strong>マルチロボット協調</strong> ── 複数ロボットの連携</li>
+<li><strong>安全性の強化</strong> ── より堅牢な安全保証の確立</li>
+</ol>
+<h3>参考</h3>
+<ul>
+<li>Google DeepMind, "Gemini Robotics: Bringing AI into the Physical World," arXiv:2503.20020 (2025)</li>
+<li>https://arxiv.org/abs/2503.20020</li>
+</ul>
 
 </details>
 
