@@ -159,6 +159,8 @@ arXiv: https://arxiv.org/abs/1907.11157
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch03.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch03.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -201,6 +203,8 @@ arXiv: https://arxiv.org/abs/1907.11157
 ### 第4章: 表面符号 ── 最も実用的な量子誤り訂正符号
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch04.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch04.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -247,6 +251,8 @@ arXiv: https://arxiv.org/abs/1907.11157
 ### 第5章: 耐障害性と閾値定理
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch05.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch05.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
