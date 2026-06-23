@@ -1,5 +1,5 @@
 ---
-title: "表面符号 ── 大規模量子コンピュータへの実践的アプローチ"
+title: "表面符号：大規模量子コンピュータへの実践的アプローチ"
 layout: default
 ---
 
@@ -8,7 +8,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# 表面符号 ── 大規模量子コンピュータへの実践的アプローチ
+# 表面符号：大規模量子コンピュータへの実践的アプローチ
 
 *Austin G. Fowler, Matteo Mariantoni, John M. Martinis, Andrew N. Cleland (2012)*
 
@@ -17,421 +17,702 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 ---
 
-## 概要
-
-Fowler et al. 2012「Surface codes: Towards practical large-scale quantum computation」（arXiv:1208.0928）の第1章を深く読み解きます。量子ビットが脆い理由から、ショアのアルゴリズムに必要な物理量子ビット約400万個という試算まで、数式と対話で丁寧に解説。
-
-▼ 第1章の内容
-・なぜ量子エラー訂正が必要か（デコヒーレンス・ゲートエラー）
-・古典エラー訂正が量子に使えない2つの理由（no-cloning定理・測定崩壊）
-・X/Z/Yエラーの3種類と位相エラーの難しさ
-・符号距離dと物理量子ビット数 n ≈ 2d² の関係
-・論理エラー率の指数的スケーリング（d=25 で 10の-15乗）
-・ショアのアルゴリズム実行に必要な物理量子ビット約400万個の試算
-・1サイクル1マイクロ秒・実行時間数時間の試算
-・表面符号の3つの強み：近傍のみ・閾値1%・スケーラブル
-・現在の量子コンピュータ（Google Willow 105個）との比較
-
-▼ 原論文（arXiv）
-https://arxiv.org/abs/1208.0928 — 表面符号：大規模量子コンピュータへの実践的アプローチ
-
-#量子コンピュータ #量子誤り訂正 #表面符号 #arxiv #論文解説 #ゆっくり解説 #ずんだもん #量子情報 #量子力学 #IBM #Google #フォールトトレラント #量子ビット #機械学習 #テクノロジー
-
----
-
 ## 章別動画・解説
 
-### 第1章: Part 1: 導入と規模推計
+### 第1章: §I-§II: 背景と量子ビットの基礎
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch01.mp4"></video>
-
-<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch01.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>Part 1: 導入と規模推計</h2>
-<h3>なぜ量子エラー訂正が必要か（§I）</h3>
+<h2>§I-§II: 背景と量子ビットの基礎</h2>
+<h3>§I. Background ── なぜ表面符号か</h3>
 <ul>
-<li>物理量子ビットは<strong>デコヒーレンス</strong>（環境との結合で量子状態が崩れる）と<strong>ゲートエラー</strong>の2種類の欠陥を持つ</li>
-<li>現実のゲートエラー率：超伝導量子ビットで 0.1〜1%（古典コンピュータの $10^{18}$ 分の1に比べ 16桁悪い）</li>
-<li><strong>量子エラーの種類</strong>：ビット反転 $X$、位相反転 $Z$、両方同時の $Y=iXZ$（古典の1種類に対し3種類）</li>
-<li>Shor のアルゴリズム（RSA-2048 の素因数分解）：$\approx 10^9$ ゲート操作が必要</li>
-<li>エラー率 0.1% で $10^9$ 回操作 → エラー <strong>100 万回</strong>：エラー訂正なしでは実用不可能</li>
+<li>量子コンピュータは<strong>素因数分解</strong>（Shorのアルゴリズム）や<strong>データ検索</strong>（Groverアルゴリズム）で古典コンピュータを超えられる</li>
+<li>表面符号の起源：Kitaevの<strong>トーリック符号</strong>（トーラス面上の位相的符号）→ Bravyi, Kitaev, Freedman, Meyerが平面版（surface code）に発展</li>
+<li>Preskillらが「単一面でのエラー率最大<strong>3%</strong>」を示す → Raussendorfらが<strong>ブレイド変換</strong>による論理CNOTを発見</li>
 </ul>
-<h3>古典 vs 量子のエラー訂正</h3>
+<p><strong>他の符号との比較（2D最近傍結合での閾値）:</strong></p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>古典</th>
-<th>量子</th>
+<th>符号</th>
+<th>閾値</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>コピー</td>
-<td>OK（繰り返し符号）</td>
-<td><strong>不可</strong>（no-cloning 定理）</td>
+<td>Steane符号</td>
+<td>$\approx 2 \times 10^{-5}$</td>
 </tr>
 <tr>
-<td>測定</td>
-<td>状態を壊さない</td>
-<td><strong>崩れる</strong>（射影測定）</td>
+<td>Bacon-Shor符号</td>
+<td>$\approx 2 \times 10^{-5}$</td>
 </tr>
 <tr>
-<td>エラー種別</td>
-<td>ビット反転のみ</td>
-<td>$X$（反転）＋$Z$（位相）＋$Y$ の 3種</td>
-</tr>
-<tr>
-<td>エラー検出法</td>
-<td>直接読み出し</td>
-<td>スタビライザー（状態を壊さずシンドロームだけ取得）</td>
+<td><strong>表面符号</strong></td>
+<td><strong>$\approx 0.57\% \sim 1\%$</strong>（<strong>10万倍有利</strong>）</td>
 </tr>
 </tbody>
 </table>
-<h3>規模の推計（§II）</h3>
+<ul>
+<li>価格：物理量子ビット数は多い（最低13個で論理1個、実用には $10^3 \sim 10^4$ 個）</li>
+</ul>
+<h3>§II. Introduction ── パウリ演算子と量子エラー</h3>
+<p>$$
+\hat{X} = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
+\hat{Z} = \begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
+\hat{Y} = \hat{Z}\hat{X} = \begin{pmatrix}0&-1\\1&0\end{pmatrix}
+$$</p>
 <blockquote>
-<p>📊 Fig. 1 参照（原論文）</p>
+<p>注意：この論文では $\hat{Y} = \hat{Z}\hat{X}$（$i\sigma_y$ではない。付録Aを参照）</p>
 </blockquote>
-<p><strong>符号距離 $d$</strong>：表面符号格子の一辺サイズ（同時に訂正できるエラー数 $\lfloor(d-1)/2\rfloor$）</p>
-<p>$$n_{\text{phys}} \approx 2d^2 \quad (\text{1論理量子ビットあたり物理量子ビット数})$$</p>
-<p>論理エラー率のスケーリング（物理エラー率 $p$ が閾値 $p_{\rm th} \approx 1\%$ 以下のとき）：</p>
-<p>$$p_L \approx A \left(\frac{p}{p_{\rm th}}\right)^{\lceil d/2 \rceil}$$</p>
-<ul>
-<li>$d = 25$ のとき：$p_L \approx 10^{-15}$（$10^9$ ゲート操作に耐えられる）</li>
-<li>必要な物理量子ビット：$2d^2 \approx 1{,}250$ 個（1論理量子ビットあたり）</li>
-<li>Shor（RSA-2048）：論理量子ビット $\approx 2{,}000$ 個 → 基本部 <strong>250万個</strong></li>
-<li>マジック状態蒸留ファクトリー込みの総計：物理量子ビット <strong>≈ 400 万個</strong></li>
-</ul>
-<p><strong>実行時間の試算：</strong></p>
-<ul>
-<li>1サイクル（スタビライザー測定一回）$\approx 1 \, \mu\text{s}$（ゲート 100 ns + 読み出し 900 ns）</li>
-<li>Shor 必要サイクル数：$\approx 10^9$ → 基本計算 <strong>≈ 1000 秒</strong></li>
-<li>マジック状態蒸留込み実効時間：<strong>≈ 数時間〜数日</strong>（閾値・蒸留段数依存）</li>
-</ul>
-<p><strong>現状（2024）との比較：</strong></p>
-<table>
-<thead>
-<tr>
-<th>実装</th>
-<th>物理量子ビット数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Google Willow (2024)</td>
-<td>105 個</td>
-</tr>
-<tr>
-<td>必要 (Shor RSA-2048)</td>
-<td>≈ 400 万個</td>
-</tr>
-<tr>
-<td>スケールアップ倍率</td>
-<td><strong>≈ 40,000 倍</strong></td>
-</tr>
-</tbody>
-</table>
-<h3>表面符号の 3 つの強み</h3>
-<table>
-<thead>
-<tr>
-<th>強み</th>
-<th>内容</th>
-<th>意義</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>近傍相互作用のみ</td>
-<td>隣接4量子ビット操作で完結</td>
-<td>超伝導・中性原子等のプラットフォームで製造しやすい</td>
-</tr>
-<tr>
-<td>高い誤り閾値</td>
-<td>$p_{\rm th} \approx 1\%$（他の多くの符号より高い）</td>
-<td>現行の物理エラー率（0.1〜0.5%）はすでに閾値以下</td>
-</tr>
-<tr>
-<td>スケーラブル</td>
-<td>$d$ を大きくするだけで論理エラーが指数的に改善</td>
-<td>設計変更不要で規模拡大可能</td>
-</tr>
-</tbody>
-</table>
+<p><strong>反可換関係（エラー検出の核心）：</strong></p>
+<p>$$\hat{X}\hat{Z} = -\hat{Z}\hat{X}, \quad \hat{X}^2 = \hat{Z}^2 = \hat{I}$$</p>
+<p><strong>ユニバーサルゲートセット：</strong> $\{\hat{X}, \hat{Z}, \hat{H}, \hat{S}, \hat{T}, \text{CNOT}\}$</p>
+<p>$$\hat{H} = \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix},\quad
+\hat{S} = \begin{pmatrix}1&0\\0&i\end{pmatrix},\quad
+\hat{T} = \begin{pmatrix}1&0\\0&e^{i\pi/4}\end{pmatrix}$$</p>
+<p><strong>量子エラーのモデル：</strong>
+- ビット反転エラー $\hat{X}$：$|g\rangle \leftrightarrow |e\rangle$
+- 位相反転エラー $\hat{Z}$：$\alpha|g\rangle + \beta|e\rangle \to \alpha|g\rangle - \beta|e\rangle$
+- $\hat{Y} = \hat{Z}\hat{X}$：両方同時
+- エラーは<strong>修正する必要はない</strong>——測定結果を古典的に補正するだけでよい</p>
 <hr />
 
 </details>
 
-### 第2章: Part 2: スタビライザーと表面符号
+### 第2章: §III-§IV: 表面符号と静止状態の測定サイクル
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch02.mp4"></video>
-
-<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch02.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>Part 2: スタビライザーと表面符号</h2>
-<h3>パウリ演算子（§III）</h3>
-<p>$$
-X = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad
-Z = \begin{pmatrix}1&0\\0&-1\end{pmatrix},\quad
-Y = iXZ = \begin{pmatrix}0&-i\\i&0\end{pmatrix}
-$$</p>
-<ul>
-<li>$X$：ビット反転，$Z$：位相反転</li>
-<li><strong>反可換</strong>：$XZ = -ZX$（この非可換性がエラー検出の鍵）</li>
-<li>パウリ群：$\{I, X, Y, Z\}^{\otimes n}$（$n$ 量子ビット系）</li>
-</ul>
-<h3>スタビライザーの定義</h3>
-<p>量子状態 $|\psi\rangle$ を固有値 $+1$ で安定化する演算子 $S$：</p>
-<p>$$S|\psi\rangle = +|\psi\rangle$$</p>
-<p>エラー $E$ が起きると（$E$ が $S$ と反可換なら）：</p>
-<p>$$S(E|\psi\rangle) = -E(S|\psi\rangle) = -(E|\psi\rangle)$$</p>
-<p>固有値が $-1$ に反転 → <strong>エラーを状態を崩さずに検出</strong></p>
-<h3>2量子ビットの例（§III）</h3>
-<p>$S_1 = ZZ$，$S_2 = XX$ でベル状態 $|\Phi^+\rangle = \frac{|00\rangle+|11\rangle}{\sqrt{2}}$ を安定化</p>
-<ul>
-<li>$X_1$ エラー → $S_1 = ZZ$ の測定値が $-1$ に → 検出！量子状態は破壊されない</li>
-<li>量子情報は $Z_1Z_2$ と $X_1X_2$ の固有空間に「エンコード」されている</li>
-</ul>
-<h3>表面符号のスタビライザー（§IV）</h3>
+<h2>§III-§IV: 表面符号と静止状態の測定サイクル</h2>
+<h3>§III. The Surface Code ── 2次元格子の配置</h3>
 <blockquote>
-<p>📊 Fig. 2, 3 参照（原論文）</p>
+<p>📊 Fig. 1 参照（原論文）</p>
 </blockquote>
-<p>$d \times d$ 格子上に量子ビットを配置（辺上に1個ずつ）：</p>
-<p>$$A_v = \prod_{i \in \partial v} X_i \qquad (\text{頂点プラケット：位相エラー検出})$$</p>
-<p>$$B_p = \prod_{i \in \partial p} Z_i \qquad (\text{面プラケット：ビット反転エラー検出})$$</p>
+<p><strong>2種類の量子ビット：</strong></p>
+<table>
+<thead>
+<tr>
+<th>種別</th>
+<th>役割</th>
+<th>記号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>データ量子ビット（data qubit）</td>
+<td>計算情報を保持</td>
+<td>白丸</td>
+</tr>
+<tr>
+<td>測定量子ビット（measure qubit）</td>
+<td>エラーを検出</td>
+<td>黒丸</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li>$[A_v, B_p] = 0$（常に可換 → 同時測定可能、論理状態を壊さない）</li>
-<li>正常状態：全プラケット測定値 $= +1$（シンドロームはすべて 0）</li>
+<li><strong>measure-Zキュービット</strong>（緑）：隣接4データキュービットの $\hat{Z}_a\hat{Z}_b\hat{Z}_c\hat{Z}_d$ を測定</li>
+<li><strong>measure-Xキュービット</strong>（橙）：隣接4データキュービットの $\hat{X}_a\hat{X}_b\hat{X}_c\hat{X}_d$ を測定</li>
+<li>各データ量子ビットは2個のmeasure-Z と2個のmeasure-X に隣接</li>
 </ul>
-<pre><code>● ─X─ ● ─X─ ●
-|      |      |
-Z  Bp  Z  Bp  Z
-|      |      |
-● ─X─ ● ─X─ ●
+<h3>§IV. Quiescent State ── 静止状態と測定サイクル</h3>
+<p><strong>Zスタビライザー測定（measure-Zキュービット）の手順：</strong></p>
+<p>$$|g\rangle \xrightarrow{\text{CNOT×4（データ→measure）}} \text{射影測定} \to Z_{abcd} = \pm 1$$</p>
+<p><strong>Xスタビライザー測定（measure-Xキュービット）：</strong></p>
+<p>$$|g\rangle \xrightarrow{H} \xrightarrow{\text{CNOT×4（measure→データ）}} \xrightarrow{H} \text{射影測定} \to X_{abcd} = \pm 1$$</p>
+<p><strong>静止状態（quiescent state）の特徴：</strong>
+- 全スタビライザーの測定値 $Z_{abcd} = X_{abcd} = +1$（全プラケット「ゼロ」）
+- 測定サイクルを繰り返しても状態は変化しない
+- CNOTの順番（ジグザグ順）は<strong>誤り伝播を防ぐ</strong>ために重要</p>
+<p><strong>境界条件：</strong></p>
+<pre><code>X境界  Z境界
+ ───────────
+|  X  Z  X  |  ← 上辺: Z境界（Zスタビライザーが境界に来る）
+|  Z  X  Z  |
+|  X  Z  X  |  ← 下辺: Z境界
+ ───────────
+↑左辺: X境界   ↑右辺: X境界
 </code></pre>
 <hr />
 
 </details>
 
-### 第3章: Part 3: 欠陥と論理量子ビットの初期化・測定
+### 第3章: §V-§VI: エラー検出と論理演算子
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch03.mp4"></video>
 
-<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch03.mp3" style="width:100%;margin-top:4px"></audio>
-
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>Part 3: 欠陥と論理量子ビットの初期化・測定</h2>
-<h3>欠陥（Defect）とは（§V）</h3>
+<h2>§V-§VI: エラー検出と論理演算子</h2>
+<h3>§V. Single Qubit Errors ── 1量子ビットエラーの検出</h3>
+<p><strong>$\hat{Z}_a$ エラーが起きたとき（位相反転）：</strong></p>
+<p>$$\hat{X}_a\hat{X}_b\hat{X}_c\hat{X}_d \cdot \hat{Z}_a|\psi\rangle = -X_{abcd}\cdot\hat{Z}_a|\psi\rangle$$</p>
+<p>→ 隣接2個のmeasure-Xキュービットの測定値が <strong>反転</strong>（$+1 \to -1$）</p>
+<p><strong>$\hat{X}_a$ エラーが起きたとき（ビット反転）：</strong></p>
+<p>$$\hat{Z}_a\hat{Z}_b\hat{Z}_c\hat{Z}_d \cdot \hat{X}_a|\psi\rangle = -Z_{abcd}\cdot\hat{X}_a|\psi\rangle$$</p>
+<p>→ 隣接2個のmeasure-Zキュービットの測定値が <strong>反転</strong></p>
 <blockquote>
-<p>📊 Fig. 4, 5 参照（原論文）</p>
+<p>📊 Fig. 2 参照（原論文）</p>
 </blockquote>
-<p>格子上の一部のプラケット測定をあえて止めると「<strong>欠陥（穴）</strong>」が生まれる：</p>
-<ul>
-<li><strong>$d$タイプ欠陥</strong>：$B_p$（$Z$プラケット）を止めた穴</li>
-<li><strong>$p$タイプ欠陥</strong>：$A_v$（$X$プラケット）を止めた穴</li>
-<li>同タイプの欠陥ペアで <strong>論理量子ビット 1個</strong> を定義</li>
-</ul>
-<p>論理演算子：</p>
-<p>$$\bar{X} = \prod_{i \in \text{欠陥間の鎖}} X_i, \qquad \bar{Z} = \prod_{i \in \text{欠陥周囲}} Z_i$$</p>
-<h3>論理量子ビットの初期化・測定（§VI）</h3>
+<p><strong>エラー検出のまとめ：</strong>
+- $\hat{Z}$ エラー（位相反転）→ <strong>Xスタビライザーが反応</strong>
+- $\hat{X}$ エラー（ビット反転）→ <strong>Zスタビライザーが反応</strong>
+- $\hat{Y} = \hat{Z}\hat{X}$ エラー → <strong>両方が反応</strong>
+- エラーが小さければ射影によって消去される（確率 $\approx 1-\epsilon^2$）</p>
+<h3>§VI. Logical Operators ── 論理演算子</h3>
 <blockquote>
-<p>📊 Fig. 6 参照（原論文）</p>
+<p>📊 Fig. 3 参照（原論文）</p>
 </blockquote>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>手順</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$|\bar{0}\rangle$ 初期化</td>
-<td>全データ量子ビットを $|0\rangle$ にセット → スタビライザー測定 $d$ 回</td>
-</tr>
-<tr>
-<td>$|\bar{+}\rangle$ 初期化</td>
-<td>全データ量子ビットを $|+\rangle$ にセット → スタビライザー測定 $d$ 回</td>
-</tr>
-<tr>
-<td>$\bar{Z}$ 測定</td>
-<td>$d$タイプ欠陥間のデータ量子ビットを $Z$ 測定（情報は消滅）</td>
-</tr>
-<tr>
-<td>$\bar{X}$ 測定</td>
-<td>$p$タイプ欠陥を囲む量子ビットを $X$ 測定（情報は消滅）</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>測定ノイズを考慮して <strong>$d$ 回繰り返し測定</strong>して多数決</li>
-</ul>
+<p><strong>X境界を結ぶ $\hat{X}_L$ チェーン（$d=5$ の例）：</strong></p>
+<p>$$\hat{X}_L = \hat{X}_1\hat{X}_2\hat{X}_3\hat{X}_4\hat{X}_5$$</p>
+<p>全Zスタビライザーと可換 → 状態を壊さずに論理ビット反転</p>
+<p><strong>Z境界を結ぶ $\hat{Z}_L$ チェーン：</strong></p>
+<p>$$\hat{Z}_L = \hat{Z}_6\hat{Z}_7\hat{Z}_3\hat{Z}_8\hat{Z}_9$$</p>
+<p><strong>反可換性（論理量子ビットの核心）：</strong></p>
+<p>$$\hat{X}_L\hat{Z}_L = -\hat{Z}_L\hat{X}_L$$</p>
+<p>→ 古典情報のコピーに対応する代わりに、位相空間での情報をエンコード</p>
+<p><strong>$\hat{X}_L$ チェーンの変形：</strong></p>
+<p>$$\hat{X}'_L = \hat{X}_1\hat{X}_{10}\hat{X}_{11}\hat{X}_{12}\hat{X}_3\hat{X}_4\hat{X}_5 = X_{2,10,11,12} \cdot \hat{X}_L$$</p>
+<p>→ スタビライザーで変形しても論理的に同等（測定値の積で違いが吸収される）</p>
 <hr />
 
 </details>
 
-### 第4章: Part 4: 論理量子ビットの移動とブレイド
+### 第4章: §VII: エラー検出とデコード
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch04.mp4"></video>
 
-<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch04.mp3" style="width:100%;margin-top:4px"></audio>
-
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>Part 4: 論理量子ビットの移動とブレイド</h2>
-<h3>論理量子ビットの移動（§VII）</h3>
+<h2>§VII: エラー検出とデコード</h2>
+<h3>エラーの種類（§VII）</h3>
 <blockquote>
-<p>📊 Fig. 7, 8 参照（原論文）</p>
+<p>📊 Fig. 4, 5 参照（原論文）</p>
 </blockquote>
-<p>欠陥を格子上で「滑らせる」ことで論理量子ビットを移動：</p>
-<ol>
-<li>移動先のプラケット測定を停止（穴を拡張）</li>
-<li>元の位置の測定を再開（穴を縮小）</li>
-<li>移動中もスタビライザー測定を継続 → <strong>フォールトトレラント</strong></li>
-</ol>
-<p>移動コスト：距離 $\ell$ の移動に $O(\ell \cdot d)$ サイクル</p>
-<h3>ブレイドによる論理 CNOT（§VIII）</h3>
-<blockquote>
-<p>📊 Fig. 9, 10, 11 参照（原論文）</p>
-</blockquote>
-<p>制御量子ビット（$d$型欠陥）を標的量子ビット（$p$型欠陥）の<strong>周りを一周</strong>させる：</p>
-<p>$$|c\rangle|\psi\rangle \xrightarrow{\text{braid}} |c\rangle\, X^c|\psi\rangle \quad (\text{論理 CNOT})$$</p>
+<p>シミュレーションで考慮するエラー：
+1. <strong>データ量子ビットの $\hat{I} \to \hat{X}, \hat{Y}, \hat{Z}$</strong>：各 $p/3$ の確率
+2. <strong>初期化エラー</strong>：$|g\rangle$ の代わりに $|e\rangle$ に初期化（確率 $p$）
+3. <strong>アダマールエラー</strong>：$\hat{H}$ に加えて $\hat{X}, \hat{Y}, \hat{Z}$（各 $p/3$）
+4. <strong>測定エラー</strong>：誤った値を報告（確率 $p$）
+5. <strong>CNOTエラー</strong>：15種の2量子ビットエラー（各 $p/15$）</p>
+<h3>閾値と論理エラー率のスケーリング</h3>
+<p><strong>論理エラー率のスケーリング（$p < p_{\rm th}$ のとき）：</strong></p>
+<p>$$P_L \approx 0.03 \left(\frac{p}{p_{\rm th}}\right)^{d_e}, \quad d_e = \left\lceil\frac{d+1}{2}\right\rceil$$</p>
+<p>$$p_{\rm th} \approx 0.57\% \quad (\text{この論文の実装では})$$</p>
+<table>
+<thead>
+<tr>
+<th>距離 $d$</th>
+<th>$d_e$</th>
+<th>$p=0.1\%$ での $P_L$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>3</td>
+<td>$\sim 3\times 10^{-5}$</td>
+</tr>
+<tr>
+<td>25</td>
+<td>13</td>
+<td>$\sim 10^{-28}$</td>
+</tr>
+<tr>
+<td>55</td>
+<td>28</td>
+<td>$< 10^{-60}$</td>
+</tr>
+</tbody>
+</table>
+<h3>最小重みパーフェクトマッチング（Edmondsアルゴリズム）</h3>
+<p>$$\text{エラーチェーンを空間-時間の3次元グラフとして表現}$$</p>
 <ul>
-<li><strong>位相的操作</strong>：経路の細部が変わっても結果は不変（トポロジカル保護）</li>
-<li>局所エラーに対して本質的に頑健</li>
-<li>ゲートコスト：$O(d^2)$ サイクル</li>
+<li>シンドローム変化点（-1になったプラケット）をノードとする</li>
+<li>ノード間を結ぶ最短パスを「最もありそうなエラーチェーン」と推定</li>
+<li>計算コスト：$O(n^3)$（$n$ = エラー検出点数）</li>
 </ul>
 <hr />
 
 </details>
 
-### 第5章: Part 5: HゲートとSゲートとTゲート
+### 第5章: §VIII-§IX: 論理量子ビットの生成とパウリフレーム
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch05.mp4"></video>
 
-<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch05.mp3" style="width:100%;margin-top:4px"></audio>
-
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>Part 5: HゲートとSゲートとTゲート</h2>
-<h3>Hadamard ゲート（§IX）</h3>
+<h2>§VIII-§IX: 論理量子ビットの生成とパウリフレーム</h2>
+<h3>§VIII. Creating Logical Qubits ── 欠陥（穴）による論理量子ビット</h3>
 <blockquote>
-<p>📊 Fig. 12 参照（原論文）</p>
+<p>📊 Fig. 9, 10, 11 参照（原論文）</p>
 </blockquote>
-<p>$$H = \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix}, \quad HXH^\dagger = Z,\quad HZH^\dagger = X$$</p>
-<p>表面符号での実現：格子を <strong>90°回転</strong> → $X$プラケットと$Z$プラケットが入れ替わる（物理的には量子ビットの再ラベリング）</p>
-<h3>$S$ ゲート（§X）</h3>
-<blockquote>
-<p>📊 Fig. 13 参照（原論文）</p>
-</blockquote>
-<p>$$S = \begin{pmatrix}1&0\\0&i\end{pmatrix} = \sqrt{Z}$$</p>
-<p>アンシラ量子ビットとの<strong>測定ベース操作</strong>で実現：アンシラ準備 → CNOT → $X$ 測定 → パウリ補正</p>
-<h3>$T$ ゲート（§XI）</h3>
-<p>$$T = \begin{pmatrix}1&0\\0&e^{i\pi/4}\end{pmatrix} = \sqrt{S}$$</p>
+<p><strong>Z-cut欠陥（Z-cut hole）：</strong>
+- measure-Zキュービットを1個停止 → X境界の穴が内部に生まれる</p>
+<p>$$\hat{X}_L = \hat{X}_1\hat{X}_2\hat{X}_3 \quad (\text{外側X境界から穴のX境界へのチェーン})$$</p>
+<p>$$\hat{Z}_L = \hat{Z}_3\hat{Z}_4\hat{Z}_5\hat{Z}_6 \quad (\text{穴を囲むループ})$$</p>
+<p>$$\hat{X}_L\hat{Z}_L = -\hat{Z}_L\hat{X}_L \quad (\text{data qubit 3を共有→反可換})$$</p>
+<p><strong>X-cut欠陥（X-cut hole）：</strong>
+- measure-Xキュービットを停止 → Z境界の穴</p>
+<p><strong>2穴で1論理量子ビット（double-cut qubit）：</strong></p>
+<p>$$\hat{X}_L = \hat{X}_1\hat{X}_2\hat{X}_3 \quad (\text{2穴をつなぐチェーン})$$
+$$\hat{Z}_L = \text{いずれかの穴を囲むループ}$$</p>
+<p>距離 $d$：$\hat{X}_L$ チェーンの長さ（穴の間隔）と $\hat{Z}_L$ ループの長さの<strong>小さい方</strong></p>
+<h3>§IX. Software-Implemented $\hat{Z}_L$ and $\hat{X}_L$ ── パウリフレーム</h3>
 <ul>
-<li><strong>スタビライザー形式の外</strong>にあるゲート → 直接フォールトトレラントに実現不可</li>
-<li>マジック状態を使った「状態注入（state injection）」で実現：</li>
+<li>表面符号では <strong>$\hat{X}_L, \hat{Z}_L$ を直接実行しない</strong></li>
+<li>測定結果のビットをソフトウェア（パウリフレーム）で追跡</li>
+<li>例：$Z_{abcd} = -1$ の測定 → フレームに $\hat{X}_L$ を記録 → 後続の測定結果を自動補正</li>
+<li>これにより<strong>物理的な操作コストなし</strong>でパウリ補正を実現</li>
 </ul>
-<p>$$|T\rangle = T|+\rangle = \frac{|0\rangle + e^{i\pi/4}|1\rangle}{\sqrt{2}}$$</p>
-<p>$|T\rangle$ を消費することで $T$ ゲートを 1 回適用できる</p>
 <hr />
 
 </details>
 
-### 第6章: Part 6: マジック状態蒸留と物理実装
+### 第6章: §X-§XII: 初期化・測定と大きな論理量子ビット
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch06.mp4"></video>
-
-<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch06.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>Part 6: マジック状態蒸留と物理実装</h2>
-<h3>マジック状態蒸留（§XII）</h3>
-<blockquote>
-<p>📊 Fig. 14, 15 参照（原論文）</p>
-</blockquote>
-<p>低品質な $|T\rangle$（エラー率 $p_{\rm in}$）を多数消費して高品質な $|T\rangle$ を生成：</p>
-<p><strong>15-to-1 蒸留プロトコル：</strong></p>
-<p>$$p_{\rm out} \approx 35\, p_{\rm in}^3$$</p>
+<h2>§X-§XII: 初期化・測定と大きな論理量子ビット</h2>
+<h3>§X. Logical Qubit Initialization and Measurement</h3>
+<p><strong>Easy初期化（欠陥の種類と同じ基底）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>量子ビット</th>
+<th>Easy初期化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X-cut qubit</td>
+<td>$\hat{X}_L$ 固有状態（$|+_L\rangle$ または $|-_L\rangle$）</td>
+</tr>
+<tr>
+<td>Z-cut qubit</td>
+<td>$\hat{Z}_L$ 固有状態（$|g_L\rangle$ または $|e_L\rangle$）</td>
+</tr>
+</tbody>
+</table>
+<p>→ 穴を作る直前のスタビライザー測定値から初期状態が決まる</p>
+<p><strong>Difficult初期化（逆基底）：</strong>
+- Xスタビライザーの帯（strip）を停止 → 孤立データ量子ビットを $\hat{Z}$ 測定 → $|g\rangle$ にセット → スタビライザー復元</p>
+<h3>§XI. Errors During Stabilizer Measurement</h3>
 <ul>
-<li>15 個の低品質 $|T\rangle$ を消費して 1 個の高品質 $|T\rangle$ を出力</li>
-<li>エラー率が 3 乗で改善（$p_{\rm in} = 10^{-3}$ → $p_{\rm out} \approx 3.5 \times 10^{-8}$）</li>
-<li>必要に応じて <strong>多段蒸留</strong>（第1段の出力を第2段の入力に使う）</li>
+<li>スタビライザー測定の<strong>誤りは時間方向にも伝播</strong>する</li>
+<li>時空間3次元（水平方向2D + 時間方向）でエラーチェーンを追跡</li>
+<li>測定値の変化を時空間グラフでマッチングして訂正</li>
 </ul>
-<h3>$\{H, S, T, \text{CNOT}\}$ = ユニバーサルゲートセット</h3>
-<table>
-<thead>
-<tr>
-<th>ゲート</th>
-<th>表面符号での実装</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CNOT</td>
-<td>ブレイド変換（§VIII）</td>
-</tr>
-<tr>
-<td>$H$</td>
-<td>格子 90° 回転</td>
-</tr>
-<tr>
-<td>$S$</td>
-<td>測定ベース操作</td>
-</tr>
-<tr>
-<td>$T$</td>
-<td>マジック状態注入</td>
-</tr>
-</tbody>
-</table>
-<h3>物理実装（§XIV）</h3>
+<h3>§XII. Larger Logical Qubits ── 大きな論理量子ビット</h3>
 <blockquote>
-<p>📊 Fig. 16, 17 参照（原論文）</p>
+<p>📊 Fig. 11, 16 参照（原論文）</p>
 </blockquote>
+<p><strong>穴のサイズと距離 $d$ の関係：</strong></p>
+<ul>
+<li>最小欠陥（1スタビライザー停止）：$d = 3$（$\hat{X}_L = 3$ 量子ビット、$\hat{Z}_L = 4$ 量子ビット）</li>
+<li>5スタビライザー停止：$\hat{Z}_L = 8$ 量子ビット → $d = 8$（穴の間隔を調整）</li>
+<li>$d$ を2倍にすると物理量子ビット数は4倍、論理エラー率は指数的に改善</li>
+</ul>
+<p>$$P_L \sim p^{d_e}, \quad n_{\rm phys} \approx 2d^2 \quad (\text{1論理量子ビットあたり})$$</p>
+<hr />
+
+</details>
+
+### 第7章: §XIII-§XIV: 論理量子ビットの移動とブレイド変換
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch07.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>§XIII-§XIV: 論理量子ビットの移動とブレイド変換</h2>
+<h3>§XIII. Moving Qubits ── 欠陥の移動</h3>
+<blockquote>
+<p>📊 Fig. 17, 18 参照（原論文）</p>
+</blockquote>
+<p><strong>欠陥移動の原理（ハイゼンベルク描像）：</strong>
+- 波動関数でなく演算子を変換：$\hat{A} \to \hat{U}^\dagger\hat{A}\hat{U}$
+- 欠陥を1セル移動 → $\hat{X}_L$ と $\hat{Z}_L$ を対応して更新</p>
+<p><strong>1セル移動の手順：</strong>
+1. 隣のスタビライザーを停止（穴を拡張）
+2. 孤立データ量子ビットを $\hat{X}$ または $\hat{Z}$ で測定
+3. 元のスタビライザーを再起動（穴を縮小）
+4. $d$ サイクル待機（時間方向のエラーマッチングのため）</p>
+<p><strong>マルチセル移動：</strong> 長い切り込みを1ステップで実行 → 同じ $1 + d$ サイクルで長距離移動可能</p>
+<h3>§XIV. The Braiding Transformation ── 論理 CNOT</h3>
+<blockquote>
+<p>📊 Fig. 19, 20, 21, 22 参照（原論文）</p>
+</blockquote>
+<p><strong>ブレイドの概念：</strong>
+- Qubit 1の片方の穴を、Qubit 2の2つの穴の<strong>間を通るように</strong>周回移動させる
+- 経路が閉ループを描く → <strong>論理 CNOT</strong></p>
+<p><strong>2量子ビットブレイドの変換（$\hat{X}_{L1}, \hat{Z}_{L1}, \hat{X}_{L2}, \hat{Z}_{L2}$）：</strong></p>
 <table>
 <thead>
 <tr>
-<th>プラットフォーム</th>
-<th>特徴</th>
-<th>課題</th>
+<th>演算子</th>
+<th>ブレイド後</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>超伝導量子ビット</td>
-<td>高速（ns ゲート）、2次元格子が作りやすい</td>
-<td>デコヒーレンス時間 $\sim 100\,\mu$s</td>
+<td>$\hat{X}_{L1}$</td>
+<td>$\hat{X}_{L1}\hat{X}_{L2}$ （制御XがターゲットにXを掛ける）</td>
 </tr>
 <tr>
-<td>トラップドイオン</td>
-<td>長いコヒーレンス時間、高忠実度</td>
-<td>操作速度が遅い（$\mu$s ゲート）、スケールアップ困難</td>
+<td>$\hat{Z}_{L1}$</td>
+<td>$\hat{Z}_{L1}$</td>
 </tr>
 <tr>
-<td>中性原子</td>
-<td>光ピンセットで柔軟な配置</td>
-<td>読み出し速度、真空技術が課題</td>
+<td>$\hat{X}_{L2}$</td>
+<td>$\hat{X}_{L2}$</td>
 </tr>
 <tr>
-<td>フォトニクス</td>
-<td>室温動作可能</td>
-<td>決定論的2量子ビットゲートが困難</td>
+<td>$\hat{Z}_{L2}$</td>
+<td>$\hat{Z}_{L1}\hat{Z}_{L2}$</td>
 </tr>
 </tbody>
 </table>
+<p>→ これが論理 CNOT の変換規則と完全一致（Qubit 1 が制御、Qubit 2 が標的）</p>
+<p><strong>CNOTのコスト：</strong> $O(d^2)$ サイクル（ブレイドの周長 × 距離 $d$）</p>
+<hr />
+
+</details>
+
+### 第8章: §XV-§XVI: 1量子ビットゲート──HゲートとSL・TL演算子
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch08.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>§XV-§XVI: 1量子ビットゲート──HゲートとSL・TL演算子</h2>
+<h3>§XV. The Hadamard Transformation</h3>
+<blockquote>
+<p>📊 Fig. 26, 27, 28 参照（原論文）</p>
+</blockquote>
+<p><strong>論理アダマールの実現：</strong>
+1. 論理量子ビットを囲む $\hat{X}$ スタビライザーを停止 → 「パッチ」を孤立
+2. パッチ内の全データ量子ビットに物理 $\hat{H}$ を適用
+3. SWAPでパッチを1セル分ずらす（格子アライメント復元）
+4. 穴を再作成して論理量子ビットを復元</p>
+<p>変換後：$\hat{X}_L \leftrightarrow \hat{Z}_L$（アダマールの定義通り）</p>
+<p>$$\hat{H}\hat{X}\hat{H} = \hat{Z}, \quad \hat{H}\hat{Z}\hat{H} = \hat{X}$$</p>
+<h3>§XVI. Single Qubit $\hat{S}_L$ and $\hat{T}_L$ Operators</h3>
+<p>$$\hat{S}_L = \begin{pmatrix}1&0\\0&i\end{pmatrix},\quad \hat{T}_L = \begin{pmatrix}1&0\\0&e^{i\pi/4}\end{pmatrix}$$</p>
+<p><strong>$\hat{S}_L$ ゲートの実現（測定ベース）：</strong></p>
+<blockquote>
+<p>📊 Fig. 29 参照（原論文）</p>
+</blockquote>
+<p>アンシラ $|Y_L\rangle = \frac{|g_L\rangle + i|e_L\rangle}{\sqrt{2}}$ を使って測定ベース操作</p>
+<p>$$|Y_L\rangle \otimes |\psi_L\rangle \xrightarrow{\text{CNOT}} \xrightarrow{M_Z} \hat{S}_L|\psi_L\rangle \quad (M_Z = +1\text{ のとき})$$</p>
+<p><strong>$\hat{T}_L$ ゲート（マジック状態注入）：</strong></p>
+<blockquote>
+<p>📊 Fig. 30 参照（原論文）</p>
+</blockquote>
+<p>アンシラ（マジック状態）$|A_L\rangle = \hat{T}|+_L\rangle = \frac{|g_L\rangle + e^{i\pi/4}|e_L\rangle}{\sqrt{2}}$</p>
+<p>$$|A_L\rangle \otimes |\psi_L\rangle \xrightarrow{\text{CNOT}} \xrightarrow{M_Z} \begin{cases} \hat{T}_L|\psi_L\rangle & (M_Z = +1)  \\ \hat{X}_L\hat{T}^\dagger_L|\psi_L\rangle & (M_Z = -1) \end{cases}$$</p>
+<p>$M_Z = -1$ のとき：$\hat{S}_L\hat{T}^\dagger_L = \hat{T}_L$ なので $\hat{S}_L$ ゲートで変換して $\hat{T}_L$ を得る</p>
+<p><strong>マジック状態蒸留（15-to-1プロトコル）：</strong></p>
+<p>低品質な $|A_L\rangle$（エラー率 $p_{\rm in}$）15個 → 高品質な $|A_L\rangle$ 1個：</p>
+<p>$$p_{\rm out} \approx 35\, p_{\rm in}^3$$</p>
+<p>2段蒸留：$p_{\rm in} = 0.5\% \to p_1 \approx 4\times 10^{-6} \to p_2 \approx 2\times 10^{-15}$（十分）</p>
+<hr />
+
+</details>
+
+### 第9章: §XVII + 付録A-B: 物理実装とスタビライザー回路の詳細
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch09.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>§XVII + 付録A-B: 物理実装とスタビライザー回路の詳細</h2>
+<h3>§XVII. Physical Implementations</h3>
+<blockquote>
+<p>📊 Fig. 17（superconducting実装の例）参照（原論文）</p>
+</blockquote>
+<p><strong>必要条件：</strong>
+- 単一量子ビットゲート忠実度 $> 99\%$
+- 2量子ビットCNOT忠実度 $> 99\%$
+- コヒーレンス時間 $\geq 1\,\mu\text{s}$（ゲート時間 10-100 ns の場合）
+- 物理量子ビット数：実用的には $\sim 10^8$ 個以上
+- 古典制御のクロック：$\sim 10^6 \sim 10^7\,\text{Hz}$（表面符号サイクルに同期）</p>
+<p><strong>超伝導回路が最有力：</strong>
+- ゲート時間 10-100 ns（要件を満たす）
+- 2D格子の集積化が比較的容易
+- 課題：コヒーレンス時間・高速古典回路との統合</p>
+<p><strong>サイクル時間の目標：</strong> 200 ns（1サイクル = CNOT 4回 + 測定1回）</p>
+<h3>付録A. Notation（記号規約）</h3>
+<p>$$|g\rangle = \begin{pmatrix}1\\0\end{pmatrix},\quad |e\rangle = \begin{pmatrix}0\\1\end{pmatrix}$$</p>
+<p>$$\hat{X}|g\rangle = |e\rangle,\quad \hat{Z}|g\rangle = +|g\rangle,\quad \hat{Z}|e\rangle = -|e\rangle$$</p>
+<p>$$|+\rangle = \frac{|g\rangle + |e\rangle}{\sqrt{2}},\quad |-\rangle = \frac{|g\rangle - |e\rangle}{\sqrt{2}}$$</p>
+<p>$$\hat{Y} = \hat{Z}\hat{X} = \begin{pmatrix}0&-1\\1&0\end{pmatrix} \quad (\text{注：}i\sigma_y\text{ではない})$$</p>
+<p><strong>可換関係（$i$なしの定義のため通常とずれる）：</strong>
+$$[\hat{X},\hat{Y}] = -2\hat{Z},\quad [\hat{Y},\hat{Z}] = -2\hat{X},\quad [\hat{Z},\hat{X}] = +2\hat{Y}$$</p>
+<h3>付録B. $\hat{Z}$ and $\hat{X}$ Stabilizer Circuits</h3>
+<blockquote>
+<p>📊 Fig. 34 参照（原論文）</p>
+</blockquote>
+<p>2量子ビット簡略版（data qubit a, b + measure-Z + measure-X）：</p>
+<p><strong>Zスタビライザー回路（4ステップ）：</strong>
+1. measure-Z を $|g\rangle$ に初期化
+2. data qubit a → measure-Z の CNOT
+3. data qubit b → measure-Z の CNOT
+4. measure-Z を射影測定 → $Z_{ab} = \pm 1$</p>
+<p>→ データキュービットは $\hat{Z}_a\hat{Z}_b$ の固有状態に射影される</p>
+<p><strong>ベル状態一覧（Zスタビライザー測定後の状態）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>$Z_{ab}$</th>
+<th>$X_{ab}$</th>
+<th>状態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$+1$</td>
+<td>$+1$</td>
+<td>$|\Phi^+\rangle = \frac{|gg\rangle + |ee\rangle}{\sqrt{2}}$</td>
+</tr>
+<tr>
+<td>$+1$</td>
+<td>$-1$</td>
+<td>$|\Phi^-\rangle = \frac{|gg\rangle - |ee\rangle}{\sqrt{2}}$</td>
+</tr>
+<tr>
+<td>$-1$</td>
+<td>$+1$</td>
+<td>$|\Psi^+\rangle = \frac{|ge\rangle + |eg\rangle}{\sqrt{2}}$</td>
+</tr>
+<tr>
+<td>$-1$</td>
+<td>$-1$</td>
+<td>$|\Psi^-\rangle = \frac{|ge\rangle - |eg\rangle}{\sqrt{2}}$</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+</details>
+
+### 第10章: 付録C-F: 初期化・測定・大型量子ビット・移動の詳細
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch10.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>付録C-F: 初期化・測定・大型量子ビット・移動の詳細</h2>
+<h3>付録C. X-cut Qubit Initialization in $\hat{Z}_L$ Basis（Difficult初期化）</h3>
+<blockquote>
+<p>📊 Fig. 14 参照（原論文）</p>
+</blockquote>
+<ol>
+<li>完全安定化アレイからスタート</li>
+<li>$\hat{X}$ スタビライザーの帯（strip）を停止：帯の両端が穴の原型になる</li>
+<li>帯に隣接する $\hat{Z}$ スタビライザーを4端子→3端子に削減</li>
+<li>孤立データ量子ビット（1, 2, 3番）を $\hat{Z}$ 測定して1回記録</li>
+<li>$|g\rangle$ にセット → $\hat{Z}_L = \hat{Z}_1\hat{Z}_2\hat{Z}_3 = +1$ の状態確定</li>
+<li>内部 $\hat{X}$ スタビライザーと3端子 $\hat{Z}$ を元に戻す</li>
+</ol>
+<p><strong>なぜ $d$ 回ではなく1回の測定でよいか：</strong>
+- 3端子 $\hat{Z}$ 測定と後続の4端子測定の比較で<strong>時間方向の距離</strong>を確保できるため</p>
+<h3>付録D. Measuring an X-cut Qubit in $\hat{Z}_L$ Basis（Difficult測定）</h3>
+<ol>
+<li>$\hat{Z}_L$ チェーンが通る $\hat{X}$ スタビライザーの帯を停止</li>
+<li>帯に隣接する $\hat{Z}$ スタビライザーを3端子に削減</li>
+<li>孤立データ量子ビットを $\hat{X}$ 測定（各 $X_i = \pm 1$）</li>
+<li>$X_L = \prod_i X_i$（論理 $\hat{X}_L$ の測定値）</li>
+<li>データキュービットを $|g\rangle$ にリセット → 論理量子ビット消滅</li>
+</ol>
+<h3>付録E. Making a Larger Qubit（大型欠陥の作り方）</h3>
+<blockquote>
+<p>📊 Fig. 16 参照（原論文）</p>
+</blockquote>
+<p>5スタビライザー停止（$\hat{Z}_{s1}\sim\hat{Z}_{s4}$ と $\hat{X}_{s1}$）による大型Z-cut qubit：</p>
+<ul>
+<li>$\hat{Z}_L = \hat{Z}_1\hat{Z}_2\hat{Z}_3\hat{Z}_4\hat{Z}_5\hat{Z}_6\hat{Z}_7\hat{Z}_8$（8量子ビットのループ）</li>
+<li>初期値 $= \prod_{k=1}^{4} Z_{sk}$（停止直前のスタビライザー測定値の積）</li>
+<li>4つの内部データ量子ビットは $\hat{X}$ 測定でエラー追跡</li>
+</ul>
+<h3>付録F. One-Cell Qubit Move（1セル移動の詳細）</h3>
+<blockquote>
+<p>📊 Fig. 17 参照（原論文）</p>
+</blockquote>
+<p>Z-cut qubitを1セル移動する操作：</p>
+<p>$$\hat{X}_L \to \hat{X}'_L = \hat{X}_L \cdot (\text{隣のXスタビライザーから貰う})$$</p>
+<p>$$\hat{Z}_L \to \hat{Z}'_L = \hat{Z}_{sn} \quad (\text{新しい穴を囲む最小ループ})$$</p>
+<ul>
+<li>移動コスト：$1 + d$ サイクル（1サイクルで穴を移動、$d$ サイクル待機）</li>
+<li>孤立データ量子ビットの $\hat{X}$ エラーは測定で消去、$\hat{Z}$ エラーは3端子スタビライザーで追跡</li>
+</ul>
+<hr />
+
+</details>
+
+### 第11章: 付録G-J: ブレイドと論理アダマール変換の詳細
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch11.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>付録G-J: ブレイドと論理アダマール変換の詳細</h2>
+<h3>付録G. Multi-Cell Moves（マルチセル移動）</h3>
+<blockquote>
+<p>📊 Fig. 18 参照（原論文）</p>
+</blockquote>
+<ul>
+<li>長い切り込みを<strong>1ステップ</strong>で作成 → 穴を一気に長距離移動</li>
+<li>所要時間：$1 + d$ サイクル（単セル移動と同じ！）</li>
+<li>移動中に $\hat{X}$ スタビライザーが「橋」をわたって更新される</li>
+</ul>
+<p>バイプロダクト演算子の符号追跡：</p>
+<p>$$\hat{X}'_L = \prod_i X_{si} \cdot \hat{X}_L \quad (\text{橋わたりで生じる符号})$$</p>
+<h3>付録H. Single Qubit Braid Transformation（1量子ビットブレイドの詳細）</h3>
+<blockquote>
+<p>📊 Fig. 19, 20 参照（原論文）</p>
+</blockquote>
+<p><strong>第1移動（8セル）後の演算子変換：</strong>
+$$\hat{X}_L \to \hat{X}^e_L = \hat{X}_{\rm loop}\cdot\hat{X}_L, \quad \hat{Z}_L \to \hat{Z}^e_L = \hat{Z}_{sn}\cdot\hat{Z}_L$$</p>
+<p><strong>第2移動（4セル、ループを閉じる）後：</strong>
+$$\hat{X}''_L = X_{\rm loop}\cdot\hat{X}_L \quad (X_{\rm loop} = \text{囲まれたスタビライザー測定値の積})$$
+$$\hat{Z}''_L = \hat{Z}_L \quad (\text{ループが元に戻る})$$</p>
+<p>→ $\hat{X}_L$ は符号だけ変わって実質同じ、$\hat{Z}_L$ は不変</p>
+<h3>付録I. Two-Qubit Braid Transformation（2量子ビットブレイドの詳細）</h3>
+<blockquote>
+<p>📊 Fig. 21, 22, 23 参照（原論文）</p>
+</blockquote>
+<p><strong>内部にQubit 2の穴を含むブレイドの変換規則：</strong></p>
+<table>
+<thead>
+<tr>
+<th>初期演算子</th>
+<th>ブレイド後</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\hat{X}_{L1}$</td>
+<td>$\hat{X}_{L1}\hat{X}_{L2}$</td>
+</tr>
+<tr>
+<td>$\hat{Z}_{L1}$</td>
+<td>$\hat{Z}_{L1}$</td>
+</tr>
+<tr>
+<td>$\hat{X}_{L2}$</td>
+<td>$\hat{X}_{L2}$</td>
+</tr>
+<tr>
+<td>$\hat{Z}_{L2}$</td>
+<td>$\hat{Z}_{L1}\hat{Z}_{L2}$</td>
+</tr>
+</tbody>
+</table>
+<p>→ CNOT変換（Qubit 1 = 制御、Qubit 2 = 標的）と一致する証明</p>
+<h3>付録J. Logical Hadamard Process（論理アダマール変換の詳細）</h3>
+<blockquote>
+<p>📊 Fig. 26, 27, 28 参照（原論文）</p>
+</blockquote>
+<p>$d=7$ のZ-cut qubitに対するHadamardの手順（各ステップの測定回数を明記）：</p>
+<ol>
+<li><strong>第1サイクル</strong>：論理量子ビット周囲の $\hat{X}$ スタビライザーを停止、リングを形成。3端子 $\hat{Z}$ 測定を3回実施（$d=7$ 専用）</li>
+<li><strong>第2サイクル</strong>：リングをモートに拡大（外側の $\hat{X}$, $\hat{Z}$ も停止）、孤立データ量子ビットを測定</li>
+<li><strong>物理Hadamard</strong>：パッチ内全データ量子ビットに $\hat{H}$ を適用</li>
+<li><strong>SWAP操作</strong>：パッチを1セル分ずらして格子位置を合わせる</li>
+<li><strong>穴の再作成</strong>：新しい位置に Z-cut 穴を2個作成</li>
+<li><strong>帰還移動</strong>：穴を元の位置に移動（距離保護のため2ステップに分割）</li>
+</ol>
+<hr />
+
+</details>
+
+### 第12章: 付録K-M: 短い量子ビット・蒸留回路・規模推計
+
+<video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch12.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>付録K-M: 短い量子ビット・蒸留回路・規模推計</h2>
+<h3>付録K. Short Qubits（短い量子ビット）</h3>
+<blockquote>
+<p>📊 Fig. 31 参照（原論文）</p>
+</blockquote>
+<p>マジック状態 $|A_L\rangle$ の「状態注入」に使う特別な形状の論理量子ビット：</p>
+<ul>
+<li>短い量子ビット（short qubit）：細長い形状（$d_x \times d_z$ で $d_x \ll d_z$）</li>
+<li>小さな物理エラー率での初期注入に特化</li>
+<li>注入後すぐに蒸留回路へ渡す</li>
+<li>注入エラー率の目安：$p_I \approx 0.5\%$（物理エラー率 $p = 0.1\%$ の場合）</li>
+</ul>
+<h3>付録L. $\hat{S}_L$ and $\hat{T}_L$ Distillation Sub-circuits</h3>
+<blockquote>
+<p>📊 Fig. 32, 33, 35 参照（原論文）</p>
+</blockquote>
+<p><strong>$\hat{S}_L$ 蒸留サブ回路：</strong></p>
+<p>$$M'_Z = +1: \quad |\psi'\rangle = \hat{S}|\psi\rangle$$
+$$M'_Z = -1: \quad |\psi'\rangle = \hat{X}\hat{Z}\hat{S}|\psi\rangle \xrightarrow{\hat{X}\hat{Z}\text{補正}} \hat{S}|\psi\rangle$$</p>
+<p><strong>$\hat{T}^\dagger_L$ 蒸留サブ回路（Table VIIを参照）：</strong></p>
+<p>入力状態が $\hat{Z}, \hat{X}, \hat{Y}$ エラーを含む場合の測定結果と補正操作：</p>
+<p>$$p_{\rm out} = 35 p_{\rm in}^3 \quad (\text{15-to-1蒸留の精度スケーリング})$$</p>
+<p><strong>多段蒸留の数値例（$p_{\rm in} = 0.5\%$）：</strong>
+$$p_1 = 35 \times (0.005)^3 \approx 4.4 \times 10^{-6}$$
+$$p_2 = 35 \times (4.4 \times 10^{-6})^3 \approx 3 \times 10^{-15}$$</p>
+<h3>付録M. Estimating the Time and Size of a Factoring Circuit</h3>
+<blockquote>
+<p>📊 Table I, Table VII 参照（原論文）</p>
+</blockquote>
+<p><strong>Shor のアルゴリズム（$N = 2000$ ビット）の資源推計：</strong></p>
+<p>$$\text{冪乗剰余回路：} \quad 40N^3 \text{ 逐次 Toffoli ゲート}$$</p>
+<p>各 Toffoli ゲート = 7個の $\hat{T}_L$ ゲート（3並列 + 1 + 3並列）</p>
+<p>$$\text{総 }T_L\text{ ゲート数} = 7 \times 40N^3 = 280N^3 \approx 2.2 \times 10^{12}$$</p>
+<p><strong>実行時間：</strong> 各 $\hat{T}_L$ を $t_M = 100\,\text{ns}$ で実行</p>
+<p>$$t_{\rm total} = 120N^3 \times t_M = 120 \times (2000)^3 \times 100\,\text{ns} \approx 26.7\,\text{hours}$$</p>
+<p><strong>蒸留回路の規模（2段蒸留）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>入力状態数</th>
+<th>出力エラー率</th>
+<th>必要論理量子ビット</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第1段</td>
+<td>15</td>
+<td>$\approx 4\times 10^{-6}$</td>
+<td>16</td>
+</tr>
+<tr>
+<td>第2段</td>
+<td>15</td>
+<td>$\approx 3\times 10^{-15}$</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>必要物理量子ビット総数（$d = 25$, $p = 10^{-3}$）：</p>
+<p>$$n_{\rm total} \approx 10^8 \quad (\text{著者の推計；蒸留ファクトリー込み})$$</p>
 <hr />
 
 </details>

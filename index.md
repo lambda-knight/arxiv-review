@@ -9,7 +9,7 @@ layout: default
 
 | 論文 | 論文リンク | 章数 |
 |------|-------|------|
-| [表面符号 ── 大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 6 |
+| [表面符号：大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 12 |
 | [量子回路学習（Quantum Circuit Learning）](papers/1803.00745/) | [arXiv:1803.00745](https://arxiv.org/abs/1803.00745) | 5 |
 | [量子誤り訂正：入門ガイド](papers/1907.11157/) | [arXiv:1907.11157](https://arxiv.org/abs/1907.11157) | 5 |
 | [マジック状態栽培（Magic State Cultivation）](papers/2409.17595/) | [arXiv:2409.17595](https://arxiv.org/abs/2409.17595) | 4 |
