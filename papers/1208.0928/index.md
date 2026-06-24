@@ -23,6 +23,8 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch01.mp4"></video>
 
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch01.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -87,6 +89,8 @@ $$</p>
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch02.mp4"></video>
 
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch02.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -148,6 +152,8 @@ $$</p>
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch03.mp4"></video>
 
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch03.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -189,6 +195,8 @@ $$</p>
 ### 第4章: §VII: エラー検出とデコード
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch04.mp4"></video>
+
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch04.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -249,6 +257,8 @@ $$</p>
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch05.mp4"></video>
 
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch05.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -282,6 +292,8 @@ $$\hat{Z}_L = \text{いずれかの穴を囲むループ}$$</p>
 ### 第6章: §X-§XII: 初期化・測定と大きな論理量子ビット
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch06.mp4"></video>
+
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch06.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -334,6 +346,8 @@ $$\hat{Z}_L = \text{いずれかの穴を囲むループ}$$</p>
 ### 第7章: §XIII-§XIV: 論理量子ビットの移動とブレイド変換
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch07.mp4"></video>
+
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch07.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -396,6 +410,8 @@ $$\hat{Z}_L = \text{いずれかの穴を囲むループ}$$</p>
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch08.mp4"></video>
 
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch08.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -437,6 +453,8 @@ $$\hat{Z}_L = \text{いずれかの穴を囲むループ}$$</p>
 ### 第9章: §XVII + 付録A-B: 物理実装とスタビライザー回路の詳細
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch09.mp4"></video>
+
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch09.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -515,6 +533,8 @@ $$[\hat{X},\hat{Y}] = -2\hat{Z},\quad [\hat{Y},\hat{Z}] = -2\hat{X},\quad [\hat{
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch10.mp4"></video>
 
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch10.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -569,6 +589,8 @@ $$[\hat{X},\hat{Y}] = -2\hat{Z},\quad [\hat{Y},\hat{Z}] = -2\hat{X},\quad [\hat{
 ### 第11章: 付録G-J: ブレイドと論理アダマール変換の詳細
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch11.mp4"></video>
+
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch11.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -647,6 +669,8 @@ $$\hat{Z}''_L = \hat{Z}_L \quad (\text{ループが元に戻る})$$</p>
 ### 第12章: 付録K-M: 短い量子ビット・蒸留回路・規模推計
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch12.mp4"></video>
+
+<audio controls src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch12.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>

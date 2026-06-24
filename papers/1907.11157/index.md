@@ -39,7 +39,7 @@ arXiv: https://arxiv.org/abs/1907.11157
 
 ## 章別動画・解説
 
-### 第1章: 量子誤り訂正の必要性とノイズモデル
+### 第1章: 量子誤り訂正の背景と量子エラーの性質
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch01.mp4"></video>
 
@@ -48,68 +48,84 @@ arXiv: https://arxiv.org/abs/1907.11157
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>量子誤り訂正の必要性とノイズモデル</h2>
+<h2>量子誤り訂正の背景と量子エラーの性質</h2>
 <h3>なぜ量子誤り訂正が必要か</h3>
 <ul>
-<li>量子ビット（qubit）は環境との相互作用で<strong>デコヒーレンス</strong>が起きる</li>
-<li>古典ビットのノイズ：0→1 または 1→0（ビット反転）</li>
-<li>量子ビットのノイズ：3種類のエラーが存在</li>
+<li>量子コンピュータは光子・トラップイオン・超伝導回路・半導体スピンなど多様な量子ビットで実装が試みられている</li>
+<li>すべての実装に共通する問題：<strong>量子ビットを外部ノイズから十分に遮断できない</strong></li>
+<li>古典ビットはトランジスタの ON/OFF で実現され、数十億電子の差による高いノイズ耐性を持つが、量子ビットにはそのような余裕がない</li>
+<li>現在・将来の量子ビット技術に基づくすべての回路型量子コンピュータには<strong>能動的な誤り訂正</strong>が不可欠</li>
 </ul>
-<h3>3種類の量子エラー</h3>
+<h3>量子ビットとは</h3>
+<p>一般的な量子ビット状態：</p>
+<p>$$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$$</p>
+<ul>
+<li>$\alpha, \beta$：複素振幅、$|\alpha|^2 + |\beta|^2 = 1$ を満たす</li>
+<li>$|\alpha|^2$：$|0\rangle$ を測定する確率、$|\beta|^2$：$|1\rangle$ を測定する確率</li>
+<li>量子ビットは <strong>$2^n$ 次元計算空間</strong>を利用できる（古典は $n$ 次元）</li>
+</ul>
+<p>ブロッホ球表現：</p>
+<p>$$|\psi\rangle = \cos\frac{\theta}{2}|0\rangle + e^{i\phi}\sin\frac{\theta}{2}|1\rangle$$</p>
+<ul>
+<li>$\theta, \phi$ でブロッホ球表面の1点を指定</li>
+<li>量子エラー = ブロッホ球上の点が連続的にずれる現象</li>
+</ul>
+<h3>量子エラーのデジタル化（最重要）</h3>
+<p>連続的な量子エラーは、パウリ行列の基底に展開できる：</p>
+<p>$$U(\delta\theta, \delta\phi)|\psi\rangle = \alpha_I|\psi\rangle + \alpha_X X|\psi\rangle + \alpha_Z Z|\psi\rangle + \alpha_{XZ} XZ|\psi\rangle$$</p>
+<ul>
+<li>$X, Y, Z$：パウリ行列（量子ビット操作の基本）</li>
+<li>$\alpha_{I,X,Z,XZ}$：展開係数</li>
+</ul>
+<p><strong>重要な結論</strong>：シンドローム測定（後述）を行うと、この重ね合わせが $\{I, X, Z, XZ\}$ のどれかに収縮する。つまり<strong>有限個のエラーを訂正できれば、任意の連続エラーを訂正できる</strong>。</p>
+<p>パウリ行列：</p>
+<p>$$X = \begin{pmatrix}0&1\\1&0\end{pmatrix}, \quad Y = \begin{pmatrix}0&-i\\i&0\end{pmatrix}, \quad Z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$$</p>
+<blockquote>
+<p>📊 Fig. 1 参照（原論文）— ブロッホ球上の量子状態表現</p>
+</blockquote>
+<h3>2種類の量子エラー</h3>
 <table>
 <thead>
 <tr>
 <th>エラー</th>
 <th>演算子</th>
-<th>効果</th>
+<th>作用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ビット反転（Bit Flip）</td>
-<td>$X = \begin{pmatrix}0&1\\1&0\end{pmatrix}$</td>
-<td>$\|0\rangle \leftrightarrow \|1\rangle$</td>
+<td>ビット反転（X エラー）</td>
+<td>$X$</td>
+<td>$X|0\rangle=|1\rangle$, $X|1\rangle=|0\rangle$</td>
 </tr>
 <tr>
-<td>位相反転（Phase Flip）</td>
-<td>$Z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$</td>
-<td>$\|+\rangle \leftrightarrow \|-\rangle$</td>
+<td>位相反転（Z エラー）</td>
+<td>$Z$</td>
+<td>$Z|0\rangle=|0\rangle$, $Z|1\rangle=-|1\rangle$</td>
 </tr>
 <tr>
 <td>両方（Y エラー）</td>
 <td>$Y = iXZ$</td>
-<td>ビット＋位相反転</td>
+<td>ビット反転＋位相反転</td>
 </tr>
 </tbody>
 </table>
-<h3>量子チャネルモデル</h3>
-<p><strong>脱分極チャネル（Depolarizing Channel）:</strong></p>
-<p>$$\mathcal{E}(\rho) = (1-p)\rho + \frac{p}{3}(X\rho X + Y\rho Y + Z\rho Z)$$</p>
 <ul>
-<li>$\rho$: 量子状態の密度行列</li>
-<li>$p$: エラー率（各軸方向に確率 $p/3$）</li>
-<li>$p \to 0$ で恒等写像（ノイズなし）</li>
+<li>X エラー（ビット反転）：古典の誤りに相当</li>
+<li>Z エラー（位相反転）：<strong>古典には類似物がない量子固有のエラー</strong></li>
+<li>位相反転は共役基底 $\{|+\rangle, |-\rangle\}$ で「ビット反転」として現れる</li>
 </ul>
-<h3>複製禁止定理と量子誤り訂正</h3>
-<ul>
-<li><strong>複製禁止定理</strong>：未知の量子状態をコピーできない</li>
-<li>では情報をどう守るか？→ <strong>冗長性をエンタングルメントで実現</strong></li>
-<li>1量子ビットの情報を複数量子ビットに「分散」してエンコード</li>
-</ul>
-<h3>シンドローム測定の原理</h3>
-<ul>
-<li>符号空間外へのエラーを「間接測定」で検出</li>
-<li>論理量子ビット自体は測定しない → 情報を壊さない</li>
-<li>測定結果（シンドローム）からエラー位置を推定 → 訂正</li>
-</ul>
-<blockquote>
-<p>📊 Fig. 1 参照（原論文）— ノイズチャネルと誤り訂正の流れ</p>
-</blockquote>
+<h3>量子誤り訂正の3つの困難</h3>
+<ol>
+<li><strong>複製禁止定理</strong>：未知の量子状態をコピーできない → 古典の繰り返し符号と同じ方法は使えない</li>
+<li><strong>波動関数の収縮</strong>：量子ビットを直接測定すると情報が失われる → 間接測定（スタビライザー測定）が必要</li>
+<li><strong>X/Z 両方のエラー</strong>：古典ではビット反転だけだが、量子では位相反転も扱わなければならない</li>
+</ol>
 <hr />
 
 </details>
 
-### 第2章: 古典符号から量子符号へ ── 繰り返し符号と安定化符号
+### 第2章: 量子冗長性とスタビライザー測定
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch02.mp4"></video>
 
@@ -118,44 +134,87 @@ arXiv: https://arxiv.org/abs/1907.11157
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>古典符号から量子符号へ ── 繰り返し符号と安定化符号</h2>
-<h3>古典繰り返し符号</h3>
+<h2>量子冗長性とスタビライザー測定</h2>
+<h3>2量子ビット符号：コードスペースとエラースペース</h3>
+<p>エンコード操作：</p>
+<p>$$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle \xrightarrow{\text{encoder}} |\psi\rangle_L = \alpha|00\rangle + \beta|11\rangle$$</p>
 <ul>
-<li>$0 \to 000$、$1 \to 111$ とエンコード</li>
-<li>多数決で訂正：$011 \to 1$（2個以上のビットが正しい）</li>
-<li>符号距離 $d=3$：1エラーを訂正可能</li>
+<li>これは<strong>複製ではない</strong>（$\alpha|00\rangle + \beta|11\rangle \neq |\psi\rangle \otimes |\psi\rangle$）</li>
+<li>情報を「エンタングルした2量子ビット状態」に分散してエンコード</li>
+<li>コードスペース：$\mathcal{C} = \text{span}\{|00\rangle, |11\rangle\} \subset \mathcal{H}_4$</li>
 </ul>
-<h3>量子ビット反転繰り返し符号</h3>
-<p>$$|0\rangle_L = |000\rangle, \quad |1\rangle_L = |111\rangle$$</p>
-<p>$$|\psi\rangle_L = \alpha|000\rangle + \beta|111\rangle$$</p>
+<p>X エラーが発生した場合：</p>
+<p>$$X_1|\psi\rangle_L = \alpha|10\rangle + \beta|01\rangle \in \mathcal{F}$$</p>
 <ul>
-<li>$\alpha, \beta$: 論理量子ビットの振幅（複製禁止定理に違反しない）</li>
-<li>Xエラーが1個起きても多数決で回復可能</li>
+<li>$\mathcal{C}$（コードスペース）と $\mathcal{F}$（エラースペース）は直交</li>
+<li>直接測定せずに「どちらにいるか」を判定 → スタビライザー測定</li>
 </ul>
-<h3>安定化符号（Stabilizer Code）</h3>
-<p><strong>安定化演算子：</strong></p>
-<p>$$S_1 = Z \otimes Z \otimes I, \quad S_2 = I \otimes Z \otimes Z$$</p>
-<p>$$S_1 |\psi\rangle_L = +|\psi\rangle_L, \quad S_2 |\psi\rangle_L = +|\psi\rangle_L$$</p>
-<ul>
-<li>符号空間: $S_1$ と $S_2$ の固有値 $+1$ の共通固有空間</li>
-<li>$X_1$ エラー（1番目の qubit にX）が起きると $S_1 \to -1$、$S_2 \to +1$</li>
-<li>$X_2$ エラーなら $S_1 \to -1$、$S_2 \to -1$</li>
-<li>シンドローム $(s_1, s_2)$ でエラー位置を特定</li>
-</ul>
-<h3>安定化群の代数構造</h3>
-<ul>
-<li>安定化演算子は互いに<strong>可換</strong>（同時固有状態が存在）</li>
-<li>$n$ qubit の Pauli 群 $\mathcal{P}_n$：$\{I, X, Y, Z\}^{\otimes n}$ に位相を加えた群</li>
-<li>安定化符号 $[[n, k, d]]$: $n$ 物理 qubit で $k$ 論理 qubit を符号距離 $d$ で守る</li>
-</ul>
+<p><strong>スタビライザー $Z_1Z_2$ の測定</strong>：</p>
+<p>$$Z_1Z_2|\psi\rangle_L = (+1)|\psi\rangle_L \quad \text{（コードスペース：シンドローム 0）}$$
+$$Z_1Z_2 \cdot X_1|\psi\rangle_L = (-1) \cdot X_1|\psi\rangle_L \quad \text{（エラースペース：シンドローム 1）}$$</p>
 <blockquote>
-<p>📊 Fig. 2 参照（原論文）— 繰り返し符号のシンドローム測定回路</p>
+<p>📊 Fig. 2 参照（原論文）— 2量子ビット符号の回路図（エンコード・エラー・シンドローム抽出）</p>
 </blockquote>
+<h3>論理エラー率の抑制</h3>
+<p>2量子ビット符号での論理エラー率（シンドローム測定後）：</p>
+<p>$$p_L = \frac{p_x^2}{(1-p_x)^2 + p_x^2} \approx p_x^2$$</p>
+<ul>
+<li>物理エラー率 $p_x$ に対して、論理エラー率は $p_x^2$（2次で抑制）</li>
+<li>これが<strong>量子誤り訂正が機能する証明</strong></li>
+</ul>
+<h3>3量子ビット符号：誤り訂正へ</h3>
+<p>2量子ビット符号は<strong>検出</strong>はできるが<strong>どちらの量子ビットが壊れたかは分からない</strong>。訂正のために3量子ビット符号を使う。</p>
+<p>論理状態：</p>
+<p>$$|\psi\rangle_L = \alpha|000\rangle + \beta|111\rangle$$</p>
+<p>8次元ヒルベルト空間を4つの2次元部分空間に分割：</p>
+<p>$$\mathcal{C} = \text{span}\{|000\rangle, |111\rangle\}, \quad \mathcal{F}_1 = \text{span}\{|100\rangle, |011\rangle\}, \quad \mathcal{F}_2 = \text{span}\{|010\rangle, |101\rangle\}, \quad \mathcal{F}_3 = \text{span}\{|001\rangle, |110\rangle\}$$</p>
+<p>2つのスタビライザー $Z_1Z_2$ と $Z_2Z_3$ を測定して2ビットシンドローム $S = s_1s_2$ を得る：</p>
+<table>
+<thead>
+<tr>
+<th>エラー</th>
+<th>シンドローム $S$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>エラーなし</td>
+<td>00</td>
+</tr>
+<tr>
+<td>$X_1$</td>
+<td>10</td>
+</tr>
+<tr>
+<td>$X_2$</td>
+<td>11</td>
+</tr>
+<tr>
+<td>$X_3$</td>
+<td>01</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📊 Fig. 3 参照（原論文）— 3量子ビット符号の回路図</p>
+</blockquote>
+<h3>符号距離</h3>
+<p><strong>符号距離の定義</strong>：一つの符号語を別の符号語に変える最小エラーのサイズ</p>
+<p>$$d = 2t + 1$$</p>
+<ul>
+<li>$t$：訂正できるエラー数</li>
+<li>3量子ビット符号では $\bar{X} = X_1X_2X_3$（3つのXエラーで論理エラー）→ Xエラーに対して $d=3$</li>
+</ul>
+<p><strong>重要な問題点</strong>：3量子ビット符号はXエラー（ビット反転）しか訂正できない！</p>
+<ul>
+<li>論理Z演算子 $\bar{Z} = Z_1$（1つのZエラーで論理エラー）→ Zエラーに対して $d=1$</li>
+<li>つまり3量子ビット符号の量子符号距離は $d=1$</li>
+</ul>
 <hr />
 
 </details>
 
-### 第3章: CSS符号の代数構造 ── ステアン符号
+### 第3章: スタビライザー符号の一般理論とショア符号
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch03.mp4"></video>
 
@@ -164,43 +223,71 @@ arXiv: https://arxiv.org/abs/1907.11157
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>CSS符号の代数構造 ── ステアン符号</h2>
-<h3>CSS符号の構成</h3>
-<p><strong>CSS符号（Calderbank-Shor-Steane Code）の定義：</strong></p>
-<p>古典線形符号 $C_1 = [n, k_1, d_1]$ と $C_2 = [n, k_2, d_2]$ で $C_2^\perp \subseteq C_1$ を満たすとき：</p>
-<p>$$|c + C_2^\perp\rangle = \frac{1}{\sqrt{|C_2^\perp|}} \sum_{v \in C_2^\perp} |c + v\rangle, \quad c \in C_1$$</p>
-<ul>
-<li>Xスタビライザー: $C_2^\perp$ のパリティ検査行列 $H_2$ から生成</li>
-<li>Zスタビライザー: $C_1^\perp$ のパリティ検査行列 $H_1^T$ から生成</li>
-<li>パラメータ: $[[n, k_1 + k_2 - n, \min(d_1, d_2)]]$</li>
-</ul>
-<h3>ステアン符号 [7,1,3]</h3>
-<p><strong>7量子ビット完全符号。[7,4,3] ハミング符号から構成：</strong></p>
-<p>$$H = \begin{pmatrix}
-0&0&0&1&1&1&1\\
-0&1&1&0&0&1&1\\
-1&0&1&0&1&0&1
-\end{pmatrix}$$</p>
-<ul>
-<li>6個の安定化演算子（Xタイプ3個 + Zタイプ3個）</li>
-<li>論理X演算子: $\bar{X} = X^{\otimes 7}$（全ビットにX）</li>
-<li>論理Z演算子: $\bar{Z} = Z^{\otimes 7}$（全ビットにZ）</li>
-<li>符号距離3 → 1エラーを訂正可能</li>
-</ul>
-<h3>論理演算子とトランスバーサルゲート</h3>
-<p>$$\bar{X} = X_1 X_2 X_3 X_4 X_5 X_6 X_7, \quad \bar{Z} = Z_1 Z_2 Z_3 Z_4 Z_5 Z_6 Z_7$$</p>
-<ul>
-<li><strong>トランスバーサル演算</strong>: 各物理 qubit に独立に同じゲートを適用</li>
-<li>ステアン符号では H, CNOT, S ゲートがトランスバーサル → フォルトトレラント</li>
-</ul>
+<h2>スタビライザー符号の一般理論とショア符号</h2>
+<h3>[[n,k,d]] スタビライザー符号の一般構造</h3>
 <blockquote>
-<p>📊 Fig. 3 参照（原論文）— CSS符号の構成とステアン符号の安定化演算子</p>
+<p>📊 Fig. 4 参照（原論文）— [[n,k,d]] 符号の回路構造</p>
 </blockquote>
+<p>$n$ 個の物理量子ビットで $k$ 個の論理量子ビットを符号距離 $d$ で守る：</p>
+<ul>
+<li>$k$ データ量子ビット $|\psi\rangle_D$ を $(n-k)$ 冗長量子ビット $|0\rangle_R$ とエンタングル</li>
+<li>$m = n-k$ 個のスタビライザー測定 $P_i$ を実行 → $m$ ビットシンドローム</li>
+<li>古典符号との区別：量子符号はダブルブラケット $[[n,k,d]]$（古典は $[n,k,d]$）</li>
+</ul>
+<h3>スタビライザーの代数的性質</h3>
+<p>スタビライザー群 $\mathcal{S}$：
+- $m$ 個の<strong>互いに可換なパウリ演算子</strong> $P_i$ で生成される群
+- 符号空間 $\mathcal{C}$：全 $P_i$ の固有値 $+1$ の共通固有空間
+- $n$ 量子ビットのパウリ群 $\mathcal{P}_n = \{I,X,Y,Z\}^{\otimes n}$ から選ぶ</p>
+<h3>論理演算子</h3>
+<p>$[[n,k,d]]$ 符号の論理 $\bar{X}$ と $\bar{Z}$ 演算子の条件：
+- すべてのスタビライザーと<strong>可換</strong>（符号空間を保存）
+- 論理 $\bar{X}$ と $\bar{Z}$ は<strong>互いに反可換</strong>（$\bar{X}\bar{Z} = -\bar{Z}\bar{X}$）
+- スタビライザーそのものでない（自明でない論理演算）</p>
+<p>符号距離 $d$ = 論理演算子の最小重み（非恒等要素の数）</p>
+<h3>例：[[4,2,2]] 検出符号</h3>
+<blockquote>
+<p>📊 Fig. 5 参照（原論文）— [[4,2,2]] 符号の回路図</p>
+</blockquote>
+<p>4量子ビットで2論理量子ビットを符号距離2で守る<strong>最小の量子検出符号</strong>：</p>
+<p>$$\mathcal{S}_{[[4,2,2]]} = \langle XXXX, ZZZZ \rangle$$</p>
+<ul>
+<li>$XXXX$ と $ZZZZ$：各2演算子が符号を定義</li>
+<li>1エラーは検出可能（$d=2$）だが訂正不能</li>
+<li>量子ビット数に対して最も効率的な量子符号の一つ</li>
+</ul>
+<h3>汎用エンコード回路</h3>
+<p>一般的なスタビライザー符号のエンコード回路（Section 4.4）：
+- データ量子ビットにアダマールゲートを適用して重ね合わせを作る
+- CNOTゲートで冗長量子ビットとエンタングルする
+- スタビライザー測定のアンシラ量子ビットを用意する</p>
+<h3>量子誤り訂正の手順</h3>
+<ol>
+<li>スタビライザー測定でシンドローム $S$ を取得</li>
+<li>訂正操作 $\mathcal{R}$ を選択（ルックアップテーブルまたはデコーダー）</li>
+<li>$\mathcal{R} \cdot E|\psi\rangle_L = |\psi\rangle_L$ となれば成功</li>
+<li>$\mathcal{R} \cdot E = L$（論理演算子）になると<strong>論理エラー</strong>（失敗）</li>
+</ol>
+<h3>例：ショア [[9,1,3]] 符号</h3>
+<p><strong>符号連接（Code Concatenation）</strong>：小さい符号を入れ子にして大きい符号を作る手法</p>
+<p>ビット反転3量子ビット符号 $\mathcal{C}_{3b}$：</p>
+<p>$$|0\rangle_{3b} = |000\rangle, \quad |1\rangle_{3b} = |111\rangle, \quad \mathcal{S}_{3b} = \langle Z_1Z_2, Z_2Z_3 \rangle$$</p>
+<p>位相反転3量子ビット符号 $\mathcal{C}_{3p}$：</p>
+<p>$$|0\rangle_{3p} = |{+}{+}{+}\rangle, \quad |1\rangle_{3p} = |{-}{-}{-}\rangle, \quad \mathcal{S}_{3p} = \langle X_1X_2, X_2X_3 \rangle$$</p>
+<p>連接で9量子ビット符号を構成（$|+\rangle_{3b} = \frac{1}{\sqrt{2}}(|000\rangle + |111\rangle)$）：</p>
+<p>$$|0\rangle_9 = |{+}\rangle_{3b}|{+}\rangle_{3b}|{+}\rangle_{3b}, \quad |1\rangle_9 = |{-}\rangle_{3b}|{-}\rangle_{3b}|{-}\rangle_{3b}$$</p>
+<p>スタビライザー群（8個）：</p>
+<p>$$\mathcal{S}_{[[9,1,3]]} = \langle Z_1Z_2, Z_2Z_3, Z_4Z_5, Z_5Z_6, Z_7Z_8, Z_8Z_9, X_1X_2X_3X_4X_5X_6, X_4X_5X_6X_7X_8X_9 \rangle$$</p>
+<ul>
+<li>最初の6項：ビット反転符号のスタビライザー</li>
+<li>最後の2項：位相反転符号のスタビライザー</li>
+<li><strong>縮退符号（degenerate code）</strong>：$Z_1$ と $Z_2$ は同じシンドロームを持つが、どちらの回復操作でも論理エラーを防げる</li>
+</ul>
 <hr />
 
 </details>
 
-### 第4章: 表面符号 ── 最も実用的な量子誤り訂正符号
+### 第4章: 表面符号──四サイクルから格子へ
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch04.mp4"></video>
 
@@ -209,46 +296,85 @@ arXiv: https://arxiv.org/abs/1907.11157
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>表面符号 ── 最も実用的な量子誤り訂正符号</h2>
-<h3>表面符号の格子構造</h3>
-<ul>
-<li>$d \times d$ の格子（開境界）上に量子ビットを配置</li>
-<li>量子ビットは<strong>辺</strong>に置く → $2d(d-1) + (d-1)^2 + d^2 - 1$ ... 簡単に言えば $\sim d^2$ 個</li>
-<li>パラメータ: $[[d^2 + (d-1)^2, 1, d]]$ ≈ $[[2d^2-2d+1, 1, d]]$</li>
-</ul>
-<p><strong>ハミルトニアン:</strong></p>
-<p>$$H = -\sum_{v} A_v - \sum_{f} B_f$$</p>
-<ul>
-<li>$A_v = \prod_{i \in \partial v} X_i$: 頂点 $v$ に接する辺のX積（Xスタビライザー）</li>
-<li>$B_f = \prod_{i \in \partial f} Z_i$: 面 $f$ を囲む辺のZ積（Zスタビライザー）</li>
-</ul>
-<h3>シンドローム測定とデコーダー</h3>
-<p><strong>エラー検出:</strong></p>
-<ul>
-<li>Zエラー → $A_v = -1$（頂点アニオン出現）</li>
-<li>Xエラー → $B_f = -1$（面アニオン出現）</li>
-</ul>
-<p><strong>最小重みマッチング（MWPM）デコーダー:</strong></p>
-<p>$$\text{correction} = \arg\min \sum_{\text{pairs}} d(\text{anyon}_i, \text{anyon}_j)$$</p>
-<ul>
-<li>シンドローム上の全アニオンをペアに分け、最短距離でマッチング</li>
-<li>Blossom アルゴリズム（多項式時間）で効率的に解ける</li>
-</ul>
-<h3>論理演算子と符号距離</h3>
-<p>$$\bar{X} = \prod_{i \in \gamma_X} X_i, \quad \bar{Z} = \prod_{i \in \gamma_Z} Z_i$$</p>
-<ul>
-<li>$\gamma_X$: 左境界から右境界を結ぶX演算子のチェーン</li>
-<li>$\gamma_Z$: 上境界から下境界を結ぶZ演算子のチェーン</li>
-<li>符号距離 $d$ = 論理エラーに必要な最小演算子数 = 格子サイズ $d$</li>
-</ul>
+<h2>表面符号──四サイクルから格子へ</h2>
+<h3>表面符号の基本構成要素：四サイクル</h3>
 <blockquote>
-<p>📊 Fig. 4 参照（原論文）— 表面符号の格子・安定化子・論理演算子</p>
+<p>📊 Fig. 7 参照（原論文）— 表面符号の四サイクル（絵表示と回路表示）</p>
 </blockquote>
+<p><strong>四サイクル</strong>：表面符号の基本構成要素</p>
+<ul>
+<li>データ量子ビット $D_1, D_2$（円）とアンシラ量子ビット $A_1, A_2$（四角）</li>
+<li>赤エッジ：アンシラ制御のCXゲート → $X_{D_1}X_{D_2}$ スタビライザーを測定</li>
+<li>青エッジ：アンシラ制御のCZゲート → $Z_{D_1}Z_{D_2}$ スタビライザーを測定</li>
+<li>$X_{D_1}X_{D_2}$ と $Z_{D_1}Z_{D_2}$ は<strong>可換</strong>（偶数個の量子ビットで非自明に交わる）</li>
+<li>四サイクル単体では $n=2, m=2, k=n-m=0$：<strong>論理量子ビットを符号化しない</strong>（タイル状に並べる前提）</li>
+</ul>
+<p><strong>表面符号の最大の利点</strong>：<strong>最近接相互作用のみ</strong>を使う → 現行の量子ハードウェアに実装しやすい</p>
+<h3>[[5,1,2]] 表面符号</h3>
+<p>4つの四サイクルを正方格子状に並べると [[5,1,2]] 表面符号が構成される：</p>
+<blockquote>
+<p>📊 Fig. 8 参照（原論文）— [[5,1,2]] 表面符号の格子とエラー検出の例</p>
+</blockquote>
+<p>スタビライザー群：</p>
+<p>$$\mathcal{S}_{[[5,1,2]]} = \langle X_{D_1}X_{D_2}X_{D_3},\ Z_{D_1}Z_{D_3}Z_{D_4},\ Z_{D_2}Z_{D_3}Z_{D_5},\ X_{D_3}X_{D_4}X_{D_5} \rangle$$</p>
+<ul>
+<li>5データ量子ビット、4スタビライザー → $k = 5-4 = 1$ 論理量子ビット</li>
+</ul>
+<p>エラー検出の例：
+- $Z_{D_1}$ エラー → $X_{D_1}X_{D_2}X_{D_3}$ スタビライザーと反可換 → アンシラ $A_1$ が「1」（赤く点灯）
+- $X_{D_5}$ エラー → $Z_{D_2}Z_{D_3}Z_{D_5}$ スタビライザーと反可換 → アンシラ $A_3$ が「1」</p>
+<h3>[[5,1,2]] 表面符号の論理演算子</h3>
+<blockquote>
+<p>📊 Fig. 9 参照（原論文）— 表面符号の論理演算子（境界チェーン）</p>
+</blockquote>
+<p>論理演算子は格子の境界に沿ったパウリ演算子のチェーン：</p>
+<p>$$\bar{X} = X_{D_1}X_{D_4}, \quad \bar{Z} = Z_{D_1}Z_{D_2}$$</p>
+<ul>
+<li>$\bar{X}$ は Z スタビライザーが測定される境界（左辺）に沿う</li>
+<li>$\bar{Z}$ は X スタビライザーが測定される境界（上辺）に沿う</li>
+<li>$\bar{X}$ と $\bar{Z}$ は<strong>反可換</strong>（1量子ビットで非自明に交わる）</li>
+<li>論理演算子の最小重みが 2 → $d=2$（検出符号）</li>
+</ul>
+<h3>表面符号のスケーリング</h3>
+<p>格子サイズを増やすだけで符号距離を上げられる：</p>
+<p>$$[[n = \lambda^2 + (\lambda-1)^2,\ k=1,\ d=\lambda]]$$</p>
+<p>距離3の例：[[13,1,3]] 表面符号</p>
+<blockquote>
+<p>📊 Fig. 10 参照（原論文）— 距離3の [[13,1,3]] 表面符号</p>
+</blockquote>
+<p>$$\bar{X} = X_{D_1}X_{D_6}X_{D_{11}}, \quad \bar{Z} = Z_{D_1}Z_{D_2}Z_{D_3}$$</p>
+<table>
+<thead>
+<tr>
+<th>符号距離 $d$</th>
+<th>物理量子ビット数 $n$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>$4+1=5$</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$9+4=13$</td>
+</tr>
+<tr>
+<td>5</td>
+<td>$25+16=41$</td>
+</tr>
+<tr>
+<td>7</td>
+<td>$49+36=85$</td>
+</tr>
+</tbody>
+</table>
+<p><strong>[[13,1,3]] は誤りの検出と訂正の両方ができる最小の表面符号</strong></p>
 <hr />
 
 </details>
 
-### 第5章: 耐障害性と閾値定理
+### 第5章: 実装の課題──復号・閾値・フォルトトレラント計算
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch05.mp4"></video>
 
@@ -257,58 +383,236 @@ arXiv: https://arxiv.org/abs/1907.11157
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
-<h2>耐障害性と閾値定理</h2>
-<h3>耐障害性（Fault Tolerance）の概念</h3>
-<ul>
-<li><strong>問題</strong>: シンドローム測定回路自体にエラーが入る</li>
-<li><strong>解決</strong>: 測定エラーが論理エラーに「増幅」されない回路設計</li>
-<li><strong>条件</strong>: 任意のゲートで1エラーが2エラーに広がらない</li>
-</ul>
-<h3>フォルトトレラント量子計算の要素</h3>
+<h2>実装の課題──復号・閾値・フォルトトレラント計算</h2>
+<h3>効率的な復号アルゴリズム</h3>
+<p>$[[n,k,d]]$ 符号のシンドロームは $m = n-k$ ビット → $2^m$ 通りの可能なシンドローム</p>
+<p><strong>問題</strong>：ルックアップテーブルはコードが大きくなると指数的に増大
+- 距離5表面符号 $[[41,1,5]]$：$2^{40} \approx 10^{12}$ 通り → 実用不可能</p>
+<p><strong>解決策</strong>：近似推論アルゴリズムによるリアルタイム復号</p>
+<p><strong>表面符号向け：最小重みパーフェクトマッチング（MWPM）デコーダー</strong>
+- 正のシンドローム測定（アニオン）の間のエラーチェーンを特定
+- すべてのアニオンをペアにして、最短距離でマッチング
+- ブロッサムアルゴリズム（多項式時間）で効率的に解ける
+- 訂正失敗条件：$\mathcal{R} \cdot E = L$（訂正操作がエラーと組み合わさって論理演算子になる）</p>
+<h3>閾値定理</h3>
+<p><strong>閾値定理</strong>：物理エラー率 $p$ が閾値 $p_{th}$ を下回れば、符号サイズを増やすことで論理エラー率を指数的に下げられる</p>
 <table>
 <thead>
 <tr>
-<th>要素</th>
-<th>実装方法</th>
-<th>説明</th>
+<th>状況</th>
+<th>表面符号の閾値</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>メモリ</td>
-<td>QEC サイクル</td>
-<td>シンドロームを繰り返し測定</td>
+<td>理想的なアンシラ測定</td>
+<td>$\approx 10.9\%$（統計力学的上界）</td>
 </tr>
 <tr>
-<td>CliffordゲートCNOT</td>
-<td>トランスバーサル</td>
-<td>表面符号で実現可能</td>
+<td>MWPM デコーダー</td>
+<td>$\approx 10.3\%$</td>
 </tr>
 <tr>
-<td>非Clifford（Tゲート）</td>
-<td>マジック状態蒸留</td>
-<td>特別な状態 $\|T\rangle$ を注入</td>
+<td>雑音のあるアンシラ測定</td>
+<td>$\approx 1\%$</td>
 </tr>
 </tbody>
 </table>
-<h3>マジック状態蒸留</h3>
+<ul>
+<li>Google Willow・IBM Heron など最先端の量子ビットのエラー率はすでに $\sim 0.1\%$ → 物理エラー率はすでに閾値を下回る</li>
+<li>しかし論理エラー率を実用水準に下げるには「論理量子ビット vs 非符号化量子ビット」のブレーク・イーブンポイントを超える大規模スケーリングが必要</li>
+</ul>
+<h3>フォルトトレラント性（耐障害性）</h3>
+<p><strong>問題</strong>：シンドローム測定回路自体にもエラーが入る（2量子ビットゲートや測定操作は主要なエラー源）</p>
+<p><strong>フォルトトレラント設計の原則</strong>：サブ距離エラーが回路中で制御不能に増幅されないこと</p>
+<p>Shor の耐障害性シンドローム抽出法：
+- 各スタビライザーを測定するのに $\lambda$ 個のアンシラ量子ビットを使用（$\lambda$ = スタビライザーの非恒等要素数）
+- 測定エラーを区別するために<strong>複数ラウンドのシンドローム測定が必要</strong>
+- 雑音のあるアンシラでは閾値が $\approx 10\%$ から $\approx 1\%$ に低下する原因</p>
+<h3>符号化された計算（エンコードされた論理ゲート）</h3>
+<p>万能量子コンピュータに必要な万能ゲートセット：</p>
+<p>$$\langle\mathcal{U}\rangle = \langle X, Z, Y, H, \text{CNOT}, T \rangle, \quad T = \text{diag}(1, e^{i\pi/4})$$</p>
+<p><strong>トランスバーサルゲート</strong>：各物理量子ビットに独立に同じゲートを適用する耐障害的な実装法
+- 多くの符号でCliffordゲート（$X, Z, H, \text{CNOT}$）をトランスバーサルに実装可能
+- しかし<strong>ノーゴー定理</strong>：万能ゲートセット全体をトランスバーサルに実装することは不可能</p>
+<p><strong>Tゲートの問題</strong>：TゲートはCliffordゲートでなく、トランスバーサル実装できない</p>
+<p><strong>解決策：マジック状態注入（Magic State Injection）</strong></p>
 <p>$$|T\rangle = \frac{|0\rangle + e^{i\pi/4}|1\rangle}{\sqrt{2}}$$</p>
 <ul>
-<li>Tゲートをトランスバーサルに実装不可 → 代わりに $\|T\rangle$ を使う</li>
-<li>低品質な $\|T\rangle$ を多数用意 → 蒸留プロトコルで高品質に精製</li>
-<li>オーバーヘッドが大きい（量子コンピュータの大部分はT蒸留に使われる）</li>
+<li>低品質な $|T\rangle$ 状態を多数用意し、蒸留プロトコルで高品質に精製</li>
+<li>推定コスト：万能フォルトトレラント量子コンピュータの<strong>総量子ビットが1桁増加</strong>する可能性</li>
 </ul>
-<h3>閾値定理</h3>
-<p><strong>物理エラー率 $p$ が閾値 $p_{th}$ を下回れば、コードサイズを増やして論理エラー率を指数的に下げられる：</strong></p>
-<p>$$p_L \propto \left(\frac{p}{p_{th}}\right)^{\lceil d/2 \rceil}$$</p>
+<h3>実験的実装の現状と展望</h3>
+<p>現在の取り組み（2019年時点、その後急速に進展）：
+- Google・IBM Research・TU Delft：超伝導量子ビットで表面符号論理量子ビットの実現を目標
+- イオントラップ・量子光学の取り組みも並行</p>
+<p>現実的な課題（論文の見積もり）：
+- 最初のフォルトトレラント表面符号論理量子ビット：<strong>1,000以上の量子ビットが必要</strong>
+- 古典計算機に勝てる実用的タスク：<strong>100万以上の量子ビットが必要</strong>
+- 当時（2019年）の最大量子コンピュータは100量子ビット未満</p>
+<p><strong>表面符号の欠点と代替案</strong>：
+- 符号レート $R = k/n \to 0$（量子ビット数増加に対して論理量子ビット数が増えない）
+- Tゲートに資源集約的な手法が必要
+- 代替：高次元トポロジカル符号・LDPC符号（非消滅レート、長距離相互作用が必要）</p>
+<h3>まとめ</h3>
+<p><strong>量子誤り訂正の全体像</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>問題</td>
+<td>量子デコヒーレンス・ビット反転・位相反転</td>
+</tr>
+<tr>
+<td>解決原理</td>
+<td>エンタングルメントによる冗長エンコード＋シンドローム測定</td>
+</tr>
+<tr>
+<td>最有力候補</td>
+<td>表面符号（最近接相互作用・高閾値・スケーラブル）</td>
+</tr>
+<tr>
+<td>実装の鍵</td>
+<td>MWPM復号・フォルトトレラント回路・マジック状態蒸留</td>
+</tr>
+<tr>
+<td>残された課題</td>
+<td>百万量子ビット規模でのスケーリング</td>
+</tr>
+</tbody>
+</table>
+<hr />
+
+</details>
+
+### 第6章: 付録──記法の手引き（ブラケット・パウリ群・回路・可換性）
+
+<video controls width="100%" src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch06.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-1907-11157/paper_1907.11157_ch06.mp3" style="width:100%;margin-top:4px"></audio>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>付録──記法の手引き（ブラケット・パウリ群・回路・可換性）</h2>
+<h3>付録A：量子状態の記法（Dirac ブラケット）</h3>
+<p>一般的な量子ビット状態（式48）：</p>
+<p>$$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle$$</p>
 <ul>
-<li>表面符号の閾値: $p_{th} \approx 1\%$（独立脱分極ノイズ）</li>
-<li>Google Willow（2024）: 物理エラー率 $\sim 0.1\%$ → 閾値を下回る</li>
-<li>IBM Eagle/Heron: 同様の水準に到達</li>
+<li>$\alpha, \beta$：複素振幅、$|\alpha|^2 + |\beta|^2 = 1$</li>
+<li>計算基底：$\{|0\rangle, |1\rangle\}$（ブロッホ球の北極・南極）</li>
+<li>$|\phi\rangle$：ケット（ベクトル）、$\langle\phi|$：ブラ（双対ベクトル）</li>
+<li>内積 $\langle\phi|\psi\rangle$ → 「ブラケット」が名前の由来</li>
 </ul>
-<blockquote>
-<p>📊 Fig. 5 参照（原論文）— 閾値定理の概念図・論理エラー率のスケーリング</p>
-</blockquote>
+<p>多量子ビット表記の規則：量子ビットを左から右へ $1, 2, \ldots, n$ と番号づけ</p>
+<p>$$|010\rangle = |0\rangle_1 \otimes |1\rangle_2 \otimes |0\rangle_3$$</p>
+<ul>
+<li>$\otimes$：テンソル積（複数量子系を合わせた空間を作る）</li>
+<li>省略表記 $|010\rangle$ を使うことで複数量子ビット状態を簡潔に表現</li>
+</ul>
+<h3>付録B：パウリ演算子の記法</h3>
+<p>1量子ビットパウリ群 $\mathcal{G}_1$（式49）：</p>
+<p>$$\mathcal{G}_1 = \{\pm I, \pm iI, \pm X, \pm iX, \pm Y, \pm iY, \pm Z, \pm iZ\}$$</p>
+<ul>
+<li>$\pm 1, \pm i$ の係数を含めることで乗算に閉じた群となる
+  （例：$XY = iZ$ → $iZ$ も群に含まれる必要がある）</li>
+</ul>
+<p>4つのパウリ演算子の行列形（式50）：</p>
+<p>$$I = \begin{pmatrix}1&0\\0&1\end{pmatrix},\quad X = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad Y = \begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad Z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}$$</p>
+<p>一般パウリ群 $\mathcal{G}$ の例（式51）：</p>
+<p>$$I \otimes X \otimes I \otimes Y \in \mathcal{G} \quad \text{（4量子ビットパウリ群の要素）}$$</p>
+<p><strong>サポート（support）</strong>：パウリ演算子の恒等でない要素の番号リスト</p>
+<p>$$\text{supp}(I \otimes X \otimes I \otimes Y) = X_2 Y_4$$</p>
+<ul>
+<li>サポートが重なる量子ビットで可換性が決まる（付録D参照）</li>
+</ul>
+<h3>付録C：量子回路記法</h3>
+<p><strong>C.1 1量子ビットゲート</strong>
+- 各量子ビットに水平なワイヤーを割り当てる
+- ゲートを左から右の順に並べる（時間は左→右）
+- 注意：数式は右→左の順（$X_1Z_1|\psi\rangle$ はまず $Z_1$ が作用）</p>
+<p><strong>C.2 多量子ビットゲート</strong>
+- 複数のワイヤーをまたぐゲートボックスが複数量子ビット演算を示す</p>
+<p><strong>C.3 制御ゲート（Controlled gates）</strong>
+- 制御量子ビット（●）の値が $|1\rangle$ の時のみターゲットにゲートを作用
+- CX（CNOT）：制御付き $X$ ゲート、CZ：制御付き $Z$ ゲート
+- 表面符号のシンドローム抽出回路で多用（アンシラが制御、データがターゲット）</p>
+<p><strong>C.4 計算基底での測定</strong>
+- 全回路で計算基底 $\{|0\rangle, |1\rangle\}$ で測定
+- 量子乱数生成（量子コンピュータの Hello World）：
+  $$|0\rangle \xrightarrow{H} \frac{|0\rangle + |1\rangle}{\sqrt{2}} \xrightarrow{\text{測定}} \begin{cases}0 & 50\%\\1 & 50\%\end{cases}$$</p>
+<h3>付録D：パウリ演算子の可換性</h3>
+<p><strong>定義</strong>：$F_i F_j = F_j F_i$ なら可換、$F_i F_j = -F_j F_i$ なら反可換</p>
+<p>1量子ビットパウリ演算子の性質（式55）：異なるパウリは<strong>すべて反可換</strong></p>
+<p>$$X_1Z_1 = -Z_1X_1,\quad X_1Y_1 = -Y_1X_1,\quad Z_1Y_1 = -Y_1Z_1$$</p>
+<p>多量子ビットの例（式56）：$Z_1Z_2$ と $X_1X_2$</p>
+<p>$$Z_1Z_2 \cdot X_1X_2 = Z_1X_1 \cdot Z_2X_2 = (-1)X_1Z_1 \cdot (-1)X_2Z_2 = X_1X_2 \cdot Z_1Z_2$$</p>
+<p>各量子ビットで反可換（$\times(-1)$）が2回→ $(-1)^2=+1$ → <strong>可換</strong></p>
+<p><strong>一般規則</strong>（付録Dの核心）：</p>
+<table>
+<thead>
+<tr>
+<th>非自明な交わりの数</th>
+<th>可換性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>偶数</td>
+<td><strong>可換</strong></td>
+</tr>
+<tr>
+<td>奇数</td>
+<td><strong>反可換</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>非自明な交わり</strong>：両演算子がサポートを持つ量子ビットで、異なるパウリ（反可換の組み合わせ）を持つ場合</li>
+</ul>
+<p><strong>例</strong>：$X_1Z_2Z_3Z_5X_7$ と $X_1X_2X_5Z_7$</p>
+<table>
+<thead>
+<tr>
+<th>量子ビット</th>
+<th>演算子1</th>
+<th>演算子2</th>
+<th>交わり</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>X</td>
+<td>X</td>
+<td>自明（可換）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Z</td>
+<td>X</td>
+<td><strong>非自明</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Z</td>
+<td>X</td>
+<td><strong>非自明</strong></td>
+</tr>
+<tr>
+<td>7</td>
+<td>X</td>
+<td>Z</td>
+<td><strong>非自明</strong></td>
+</tr>
+</tbody>
+</table>
+<p>非自明な交わり = 3（奇数）→ <strong>反可換</strong></p>
 <hr />
 
 </details>
