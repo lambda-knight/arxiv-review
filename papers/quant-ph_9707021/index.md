@@ -361,6 +361,141 @@ $$e + e \to \epsilon \quad \text{（別の型への変換）}$$</p>
 <p>$$\text{位相的量子計算} = \text{ハードウェアレベルでの誤り訂正}$$</p>
 <p>Kitaev の1997年のビジョンは、現代のトポロジカル量子コンピュータ開発の指針となっている。</p>
 <hr />
+<hr />
+
+</details>
+
+### 第6章: 付録：アニオンの代数理論の完全定式化とアニオンモデルの例
+
+<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch06.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>付録：アニオンの代数理論の完全定式化とアニオンモデルの例</h2>
+<h3>Appendix A: 位相的スピン・S行列・量子次元</h3>
+<p>ペンタゴン方程式・ヘキサゴン方程式を満たす $(F, R)$ から導かれる量：</p>
+<p><strong>位相的スピン（topological spin）</strong>:</p>
+<p>$$\theta_a = R^{aa}_1$$</p>
+<p>アニオン $a$ を $2\pi$ 回転させたときの位相。フェルミオンは $\theta = -1$、ボゾンは $\theta = +1$。</p>
+<p><strong>リボン構造</strong>: 融合後のスピンは</p>
+<p>$$\theta_c = \theta_a \theta_b R^{ab}_c R^{ba}_c$$</p>
+<p><strong>量子次元（quantum dimension）</strong>: 融合規則の最大固有値から定まるスカラー</p>
+<p>$$d_a \geq 1, \quad d_a d_b = \sum_c N^c_{ab} d_c$$</p>
+<p>Z₂トーリックコード: $d_e = d_m = d_\epsilon = 1$（アーベルアニオン）。</p>
+<p>フィボナッチアニオン: $d_\tau = \varphi = \frac{1+\sqrt{5}}{2}$（黄金比）。</p>
+<p><strong>総量子次元</strong>:</p>
+<p>$$\mathcal{D} = \sqrt{\sum_a d_a^2}$$</p>
+<p><strong>S行列（モジュラーデータ）</strong>:</p>
+<p>$$S_{ab} = \frac{1}{\mathcal{D}} \sum_c N^c_{ab} \frac{\theta_c}{\theta_a \theta_b} d_c$$</p>
+<p>S行列は「アニオン $a$ と $b$ を互いのまわりで一周させたときの振幅」を符号化する。これがフェルリンデ公式（Verlinde formula）と結びつく：</p>
+<p>$$N^c_{ab} = \sum_x \frac{S_{ax} S_{bx} S_{cx}^*}{S_{0x}}$$</p>
+<h3>Appendix B: アニオンモデルの例</h3>
+<h4>Z₂理論（トーリックコード）</h4>
+<table>
+<thead>
+<tr>
+<th>アニオン</th>
+<th>量子次元 $d$</th>
+<th>位相的スピン $\theta$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1$（真空）</td>
+<td>1</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>$e$</td>
+<td>1</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>$m$</td>
+<td>1</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>$\epsilon = e \times m$</td>
+<td>1</td>
+<td>−1（フェルミオン）</td>
+</tr>
+</tbody>
+</table>
+<p>全アニオンがアーベル（次元1）→ ブレイディングは位相のみ。<strong>普遍量子計算には不十分</strong>。</p>
+<h4>イジングアニオン</h4>
+<p>融合規則: $\sigma \times \sigma = 1 + \psi$, $\sigma \times \psi = \sigma$, $\psi \times \psi = 1$</p>
+<table>
+<thead>
+<tr>
+<th>アニオン</th>
+<th>量子次元</th>
+<th>位相的スピン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$1$</td>
+<td>1</td>
+<td>+1</td>
+</tr>
+<tr>
+<td>$\sigma$</td>
+<td>$\sqrt{2}$</td>
+<td>$e^{i\pi/8}$</td>
+</tr>
+<tr>
+<td>$\psi$</td>
+<td>1</td>
+<td>−1</td>
+</tr>
+</tbody>
+</table>
+<p>$\sigma$ は非アーベルアニオン（$d_\sigma = \sqrt{2} > 1$）。マヨラナフェルミオンのゼロモードとして固体物理で実現可能。イジングアニオンのブレイディングはクリフォード群のみ → <strong>単独では普遍計算不可能</strong>。</p>
+<h4>フィボナッチアニオン</h4>
+<p>融合規則: $\tau \times \tau = 1 + \tau$（これだけ）</p>
+<p>$$d_\tau = \varphi = \frac{1+\sqrt{5}}{2} \approx 1.618$$</p>
+<p>ペンタゴン方程式を解くと F行列の要素に黄金比が現れる：</p>
+<p>$$[F^{\tau\tau\tau}_\tau]_{11} = \varphi^{-1}, \quad [F^{\tau\tau\tau}_\tau]_{1\tau} = \varphi^{-1/2}$$</p>
+<p>フィボナッチアニオンのブレイディング群は<strong>SU(2)に稠密</strong> → ブレイディングのみで任意のユニタリ変換に任意精度で近づける。</p>
+<p>$$\text{フィボナッチアニオンのブレイド} \xrightarrow{\text{稠密}} \text{普遍量子計算}$$</p>
+<blockquote>
+<p>📊 Fig. A1 参照（原論文）— ペンタゴン方程式の図的表現</p>
+</blockquote>
+<h4>アニオンモデルの比較</h4>
+<table>
+<thead>
+<tr>
+<th>モデル</th>
+<th>アーベル？</th>
+<th>普遍計算</th>
+<th>固体物理実装候補</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Z₂（トーリック）</td>
+<td>○</td>
+<td>✗</td>
+<td>量子スピン液体</td>
+</tr>
+<tr>
+<td>イジング</td>
+<td>✗</td>
+<td>✗（Cliffordのみ）</td>
+<td>マヨラナ準粒子</td>
+</tr>
+<tr>
+<td>フィボナッチ</td>
+<td>✗</td>
+<td>✓</td>
+<td>ν=12/5 分数量子ホール</td>
+</tr>
+</tbody>
+</table>
+<p>フィボナッチアニオンの物理的実現として最も有力な候補は充填率 $\nu = 12/5$ の分数量子ホール状態。ただし実験的確認はまだ途上。</p>
+<hr />
 <p><em>参考: arXiv: quant-ph/9707021 (https://arxiv.org/abs/quant-ph/9707021)</em></p>
 
 </details>

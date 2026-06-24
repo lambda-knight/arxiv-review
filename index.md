@@ -17,7 +17,7 @@ layout: default
 | [Qwen-VLA — 一つのモデルで「見る・考える・動く」を統一する](papers/2605.30280/) | [arXiv:2605.30280](https://arxiv.org/abs/2605.30280) | 5 |
 | [ニトロゲナーゼ補因子の生合成](papers/chemrev.9b00489/) | [DOI:10.1021/acs.chemrev.9b00489](https://doi.org/10.1021/acs.chemrev.9b00489) | 15 |
 | [フォトニック量子プロセッサ上の変分固有値ソルバー（VQE）](papers/ncomms5213/) | ncomms5213 | 5 |
-| [アニオンで計算する ── Kitaev のトポロジカル量子計算](papers/quant-ph_9707021/) | [DOI:10.1016/S0003-4916(02)00018-0](https://doi.org/10.1016/S0003-4916(02)00018-0) | 5 |
+| [アニオンで計算する ── Kitaev のトポロジカル量子計算](papers/quant-ph_9707021/) | [DOI:10.1016/S0003-4916(02)00018-0](https://doi.org/10.1016/S0003-4916(02)00018-0) | 6 |
 
 ---
 
