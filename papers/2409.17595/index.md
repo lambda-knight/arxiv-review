@@ -413,6 +413,76 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 </details>
 
+### 第5章: 付録：ノイズモデルとチャンク回路構築
+
+<video controls width="100%" src="https://archive.org/download/paper-explain-2409-17595/paper_2409.17595_ch05.mp4"></video>
+
+<details>
+<summary>解説スライド（クリックで展開）</summary>
+
+<h2>付録：ノイズモデルとチャンク回路構築</h2>
+<h3>Appendix A: ノイズモデル</h3>
+<p>論文の全回路シミュレーションは<strong>一様脱分極ノイズモデル（uniform depolarizing circuit noise）</strong>を使用：</p>
+<ul>
+<li>先行研究との比較を容易にするため意図的に採用（Figure 18 参照）</li>
+<li>各ゲート・アイドル・測定に一様にエラーを割り当てる</li>
+<li>非均一ノイズへの対応は今後の課題</li>
+</ul>
+<h3>Appendix B: チャンク回路構築（Chunked Circuit Construction）</h3>
+<p>カルティベーション回路の設計・実装に使った独自の手法。</p>
+<h4>チャンクとスタビライザーフロー</h4>
+<p><strong>チャンク（chunk）</strong>: スタビライザーフロー（stabilizer flow）のリストで注釈された量子スタビライザー回路。</p>
+<p>$$A \xrightarrow{M} B$$</p>
+<ul>
+<li>$A$: 入力スタビライザー、$B$: 出力スタビライザー、$M$: 測定集合</li>
+<li>フローは「回路が $A$ を $B$ に変換し、符号は $M$ のパリティで決まる」ことを表す</li>
+<li>フローは「関数のシグネチャ」に相当する検証可能な仕様</li>
+</ul>
+<p><strong>Stim の活用</strong>:
+- <code>stim.Flow</code> クラスでフローを表現
+- <code>stim.Circuit.has_flow</code> メソッドで回路がフローを実装しているか検証</p>
+<h4>チャンクの連結と検出器の自動生成</h4>
+<p>2つのチャンクを連結するとき：</p>
+<ol>
+<li>最初のチャンクの出力スタビライザーと次のチャンクの入力スタビライザーが一致するか確認</li>
+<li>一致したフロー同士を「つなぐ」ことで、長いフローが自動的に形成される</li>
+<li>入力・出力が空で測定集合だけが残るフロー → <strong>検出器（detector）</strong>として自動登録</li>
+</ol>
+<p>$$A \oplus B = 0 \quad \text{（ノイズなしで常に成立する制約）}$$</p>
+<h4>チャンクベースアプローチの4つの利点</h4>
+<table>
+<thead>
+<tr>
+<th>利点</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>デカップリング</strong></td>
+<td>あるチャンクを変えても周囲のチャンクのコードを修正不要</td>
+</tr>
+<tr>
+<td><strong>コントラクト</strong></td>
+<td>期待されるフローを仕様として書き、単体テストで自動検証</td>
+</tr>
+<tr>
+<td><strong>芸術的自由</strong></td>
+<td>視覚エディタ（Crumble）・コード生成・ガウス消去法を使い分け可能</td>
+</tr>
+<tr>
+<td><strong>マイクロマネジメント</strong></td>
+<td>検出器基底を明示的に制御（デコーダの要件に応じた比較構造を保証）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📊 例: $A=B=C$ のとき、$A \oplus B=0$ と $B \oplus C=0$ の組み合わせ vs. $A \oplus B=0$ と $A \oplus C=0$ の組み合わせは数学的に等価だが、マッチングデコーダは特定の構造のみを正しく処理できる場合がある。</p>
+</blockquote>
+<hr />
+
+</details>
+
 ---
 
 [← 論文一覧に戻る](../../)
