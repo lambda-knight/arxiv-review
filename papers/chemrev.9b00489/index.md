@@ -217,6 +217,8 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch04.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch04.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -264,6 +266,8 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 ### 第5章: Feタンパク質の成熟と成熟化因子の相互作用
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch05.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch05.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -320,6 +324,8 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch06.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch06.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -366,6 +372,8 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 ### 第7章: FeMo-coの構造と生合成モデル全体像
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch07.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch07.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -436,6 +444,8 @@ NifV → homocitrate ────────┘
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch08.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch08.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -491,6 +501,8 @@ NifV → homocitrate ────────┘
 ### 第9章: NifBタンパク質の構造と触媒機能──ラジカルSAM反応
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch09.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch09.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -560,6 +572,8 @@ NifV → homocitrate ────────┘
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch10.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch10.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -608,6 +622,8 @@ NifV → homocitrate ────────┘
 ### 第11章: FeMo-co有機補基ホモクエン酸の発見
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch11.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch11.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -662,6 +678,8 @@ NifV → homocitrate ────────┘
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch12.mp4"></video>
 
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch12.mp3" style="width:100%;margin-top:4px"></audio>
+
 <details>
 <summary>解説スライド（クリックで展開）</summary>
 
@@ -695,6 +713,8 @@ NifV → homocitrate ────────┘
 ### 第13章: Moとホモクエン酸のFeMo-coへの組み込み
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch13.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch13.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -760,6 +780,8 @@ $$\text{NifEN} + \text{Feタンパク} + \text{Mo} + \text{HC} + \text{MgATP} + 
 ### 第14章: 金属クラスターの輸送──NifXとNafY
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch14.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch14.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
@@ -833,6 +855,8 @@ $$\text{NifEN} + \text{Feタンパク} + \text{Mo} + \text{HC} + \text{MgATP} + 
 ### 第15章: 総括──ニトロゲナーゼ補因子生合成の到達点と展望
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch15.mp4"></video>
+
+<audio controls src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch15.mp3" style="width:100%;margin-top:4px"></audio>
 
 <details>
 <summary>解説スライド（クリックで展開）</summary>
