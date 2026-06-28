@@ -11,7 +11,7 @@ layout: default
 |------|-------|------|
 | [表面符号：大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 12 |
 | [量子回路学習（Quantum Circuit Learning）](papers/1803.00745/) | [arXiv:1803.00745](https://arxiv.org/abs/1803.00745) | 5 |
-| [1907.11157](papers/1907.11157/) | [arXiv:1907.11157](https://arxiv.org/abs/1907.11157) | 6 |
+| [量子誤り訂正入門（Quantum Error Correction: An Introductory Guide）](papers/1907.11157/) | [arXiv:1907.11157](https://arxiv.org/abs/1907.11157) | 6 |
 | [Gemini Robotics: AIをフィジカルな世界へ](papers/2503.20020/) | [arXiv:2503.20020](https://arxiv.org/abs/2503.20020) | 14 |
 | [Qwen-VLA: タスク・環境・ロボット形態を超えた統一VLA](papers/2605.30280/) | [arXiv:2605.30280](https://arxiv.org/abs/2605.30280) | 14 |
 | [ニトロゲナーゼ補因子の生合成](papers/chemrev.9b00489/) | chemrev.9b00489 | 15 |
