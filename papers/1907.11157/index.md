@@ -10,6 +10,8 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 # 量子誤り訂正入門（Quantum Error Correction: An Introductory Guide）
 
+*Quantum Error Correction: An Introductory Guide*
+
 - arXiv: [1907.11157](https://arxiv.org/abs/1907.11157)
 - Internet Archive: [paper-explain-1907-11157](https://archive.org/details/paper-explain-1907-11157)
 
@@ -17,15 +19,17 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 
 ## 概要
 
-シェフィールド大学のロフェ（Joschka Roffe）による量子誤り訂正の入門論文を徹底解説します。古典誤り訂正の基礎から、スタビライザー符号・表面符号・フォールトトレラント量子計算まで、数式を使ってわかりやすく解説します。
+シェフィールド大学のジョシカ・ロフェによる2019年の入門レビュー論文を徹底解説します。複製禁止定理・誤りのデジタル化（X誤り+Z誤り）・スタビライザー形式論（[[n,k,d]]符号）・3量子ビット反復符号・[[4,2,2]]符号から、最近傍相互作用のみで実装できる表面符号と誤り閾値約1%まで。フルテキストから数式入りで丁寧に解説します。
 
 ▼ 今日の論文
-・Quantum Error Correction: An Introductory Guide — Joschka Roffe, University of Sheffield (arXiv:1907.11157)
+・Quantum Error Correction: An Introductory Guide
+  Joschka Roffe — Department of Physics & Astronomy, University of Sheffield
+  Contemporary Physics 60, 226–245 (2019) — arXiv:1907.11157
 
 ▼ 参考論文（arXiv）
 https://arxiv.org/abs/1907.11157  — Quantum Error Correction: An Introductory Guide
 
-#量子コンピュータ #量子誤り訂正 #表面符号 #スタビライザー符号 #arxiv #論文解説 #ゆっくり解説 #ずんだもん
+#量子コンピュータ #量子誤り訂正 #表面符号 #スタビライザー符号 #トポロジカル符号 #フォールトトレラント #arxiv #論文解説 #ゆっくり解説 #ずんだもん
 
 ---
 
