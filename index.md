@@ -11,6 +11,7 @@ layout: default
 |------|-------|------|
 | [From Classical to Quantum Shannon Theory — Part II 解説](papers/1106.1445/) | [arXiv:1106.1445](https://arxiv.org/abs/1106.1445) | 5 |
 | [表面符号：大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 12 |
+| [量子アルゴリズム概観【Montanaro 2016 解説】](papers/1511.04206/) | [arXiv:1511.04206](https://arxiv.org/abs/1511.04206) | 5 |
 | [量子回路学習（Quantum Circuit Learning）](papers/1803.00745/) | [arXiv:1803.00745](https://arxiv.org/abs/1803.00745) | 7 |
 | [量子誤り訂正入門（Quantum Error Correction: An Introductory Guide）](papers/1907.11157/) | [arXiv:1907.11157](https://arxiv.org/abs/1907.11157) | 6 |
 | [Gemini Robotics: AIをフィジカルな世界へ](papers/2503.20020/) | [arXiv:2503.20020](https://arxiv.org/abs/2503.20020) | 14 |
