@@ -9,6 +9,7 @@ layout: default
 
 | 論文 | 論文リンク | 章数 |
 |------|-------|------|
+| [From Classical to Quantum Shannon Theory — Part II 解説](papers/1106.1445/) | [arXiv:1106.1445](https://arxiv.org/abs/1106.1445) | 5 |
 | [表面符号：大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 12 |
 | [量子回路学習（Quantum Circuit Learning）](papers/1803.00745/) | [arXiv:1803.00745](https://arxiv.org/abs/1803.00745) | 7 |
 | [量子誤り訂正入門（Quantum Error Correction: An Introductory Guide）](papers/1907.11157/) | [arXiv:1907.11157](https://arxiv.org/abs/1907.11157) | 6 |
