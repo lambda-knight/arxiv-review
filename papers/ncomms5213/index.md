@@ -8,29 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- ID: ncomms5213
-- Internet Archive: [paper-explain-ncomms5213](https://archive.org/details/paper-explain-ncomms5213)
-
----
-
-## 概要
-
-Bristol大学・Harvard大学共同チームによる2014年の歴史的論文を徹底解説します。量子位相推定（QPE）の12 CNOT ゲートをたった1 CNOT で置き換えた変分量子固有値ソルバー（VQE）のアルゴリズム設計から、フォトニック量子チップでのHe-H+分子実験まで。ハミルトニアンのパウリ分解・ユニタリ連結クラスターアンザッツ・Nelder-Mead最適化の全技術をフルテキストから数式入りで解説します。
-
-▼ 今日の論文
-・A variational eigenvalue solver on a photonic quantum processor
-  Alberto Peruzzo, Jarrod McClean ほか — Bristol大学・Harvard大学・Haverford College
-  Nature Communications 5, 4213 (2014) — arXiv:1304.3061
-
-▼ 参考論文（arXiv）
-https://arxiv.org/abs/1304.3061  — A variational eigenvalue solver on a photonic quantum processor
-
-#量子コンピュータ #量子化学 #VQE #変分量子固有値ソルバー #NISQ #フォトニック量子回路 #arxiv #論文解説 #ゆっくり解説 #ずんだもん
-
----
-
-## 章別動画・解説
-
 ### 第1章: 導入：量子固有値問題と既存手法の限界
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-ncomms5213/paper_ncomms5213_ch01.mp4"></video>
@@ -309,6 +286,3 @@ https://arxiv.org/abs/1304.3061  — A variational eigenvalue solver on a photon
 
 </details>
 
----
-
-[← 論文一覧に戻る](../../)

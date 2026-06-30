@@ -8,29 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- ID: quant-ph_9707021
-- Internet Archive: [paper-explain-quant-ph-9707021](https://archive.org/details/paper-explain-quant-ph-9707021)
-
----
-
-## 概要
-
-ランダウ理論物理学研究所のアレクセイ・キタエフによる1997年の歴史的論文を徹底解説します。トーラス上の格子で全辺にスピンを置き、頂点演算子As=Πσjx・面演算子Bp=Πσjzで4重縮退した保護空間を定義するトーリック符号。エネルギーギャップと局所摂動安定性exp(-aL)の証明から、アベリアン・エニオンのブレイディング（-1位相）、量子ダブルD(G)による非アベリアン・エニオンの普遍量子計算まで、フルテキストから数式入りで解説します。
-
-▼ 今日の論文
-・Fault-tolerant quantum computation by anyons
-  A. Yu. Kitaev — L.D. Landau Institute for Theoretical Physics
-  arXiv:quant-ph/9707021 (1997); Annals of Physics 303, 2–30 (2003)
-
-▼ 参考論文（arXiv）
-https://arxiv.org/abs/quant-ph/9707021  — Fault-tolerant quantum computation by anyons
-
-#量子コンピュータ #量子誤り訂正 #トーリック符号 #エニオン #トポロジカル量子計算 #表面符号 #キタエフ #arxiv #論文解説 #ゆっくり解説 #ずんだもん
-
----
-
-## 章別動画・解説
-
 ### 第1章: トーリックコードTOR(k) ── 定義と保護空間
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch01.mp4"></video>
@@ -67,6 +44,3 @@ https://arxiv.org/abs/quant-ph/9707021  — Fault-tolerant quantum computation b
 
 <audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch06.mp3" style="width:100%;margin-top:4px"></audio>
 
----
-
-[← 論文一覧に戻る](../../)

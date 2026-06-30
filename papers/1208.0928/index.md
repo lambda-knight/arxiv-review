@@ -8,13 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- arXiv: [1208.0928](https://arxiv.org/abs/1208.0928)
-- Internet Archive: [lk-paper-1208-0928](https://archive.org/details/lk-paper-1208-0928)
-
----
-
-## 章別動画・解説
-
 ### 第1章: §I-§II: 背景と量子ビットの基礎
 
 <video controls width="100%" src="https://archive.org/download/lk-paper-1208-0928/paper_1208.0928_ch01.mp4"></video>
@@ -737,6 +730,3 @@ $$p_2 = 35 \times (4.4 \times 10^{-6})^3 \approx 3 \times 10^{-15}$$</p>
 
 </details>
 
----
-
-[← 論文一覧に戻る](../../)

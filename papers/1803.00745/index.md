@@ -8,28 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- arXiv: [1803.00745](https://arxiv.org/abs/1803.00745)
-- Internet Archive: [paper-explain-1803-00745](https://archive.org/details/paper-explain-1803-00745)
-
----
-
-## 概要
-
-大阪大学・京都大学の御手洗恭三・根来誠・北川拓也・藤井啓祐チームによる2018年論文を徹底解説します。パラメータ付き量子回路を機械学習モデルとして使う「量子回路学習（QCL）」の5ステップアルゴリズム、±π/2シフトで勾配を計算するパラメータシフト則の原形、そして量子力学のユニタリ性が過学習を防ぐ仕組みまで、フルテキストから数式を使って解説します。
-
-▼ 今日の論文
-・Quantum Circuit Learning — K. Mitarai, M. Negoro, M. Kitagawa（大阪大学）, K. Fujii（京都大学）
-  Physical Review A 98, 032309 (2018) — arXiv:1803.00745
-
-▼ 参考論文（arXiv）
-https://arxiv.org/abs/1803.00745  — Quantum Circuit Learning
-
-#量子コンピュータ #量子機械学習 #パラメータシフト則 #変分量子回路 #NISQ #arxiv #論文解説 #ゆっくり解説 #ずんだもん
-
----
-
-## 章別動画・解説
-
 ### 第1章: 導入：量子機械学習の夜明け
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1803-00745/paper_1803.00745_ch01.mp4"></video>
@@ -278,6 +256,3 @@ $$\boldsymbol{y}_i = \boldsymbol{F}\!\left(\langle Z_1\rangle, \langle Z_2\rangl
 
 </details>
 
----
-
-[← 論文一覧に戻る](../../)

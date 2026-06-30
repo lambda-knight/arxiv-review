@@ -8,13 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- ID: chemrev.9b00489
-- Internet Archive: [paper-explain-chemrev-9b00489](https://archive.org/details/paper-explain-chemrev-9b00489)
-
----
-
-## 章別動画・解説
-
 ### 第1章: はじめに──ニトロゲナーゼ補因子生合成研究の枠組み
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-chemrev-9b00489/paper_chemrev.9b00489_ch01.mp4"></video>
@@ -917,6 +910,3 @@ $$\text{NifEN} + \text{Feタンパク} + \text{Mo} + \text{HC} + \text{MgATP} + 
 
 </details>
 
----
-
-[← 論文一覧に戻る](../../)

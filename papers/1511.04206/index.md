@@ -8,31 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- arXiv: [1511.04206](https://arxiv.org/abs/1511.04206)
-- Internet Archive: [paper-explain-1511-04206](https://archive.org/details/paper-explain-1511-04206)
-
----
-
-## 概要
-
-量子コンピュータで使われる主要アルゴリズムの全体像を4章に分けて完全解説。Ashley Montanaroの「Quantum algorithms: an overview」（npj Quantum Information 2016）をベースに、ずんだもん＆四国めたんが量子フーリエ変換・振幅増幅・ハミルトニアンシミュレーション・HHLを数式とともに丁寧に説明します。
-
-▼ 章別動画ラインナップ
-・量子アルゴリズムとは何か — 重ね合わせ・もつれ・干渉・計算複雑性の基礎
-・暗号解読：ショアのアルゴリズム — 素因数分解・量子フーリエ変換・耐量子暗号
-・探索と最適化：グローバーとその発展 — 振幅増幅・量子ウォーク・QAOA
-・量子系のシミュレーション — トロッター分解・VQE・FeMoCo・量子化学
-・線形方程式系とNISQ時代 — HHL・細字条件・誤り訂正・量子優位性の現状
-
-▼ 参考文献
-https://arxiv.org/abs/1511.04206 — Ashley Montanaro, "Quantum algorithms: an overview", npj Quantum Information 2, 15023 (2016)
-
-#量子コンピュータ #量子アルゴリズム #ショアのアルゴリズム #グローバー #HHL #量子フーリエ変換 #振幅増幅 #VQE #量子化学 #論文解説 #ゆっくり解説 #ずんだもん #NISQ #数式でわかる
-
----
-
-## 章別動画・解説
-
 ### 第1章: 量子アルゴリズムとは何か
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1511-04206/paper_1511.04206_ch01.mp4"></video>
@@ -217,6 +192,3 @@ $$E_0 \leq \langle\psi(\theta)|H|\psi(\theta)\rangle$$</p>
 
 </details>
 
----
-
-[← 論文一覧に戻る](../../)

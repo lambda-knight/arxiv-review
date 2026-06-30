@@ -8,31 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-- arXiv: [1106.1445](https://arxiv.org/abs/1106.1445)
-- Internet Archive: [paper-explain-1106-1445](https://archive.org/details/paper-explain-1106-1445)
-
----
-
-## 概要
-
-量子コンピュータ・量子通信の数学的な土台を全4章+付録で完全解説。Mark Wildeの「From Classical to Quantum Shannon Theory」Part IIをベースに、ずんだもん＆四国めたんが量子状態・密度行列・測定・量子チャネルを数式とともに丁寧に説明します。
-
-▼ 章別動画ラインナップ
-・量子状態とヒルベルト空間 — 純粋状態・ディラック記法・テンソル積・量子もつれ
-・密度行列と混合状態 — 密度演算子の3条件・部分トレース・純粋化定理・ブロッホ球
-・量子測定：射影測定とPOVM — フォン・ノイマン測定・POVM・ナイマルクの拡張定理
-・量子チャネルとクラウス表現 — CPTP写像・クラウス定理・スタインスプリング拡張・チョイ行列
-・Appendix A: 線形代数の基礎 — 内積・スペクトル定理・トレース・テンソル積・シュミット分解
-
-▼ 参考文献
-https://arxiv.org/abs/1106.1445  — Mark M. Wilde, "From Classical to Quantum Shannon Theory" (arXiv, 2nd ed.)
-
-#量子コンピュータ #量子情報 #密度行列 #POVM #量子チャネル #量子力学 #論文解説 #ゆっくり解説 #ずんだもん #線形代数 #数式でわかる #テクノロジー #大学院
-
----
-
-## 章別動画・解説
-
 ### 第1章: 量子状態とヒルベルト空間
 
 <video controls width="100%" src="https://archive.org/download/paper-explain-1106-1445/paper_1106.1445_ch01.mp4"></video>
@@ -297,6 +272,3 @@ $$A_0 = \begin{pmatrix}1&0\\0&\sqrt{1-\gamma}\end{pmatrix},\; A_1 = \begin{pmatr
 
 </details>
 
----
-
-[← 論文一覧に戻る](../../)
