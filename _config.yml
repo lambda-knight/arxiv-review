@@ -5,5 +5,7 @@ url: "https://lambda-knight.github.io"
 theme: minima
 lang: ja
 
+header_pages: []
+
 plugins:
   - jekyll-feed
