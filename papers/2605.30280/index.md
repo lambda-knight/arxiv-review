@@ -8,3 +8,5 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
+<video controls width="100%" src="https://archive.org/download/paper-explain-2605-30280/paper_2605.30280.mp4"></video>
+
