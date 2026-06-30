@@ -1,12 +1,11 @@
 ---
 title: "Gemini Robotics: AIをフィジカルな世界へ"
-layout: default
+layout: none
 ---
-
-<script>
-MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true } };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-2503-20020/paper_2503.20020.mp4"></video>
-
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url=https://lambda-knight.github.io/arxiv-review-next/papers/2503.20020/">
+<link rel="canonical" href="https://lambda-knight.github.io/arxiv-review-next/papers/2503.20020/">
+</head><body>
+<p><a href="https://lambda-knight.github.io/arxiv-review-next/papers/2503.20020/">移動しています...</a></p>
+</body></html>

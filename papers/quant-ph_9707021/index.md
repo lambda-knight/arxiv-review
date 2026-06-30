@@ -1,46 +1,11 @@
 ---
 title: "エニオンによる耐故障量子計算（Fault-tolerant quantum computation by anyons）"
-layout: default
+layout: none
 ---
-
-<script>
-MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], processEscapes: true } };
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
-
-### 第1章: トーリックコードTOR(k) ── 定義と保護空間
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch01.mp4"></video>
-
-<audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch01.mp3" style="width:100%;margin-top:4px"></audio>
-
-### 第2章: コードの誤り訂正能力とハミルトニアンH₀
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch02.mp4"></video>
-
-<audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch02.mp3" style="width:100%;margin-top:4px"></audio>
-
-### 第3章: アーベルアニオン ── 電荷と磁気渦の統計
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch03.mp4"></video>
-
-<audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch03.mp3" style="width:100%;margin-top:4px"></audio>
-
-### 第4章: 量子二重体D(G) ── 非アーベルアニオンの代数的基盤
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch04.mp4"></video>
-
-<audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch04.mp3" style="width:100%;margin-top:4px"></audio>
-
-### 第5章: リボン演算子とホップ代数 ── 粒子対の生成と代数構造
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch05.mp4"></video>
-
-<audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch05.mp3" style="width:100%;margin-top:4px"></audio>
-
-### 第6章: ブレイディングと融合 ── Section 6の位相的演算子
-
-<video controls width="100%" src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch06.mp4"></video>
-
-<audio controls src="https://archive.org/download/paper-explain-quant-ph-9707021/paper_quant-ph_9707021_ch06.mp3" style="width:100%;margin-top:4px"></audio>
-
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url=https://lambda-knight.github.io/arxiv-review-next/papers/quant-ph_9707021/">
+<link rel="canonical" href="https://lambda-knight.github.io/arxiv-review-next/papers/quant-ph_9707021/">
+</head><body>
+<p><a href="https://lambda-knight.github.io/arxiv-review-next/papers/quant-ph_9707021/">移動しています...</a></p>
+</body></html>

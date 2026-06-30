@@ -1,15 +1,17 @@
 ---
 title: "arxiv-review | 論文解説動画"
-layout: none
+layout: default
 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=https://lambda-knight.github.io/arxiv-review-next/">
-<link rel="canonical" href="https://lambda-knight.github.io/arxiv-review-next/">
-</head>
-<body>
-<p><a href="https://lambda-knight.github.io/arxiv-review-next/">移動しています...</a></p>
-</body>
-</html>
+
+| 論文 | 論文リンク | 章数 |
+|------|-------|------|
+| [From Classical to Quantum Shannon Theory — Part II 解説](papers/1106.1445/) | [arXiv:1106.1445](https://arxiv.org/abs/1106.1445) | 5 |
+| [表面符号：大規模量子コンピュータへの実践的アプローチ](papers/1208.0928/) | [arXiv:1208.0928](https://arxiv.org/abs/1208.0928) | 12 |
+| [量子アルゴリズム概観【Montanaro 2016 解説】](papers/1511.04206/) | [arXiv:1511.04206](https://arxiv.org/abs/1511.04206) | 5 |
+| [量子回路学習（Quantum Circuit Learning）](papers/1803.00745/) | [arXiv:1803.00745](https://arxiv.org/abs/1803.00745) | 7 |
+| [量子誤り訂正入門（Quantum Error Correction: An Introductory Guide）](papers/1907.11157/) | [arXiv:1907.11157](https://arxiv.org/abs/1907.11157) | 6 |
+| [Gemini Robotics: AIをフィジカルな世界へ](papers/2503.20020/) | [arXiv:2503.20020](https://arxiv.org/abs/2503.20020) | 14 |
+| [Qwen-VLA: タスク・環境・ロボット形態を超えた統一VLA](papers/2605.30280/) | [arXiv:2605.30280](https://arxiv.org/abs/2605.30280) | 14 |
+| [ニトロゲナーゼ補因子の生合成](papers/chemrev.9b00489/) | chemrev.9b00489 | 15 |
+| [フォトニック量子プロセッサ上の変分固有値ソルバー（VQE）](papers/ncomms5213/) | ncomms5213 | 7 |
+| [エニオンによる耐故障量子計算（Fault-tolerant quantum computation by anyons）](papers/quant-ph_9707021/) | quant-ph_9707021 | 6 |
