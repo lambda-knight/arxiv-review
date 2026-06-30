@@ -3,10 +3,6 @@ title: "arxiv-review | 論文解説動画"
 layout: default
 ---
 
-# 論文解説動画一覧
-
-量子コンピュータ・生成AI の最新論文をずんだもん＋四国めたんが解説します。
-
 | 論文 | 論文リンク | 章数 |
 |------|-------|------|
 | [From Classical to Quantum Shannon Theory — Part II 解説](papers/1106.1445/) | [arXiv:1106.1445](https://arxiv.org/abs/1106.1445) | 5 |
@@ -19,7 +15,3 @@ layout: default
 | [ニトロゲナーゼ補因子の生合成](papers/chemrev.9b00489/) | chemrev.9b00489 | 15 |
 | [フォトニック量子プロセッサ上の変分固有値ソルバー（VQE）](papers/ncomms5213/) | ncomms5213 | 7 |
 | [エニオンによる耐故障量子計算（Fault-tolerant quantum computation by anyons）](papers/quant-ph_9707021/) | quant-ph_9707021 | 6 |
-
----
-
-*ずんだもん＋四国めたんによる日本語解説。数式まで踏み込んで解説します。*
