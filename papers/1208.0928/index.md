@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# 表面符号：大規模量子コンピュータへの実践的アプローチ
-
-*Austin G. Fowler, Matteo Mariantoni, John M. Martinis, Andrew N. Cleland (2012)*
-
 - arXiv: [1208.0928](https://arxiv.org/abs/1208.0928)
 - Internet Archive: [lk-paper-1208-0928](https://archive.org/details/lk-paper-1208-0928)
 

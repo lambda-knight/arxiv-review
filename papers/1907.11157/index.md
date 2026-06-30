@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# 量子誤り訂正入門（Quantum Error Correction: An Introductory Guide）
-
-*Quantum Error Correction: An Introductory Guide*
-
 - arXiv: [1907.11157](https://arxiv.org/abs/1907.11157)
 - Internet Archive: [paper-explain-1907-11157](https://archive.org/details/paper-explain-1907-11157)
 

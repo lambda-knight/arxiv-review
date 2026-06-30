@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# エニオンによる耐故障量子計算（Fault-tolerant quantum computation by anyons）
-
-*Fault-tolerant quantum computation by anyons*
-
 - ID: quant-ph_9707021
 - Internet Archive: [paper-explain-quant-ph-9707021](https://archive.org/details/paper-explain-quant-ph-9707021)
 

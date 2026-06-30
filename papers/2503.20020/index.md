@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# Gemini Robotics: AIをフィジカルな世界へ
-
-*著者**: Google DeepMind Gemini Robotics Team*
-
 - arXiv: [2503.20020](https://arxiv.org/abs/2503.20020)
 - Internet Archive: [paper-explain-2503-20020](https://archive.org/details/paper-explain-2503-20020)
 

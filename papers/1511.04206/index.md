@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# 量子アルゴリズム概観【Montanaro 2016 解説】
-
-*> 本文HTMLは未取得のため、abstract および本論文の既知の内容をもとに解説しています*
-
 - arXiv: [1511.04206](https://arxiv.org/abs/1511.04206)
 - Internet Archive: [paper-explain-1511-04206](https://archive.org/details/paper-explain-1511-04206)
 

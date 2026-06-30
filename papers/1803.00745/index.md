@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# 量子回路学習（Quantum Circuit Learning）
-
-*Quantum Circuit Learning*
-
 - arXiv: [1803.00745](https://arxiv.org/abs/1803.00745)
 - Internet Archive: [paper-explain-1803-00745](https://archive.org/details/paper-explain-1803-00745)
 

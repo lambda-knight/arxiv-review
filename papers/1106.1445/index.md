@@ -8,8 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# From Classical to Quantum Shannon Theory — Part II 解説
-
 - arXiv: [1106.1445](https://arxiv.org/abs/1106.1445)
 - Internet Archive: [paper-explain-1106-1445](https://archive.org/details/paper-explain-1106-1445)
 

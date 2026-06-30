@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# フォトニック量子プロセッサ上の変分固有値ソルバー（VQE）
-
-*A variational eigenvalue solver on a quantum processor*
-
 - ID: ncomms5213
 - Internet Archive: [paper-explain-ncomms5213](https://archive.org/details/paper-explain-ncomms5213)
 

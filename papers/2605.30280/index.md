@@ -8,10 +8,6 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$
 </script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 
-# Qwen-VLA: タスク・環境・ロボット形態を超えた統一VLA
-
-*著者**: Qwen Team（Alibaba）*
-
 - arXiv: [2605.30280](https://arxiv.org/abs/2605.30280)
 - Internet Archive: [paper-explain-2605-30280](https://archive.org/details/paper-explain-2605-30280)
 
