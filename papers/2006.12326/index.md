@@ -1,5 +1,5 @@
 ---
-title: "2006.12326"
+title: "中性原子を用いた量子コンピューティング"
 layout: none
 ---
 <!DOCTYPE html>
