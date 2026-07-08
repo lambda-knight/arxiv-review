@@ -24,11 +24,11 @@ export default function IndexPage() {
             </td>
             <td style={{ padding: "14px 12px", fontSize: 13, whiteSpace: "nowrap" }}>
               {p.arxivUrl ? (
-                <a href={p.arxivUrl} target="_blank" rel="noopener" style={{ color: "var(--muted)" }}>
+                <a href={p.arxivUrl} target="_blank" rel="noopener" style={{ color: "var(--muted)", textDecoration: "underline" }}>
                   arXiv:{p.id}
                 </a>
               ) : p.doi ? (
-                <a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener" style={{ color: "var(--muted)" }}>
+                <a href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener" style={{ color: "var(--muted)", textDecoration: "underline" }}>
                   {p.doi}
                 </a>
               ) : (
