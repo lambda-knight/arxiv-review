@@ -48,6 +48,23 @@ export default async function PaperPage({ params }: { params: Promise<{ id: stri
         <video controls style={{ width: "100%" }} src={paper.singleVideoUrl} />
       )}
 
+      {/* 動画がまだない論文: 音声と本文をフォールバック表示（空ページを防ぐ） */}
+      {paper.chapters.length === 0 && !paper.singleVideoUrl && (
+        <div>
+          {paper.singleAudioUrl && (
+            <audio controls style={{ width: "100%" }} src={paper.singleAudioUrl} />
+          )}
+          {paper.markdown && (
+            <div style={{ marginTop: paper.singleAudioUrl ? 16 : 0 }}>
+              <MathSlide html={paper.markdown} />
+            </div>
+          )}
+          {!paper.singleAudioUrl && !paper.markdown && (
+            <p style={{ color: "var(--muted)" }}>この論文の動画・音声・本文はまだ準備中です</p>
+          )}
+        </div>
+      )}
+
     </div>
   );
 }
