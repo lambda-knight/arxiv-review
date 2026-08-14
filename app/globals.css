@@ -42,6 +42,8 @@ a:hover { color: #fff; }
 .karaoke-subtitle i.read { color:#1d4ed8; text-shadow:2px 2px 0 #fff,-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,0 3px 8px rgba(0,0,0,.9); }
 .katex { color:#050505; font-size:1.16em; font-weight:600; }
 .katex-display { margin:1em 0; overflow-x:auto; overflow-y:hidden; }
+.slide-content .katex { color:#d1fae5; text-shadow:0 0 1px rgba(255,255,255,.45); }
+.slide-content .katex-display { color:#a7f3d0; padding:10px 16px; background:rgba(110,231,183,.08); border:1px solid rgba(110,231,183,.24); border-radius:6px; }
 
 video { border-radius: 8px; background: #000; }
 
