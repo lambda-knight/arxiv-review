@@ -35,6 +35,10 @@ a:hover { color: #fff; }
 .view-mode-switch button { border:0; border-radius:6px; padding:6px 14px; color:#9ca3af; background:transparent; cursor:pointer; font-weight:700; }
 .view-mode-switch button.is-active { color:#06111e; background:linear-gradient(135deg,#67e8f9,#a78bfa); }
 .view-mode-switch button:disabled { cursor:not-allowed; opacity:.4; }
+.karaoke-subtitle { position:absolute; z-index:20; left:240px; right:280px; bottom:12px; box-sizing:border-box; padding:4px 20px; color:#fff; font-family:"Hiragino Sans","Noto Sans JP",sans-serif; font-size:34px; font-weight:700; line-height:1.5; text-align:center; text-shadow:2px 2px 0 #000,-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,0 3px 8px rgba(0,0,0,.9); }
+.karaoke-subtitle.multiline { font-size:28px; text-align:left; }
+.karaoke-subtitle i { color:#fff; font:inherit; font-style:normal; text-shadow:inherit; }
+.karaoke-subtitle i.read { color:#1d4ed8; text-shadow:2px 2px 0 #fff,-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,0 3px 8px rgba(0,0,0,.9); }
 
 video { border-radius: 8px; background: #000; }
 
