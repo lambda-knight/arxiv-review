@@ -10,14 +10,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `MathJax={tex:{inlineMath:[['$','$'],['\\\\(','\\\\)']],displayMath:[['$$','$$'],['\\\\[','\\\\]']],processEscapes:true}};`,
-          }}
-        />
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async />
-      </head>
       <body>
         <header style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}>
           <div style={{ maxWidth: 900, margin: "0 auto", padding: "12px 20px", display: "flex", alignItems: "center", gap: 12 }}>
