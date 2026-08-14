@@ -40,6 +40,8 @@ a:hover { color: #fff; }
 .karaoke-subtitle.multiline { font-size:28px; text-align:left; }
 .karaoke-subtitle i { color:#fff; font:inherit; font-style:normal; text-shadow:inherit; }
 .karaoke-subtitle i.read { color:#1d4ed8; text-shadow:2px 2px 0 #fff,-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff,0 3px 8px rgba(0,0,0,.9); }
+.katex { color:#050505; font-size:1.16em; font-weight:600; }
+.katex-display { margin:1em 0; overflow-x:auto; overflow-y:hidden; }
 
 video { border-radius: 8px; background: #000; }
 
