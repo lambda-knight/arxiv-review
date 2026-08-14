@@ -61,7 +61,8 @@ function toTimingData(props: AnimationProps): TimingData {
     markdown: props.markdownSource ?? "",
     fps: props.timeline.fps,
     totalFrames: props.timeline.totalFrames,
-    youtubeScreens: true,
+    // 論文Web版は冒頭・末尾もMarkdownスライドを常時表示する。
+    youtubeScreens: false,
     segments: props.timeline.cues.map((cue, id) => ({
       id,
       speaker: cue.speaker,
