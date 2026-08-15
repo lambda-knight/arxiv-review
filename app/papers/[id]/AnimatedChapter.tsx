@@ -239,7 +239,7 @@ export function AnimatedChapter(props: AnimationProps) {
       <div style={{ marginTop: 8, display: "flex", justifyContent: "space-between", gap: 12, color: "var(--muted)", fontSize: 12 }}>
         <span>動画プレビュー共通画面・音声同期Web版</span>
         <button type="button" className="audio-play-button" onClick={toggleAudio} aria-pressed={isAudioPlaying}>
-          {isAudioPlaying ? "⏸ 音声を停止" : "▶ 音声だけ再生"}
+          {isAudioPlaying ? "⏸ アニメーションを停止" : "▶ アニメーションを再生"}
         </button>
       </div>
     </div>

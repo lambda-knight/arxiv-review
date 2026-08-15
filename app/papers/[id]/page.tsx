@@ -2,6 +2,7 @@ import papersData from "@/data/papers.json";
 import type { Paper } from "@/types/paper";
 import { MathSlide } from "./MathSlide";
 import { AnimatedChapter } from "./AnimatedChapter";
+import { InlineAudioButton } from "./InlineAudioButton";
 
 const papers = papersData as Paper[];
 
@@ -31,7 +32,7 @@ export default async function PaperPage({ params }: { params: Promise<{ id: stri
                 第{ch.index}章: {ch.title}
               </h3>
               {ch.audioUrl && ch.timeline && ch.markdownSource ? (
-                <details className="web-content-fold" open>
+                <details className="web-content-fold">
                   <summary>Webアニメーションを表示／隠す</summary>
                   <AnimatedChapter
                     date={paper.id}
@@ -49,8 +50,9 @@ export default async function PaperPage({ params }: { params: Promise<{ id: stri
                 <audio controls style={{ width: "100%", marginTop: 8 }} src={ch.audioUrl} />
               )}
               {ch.markdown && (
-                <details className="web-content-fold markdown-fold">
+                <details className="web-content-fold markdown-fold" open>
                   <summary>本文・数式を表示／隠す</summary>
+                  {ch.audioUrl && <InlineAudioButton src={ch.audioUrl} />}
                   <MathSlide html={ch.markdown} />
                 </details>
               )}
