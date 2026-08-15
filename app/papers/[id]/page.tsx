@@ -31,14 +31,17 @@ export default async function PaperPage({ params }: { params: Promise<{ id: stri
                 第{ch.index}章: {ch.title}
               </h3>
               {ch.audioUrl && ch.timeline && ch.markdownSource ? (
-                <AnimatedChapter
-                  date={paper.id}
-                  mode={`chapter-${ch.index}`}
-                  title={`${paper.title} — 第${ch.index}章`}
-                  audioUrl={ch.audioUrl}
-                  markdownSource={ch.markdownSource}
-                  timeline={ch.timeline}
-                />
+                <details className="web-content-fold" open>
+                  <summary>Webアニメーションを表示／隠す</summary>
+                  <AnimatedChapter
+                    date={paper.id}
+                    mode={`chapter-${ch.index}`}
+                    title={`${paper.title} — 第${ch.index}章`}
+                    audioUrl={ch.audioUrl}
+                    markdownSource={ch.markdownSource}
+                    timeline={ch.timeline}
+                  />
+                </details>
               ) : (
                 <video controls style={{ width: "100%" }} src={ch.videoUrl} />
               )}
@@ -46,9 +49,10 @@ export default async function PaperPage({ params }: { params: Promise<{ id: stri
                 <audio controls style={{ width: "100%", marginTop: 8 }} src={ch.audioUrl} />
               )}
               {ch.markdown && (
-                <div style={{ marginTop: 12 }}>
+                <details className="web-content-fold markdown-fold">
+                  <summary>本文・数式を表示／隠す</summary>
                   <MathSlide html={ch.markdown} />
-                </div>
+                </details>
               )}
             </section>
           ))}

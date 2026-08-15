@@ -86,6 +86,7 @@ export function AnimatedChapter(props: AnimationProps) {
   const audioRef = useRef<HTMLVideoElement>(null);
   const fullscreenRef = useRef<HTMLDivElement>(null);
   const [isPseudoFullscreen, setIsPseudoFullscreen] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const storageKey = `ai-qc-news:adjustment:${props.date}:${props.mode}`;
   const [adjustments, setAdjustments] = useState<Adjustments>(DEFAULT_ADJUSTMENTS);
   const [viewMode, setViewMode] = useState<"normal" | "prezi" | "effect4" | "effect6" | "effect8">("normal");
@@ -153,6 +154,15 @@ export function AnimatedChapter(props: AnimationProps) {
     const target = Math.min(timingData.totalFrames - 1, Math.round(audio.currentTime * timingData.fps));
     if (Math.abs(player.getCurrentFrame() - target) > 3) player.seekTo(target);
   };
+  const toggleAudio = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (audio.paused) {
+      await audio.play();
+    } else {
+      audio.pause();
+    }
+  };
   const toggleFullscreen = async () => {
     if (isPseudoFullscreen) {
       setIsPseudoFullscreen(false);
@@ -195,18 +205,16 @@ export function AnimatedChapter(props: AnimationProps) {
         controls={false}
         style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: 10, overflow: "hidden" }}
       />
-      <video
+      <audio
         ref={audioRef}
-        controls
         playsInline
         preload="metadata"
         src={props.audioUrl}
-        onPlay={() => playerRef.current?.play()}
-        onPause={() => playerRef.current?.pause()}
+        onPlay={() => { setIsAudioPlaying(true); playerRef.current?.play(); }}
+        onPause={() => { setIsAudioPlaying(false); playerRef.current?.pause(); }}
         onTimeUpdate={syncPlayerToAudio}
         onSeeking={syncPlayerToAudio}
-        onEnded={() => playerRef.current?.pause()}
-        style={{ width: "100%", marginTop: 10, height: 40 }}
+        onEnded={() => { setIsAudioPlaying(false); playerRef.current?.pause(); }}
       />
       </div>
       <div className="remotion-adjuster" role="toolbar" aria-label="表示と同期の調整">
@@ -230,7 +238,9 @@ export function AnimatedChapter(props: AnimationProps) {
       </div>
       <div style={{ marginTop: 8, display: "flex", justifyContent: "space-between", gap: 12, color: "var(--muted)", fontSize: 12 }}>
         <span>動画プレビュー共通画面・音声同期Web版</span>
-        <a href={props.audioUrl}>音声ファイルを直接開く</a>
+        <button type="button" className="audio-play-button" onClick={toggleAudio} aria-pressed={isAudioPlaying}>
+          {isAudioPlaying ? "⏸ 音声を停止" : "▶ 音声だけ再生"}
+        </button>
       </div>
     </div>
   );
