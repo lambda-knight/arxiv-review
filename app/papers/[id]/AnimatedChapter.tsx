@@ -66,7 +66,8 @@ function toTimingData(props: AnimationProps): TimingData {
     segments: props.timeline.cues.map((cue, id) => ({
       id,
       speaker: cue.speaker,
-      text: cue.text,
+      // 台本の読み指定 {表記|よみ} は音声合成用。字幕には表記だけを出す。
+      text: cue.text.replace(/\{([^|{}]+)\|[^|{}]+\}/g, "$1"),
       section: /オープニング/.test(cue.section)
         ? "opening"
         : /エンディング/.test(cue.section)
@@ -87,6 +88,8 @@ export function AnimatedChapter(props: AnimationProps) {
   const fullscreenRef = useRef<HTMLDivElement>(null);
   const [isPseudoFullscreen, setIsPseudoFullscreen] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
   const storageKey = `ai-qc-news:adjustment:${props.date}:${props.mode}`;
   const [adjustments, setAdjustments] = useState<Adjustments>(DEFAULT_ADJUSTMENTS);
   const [viewMode, setViewMode] = useState<"normal" | "prezi" | "effect4" | "effect6" | "effect8">("normal");
@@ -119,6 +122,33 @@ export function AnimatedChapter(props: AnimationProps) {
       document.body.style.overflow = previousOverflow;
     };
   }, [isPseudoFullscreen]);
+
+  const duration = audioDuration || timingData.totalFrames / timingData.fps;
+  // 全体プログレスバー上に章の開始位置を目盛りとして示す。
+  const sectionMarks = useMemo(() => {
+    const marks: { name: string; time: number }[] = [];
+    for (const segment of timingData.segments) {
+      if (!marks.some((mark) => mark.name === segment.sectionName)) {
+        marks.push({ name: segment.sectionName, time: segment.startFrame / timingData.fps });
+      }
+    }
+    return marks;
+  }, [timingData.segments, timingData.fps]);
+  const formatTime = (seconds: number) => {
+    const total = Math.max(0, Math.floor(seconds));
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const sec = String(total % 60).padStart(2, "0");
+    return h > 0 ? `${h}:${String(m).padStart(2, "0")}:${sec}` : `${m}:${sec}`;
+  };
+  const seekTo = (seconds: number) => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.currentTime = Math.max(0, Math.min(duration, seconds));
+    setCurrentTime(audio.currentTime);
+    playerRef.current?.seekTo(Math.min(timingData.totalFrames - 1, Math.round(audio.currentTime * timingData.fps)));
+  };
+  const currentSectionName = [...sectionMarks].reverse().find((mark) => mark.time <= currentTime)?.name ?? sectionMarks[0]?.name;
 
   const currentSection = () => {
     if (adjustments.manualSectionName) return adjustments.manualSectionName;
@@ -212,10 +242,41 @@ export function AnimatedChapter(props: AnimationProps) {
         src={props.audioUrl}
         onPlay={() => { setIsAudioPlaying(true); playerRef.current?.play(); }}
         onPause={() => { setIsAudioPlaying(false); playerRef.current?.pause(); }}
-        onTimeUpdate={syncPlayerToAudio}
+        onTimeUpdate={() => { setCurrentTime(audioRef.current?.currentTime ?? 0); syncPlayerToAudio(); }}
+        onLoadedMetadata={() => { const d = audioRef.current?.duration; if (d && Number.isFinite(d)) setAudioDuration(d); }}
         onSeeking={syncPlayerToAudio}
         onEnded={() => { setIsAudioPlaying(false); playerRef.current?.pause(); }}
       />
+      <div className="episode-progress">
+        <button type="button" className="episode-progress-play" onClick={toggleAudio} aria-label={isAudioPlaying ? "一時停止" : "再生"}>
+          {isAudioPlaying ? "⏸" : "▶"}
+        </button>
+        <div className="episode-progress-track">
+          <input
+            type="range"
+            min={0}
+            max={duration || 0}
+            step={0.1}
+            value={Math.min(currentTime, duration || 0)}
+            onChange={(event) => seekTo(Number(event.target.value))}
+            aria-label="全体の再生位置"
+            style={{ ["--progress" as string]: `${duration ? (currentTime / duration) * 100 : 0}%` }}
+          />
+          {sectionMarks.slice(1).map((mark) => (
+            <button
+              key={mark.name}
+              type="button"
+              className="episode-progress-mark"
+              style={{ left: `${duration ? (mark.time / duration) * 100 : 0}%` }}
+              title={`${mark.name}（${formatTime(mark.time)}）`}
+              aria-label={`${mark.name}へ移動`}
+              onClick={() => seekTo(mark.time)}
+            />
+          ))}
+        </div>
+        <span className="episode-progress-time">{formatTime(currentTime)} / {formatTime(duration)}</span>
+      </div>
+      {currentSectionName && <div className="episode-progress-section">{currentSectionName}</div>}
       </div>
       <div className="remotion-adjuster" role="toolbar" aria-label="表示と同期の調整">
         <IconButton icon="⛶" label="全画面表示を切り替え" onClick={toggleFullscreen} />

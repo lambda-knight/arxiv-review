@@ -35,6 +35,17 @@ a:hover { color: #fff; }
 .remotion-adjuster .adjuster-icon.is-active { border-color:var(--accent2); }
 .remotion-adjuster span { margin-left:auto; color:var(--muted); font-size:11px; }
 .animation-fullscreen-shell { background:#000; }
+.episode-progress { display:flex; align-items:center; gap:10px; padding:8px 10px; background:var(--surface); border-top:1px solid var(--border); }
+.episode-progress-play { flex:none; width:34px; height:34px; border:1px solid var(--accent2); border-radius:50%; background:var(--surface2); color:var(--text); cursor:pointer; font-size:14px; }
+.episode-progress-track { position:relative; flex:1; min-width:0; height:20px; display:flex; align-items:center; }
+.episode-progress-track input[type=range] { width:100%; margin:0; height:6px; -webkit-appearance:none; appearance:none; border-radius:3px; cursor:pointer; background:linear-gradient(to right, var(--accent2) var(--progress), var(--surface2) var(--progress)); }
+.episode-progress-track input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid var(--accent2); }
+.episode-progress-track input[type=range]::-moz-range-thumb { width:12px; height:12px; border-radius:50%; background:#fff; border:2px solid var(--accent2); }
+.episode-progress-mark { position:absolute; top:3px; width:3px; height:14px; margin-left:-1px; padding:0; border:0; border-radius:1px; background:var(--muted); opacity:.7; cursor:pointer; }
+.episode-progress-mark:hover { opacity:1; background:#fff; }
+.episode-progress-time { flex:none; color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; }
+.episode-progress-section { padding:0 10px 8px; background:var(--surface); color:var(--muted); font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
 .fullscreen-close { display:none; }
 .animation-fullscreen-shell:fullscreen, .animation-fullscreen-shell.is-pseudo-fullscreen { display:flex; flex-direction:column; justify-content:center; width:100dvw; height:100dvh; padding:12px; box-sizing:border-box; }
 .animation-fullscreen-shell.is-pseudo-fullscreen { position:fixed; z-index:9999; inset:0; }
